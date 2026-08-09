@@ -66,7 +66,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                     </svg>
                 </div>
-                <h1 class="font-black text-xl tracking-tight hidden sm:block italic">IB A1.3 - 1.4</h1>
+                <h1 class="font-black text-xl tracking-tight hidden sm:block italic">IB Computer Science A1.3 , A1.4</h1>
             </div>
             
             <div class="flex items-center gap-4">
@@ -85,25 +85,120 @@
         
         <!-- Granular Tab Navigation -->
         <nav class="flex flex-wrap justify-center gap-2 mb-8 bg-slate-200/40 p-2 rounded-[2rem] w-fit mx-auto border border-slate-200 shadow-inner">
-            <button onclick="showTab('checklist')" id="btn-checklist" class="nav-btn active flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">TRACKER</button>
-            <div class="w-px h-6 bg-slate-300 my-auto mx-1"></div>
+            <button onclick="showTab('home')" id="btn-home" class="nav-btn active flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">HOME / QUESTIONS</button>
+            <button onclick="showTab('checklist')" id="btn-checklist" class="nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">TRACKER</button>
+            <div class="hidden md:block w-px h-6 bg-slate-300 my-auto mx-1"></div>
             <button onclick="showTab('os-functions')" id="btn-os-functions" class="nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">A1.3.1-2 ROLE/FUNCTIONS</button>
             <button onclick="showTab('scheduling')" id="btn-scheduling" class="nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">A1.3.3 SCHEDULING</button>
             <button onclick="showTab('events')" id="btn-events" class="nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">A1.3.4 POLLING/INT</button>
             <button onclick="showTab('multitasking')" id="btn-multitasking" class="hl-content nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">A1.3.5 MULTITASKING (HL)</button>
             <button onclick="showTab('control')" id="btn-control" class="hl-content nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">A1.3.6-7 CONTROL (HL)</button>
             <button onclick="showTab('translation')" id="btn-translation" class="hl-content nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">A1.4.1 TRANSLATION (HL)</button>
-            <div class="w-px h-6 bg-slate-300 my-auto mx-1"></div>
+            <div class="hidden md:block w-px h-6 bg-slate-300 my-auto mx-1"></div>
             <button onclick="showTab('vocabulary')" id="btn-vocabulary" class="nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">VOCABULARY</button>
             <button onclick="showTab('quiz')" id="btn-quiz" class="nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">QUIZ</button>
             <button onclick="showTab('challenges')" id="btn-challenges" class="nav-btn flex items-center gap-2 px-5 py-2.5 rounded-2xl text-xs font-black transition-all duration-200 text-slate-500 hover:text-slate-900">CHALLENGES</button>
         </nav>
 
         <!-- Content Area -->
-        <div class="bg-white rounded-[3rem] shadow-xl border border-slate-200 p-8 md:p-16 min-h-[70vh]">
+        <div class="bg-white rounded-[2rem] sm:rounded-[3rem] shadow-xl border border-slate-200 p-5 sm:p-8 md:p-16 min-h-[70vh] w-full overflow-hidden">
             
+            <!-- HOME / KEY QUESTIONS TAB -->
+            <div id="home" class="tab-content active animate-fade">
+                <div class="max-w-5xl mx-auto space-y-12">
+                    <div class="text-center">
+                        <h2 class="text-4xl sm:text-5xl font-black text-slate-800 mb-4 tracking-tight">Welcome to Revision</h2>
+                        <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">Before exploring the interactive simulators, test your baseline knowledge. Can you confidently address these essential syllabus questions?</p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Factual Questions Column -->
+                        <div class="bg-slate-50 border-4 border-sky-100 rounded-[3rem] p-8 sm:p-10 shadow-lg flex flex-col">
+                            <div class="flex items-center gap-4 mb-8 border-b-2 border-sky-200 pb-4">
+                                <div class="w-12 h-12 bg-sky-200 rounded-2xl flex items-center justify-center text-sky-700 font-black text-xl shadow-inner">?</div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-800">Factual Questions</h3>
+                                    <p class="text-[10px] font-black uppercase text-sky-600 tracking-widest">What, Define, State, List</p>
+                                </div>
+                            </div>
+                            
+                            <ul class="space-y-4 flex-grow">
+                                <li class="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-sky-100 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-sky-500 rounded-full"></span></div>
+                                    <p class="text-sm font-semibold text-slate-700">What are the primary functions of an Operating System?</p>
+                                </li>
+                                <li class="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-sky-100 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-sky-500 rounded-full"></span></div>
+                                    <p class="text-sm font-semibold text-slate-700">Define the terms 'polling' and 'interrupt'.</p>
+                                </li>
+                                <li class="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-sky-100 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-sky-500 rounded-full"></span></div>
+                                    <p class="text-sm font-semibold text-slate-700">State the role of virtual memory in a computer system.</p>
+                                </li>
+                                <li class="hl-content flex items-start gap-3 p-4 bg-indigo-50 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-indigo-200 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-indigo-600 rounded-full"></span></div>
+                                    <p class="text-sm font-black text-indigo-900 italic">[HL] State the four Coffman conditions required for a deadlock.</p>
+                                </li>
+                                <li class="hl-content flex items-start gap-3 p-4 bg-indigo-50 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-indigo-200 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-indigo-600 rounded-full"></span></div>
+                                    <p class="text-sm font-black text-indigo-900 italic">[HL] List the standard hardware components of a control system.</p>
+                                </li>
+                                <li class="hl-content flex items-start gap-3 p-4 bg-orange-50 rounded-2xl border border-orange-200 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-orange-200 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-orange-600 rounded-full"></span></div>
+                                    <p class="text-sm font-black text-orange-900 italic">[HL] Define 'bytecode' and 'JIT compilation'.</p>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Conceptual Questions Column -->
+                        <div class="bg-slate-50 border-4 border-rose-100 rounded-[3rem] p-8 sm:p-10 shadow-lg flex flex-col">
+                            <div class="flex items-center gap-4 mb-8 border-b-2 border-rose-200 pb-4">
+                                <div class="w-12 h-12 bg-rose-200 rounded-2xl flex items-center justify-center text-rose-700 font-black text-xl shadow-inner">!</div>
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-800">Conceptual Questions</h3>
+                                    <p class="text-[10px] font-black uppercase text-rose-600 tracking-widest">How, Why, Compare, Evaluate</p>
+                                </div>
+                            </div>
+                            
+                            <ul class="space-y-4 flex-grow">
+                                <li class="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-rose-100 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-rose-500 rounded-full"></span></div>
+                                    <p class="text-sm font-semibold text-slate-700">How does an Operating System hide hardware complexity from the user?</p>
+                                </li>
+                                <li class="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-rose-100 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-rose-500 rounded-full"></span></div>
+                                    <p class="text-sm font-semibold text-slate-700">Why might an OS choose Round Robin scheduling over First-Come First-Served?</p>
+                                </li>
+                                <li class="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-rose-100 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-rose-500 rounded-full"></span></div>
+                                    <p class="text-sm font-semibold text-slate-700">Evaluate the scenarios where interrupts are preferred over polling.</p>
+                                </li>
+                                <li class="hl-content flex items-start gap-3 p-4 bg-indigo-50 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-indigo-200 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-indigo-600 rounded-full"></span></div>
+                                    <p class="text-sm font-black text-indigo-900 italic">[HL] Explain how a "hold and wait" state contributes to system deadlock.</p>
+                                </li>
+                                <li class="hl-content flex items-start gap-3 p-4 bg-indigo-50 rounded-2xl border border-indigo-100 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-indigo-200 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-indigo-600 rounded-full"></span></div>
+                                    <p class="text-sm font-black text-indigo-900 italic">[HL] Compare the adaptability of open-loop and closed-loop control systems.</p>
+                                </li>
+                                <li class="hl-content flex items-start gap-3 p-4 bg-orange-50 rounded-2xl border border-orange-200 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="w-6 h-6 rounded-full bg-orange-200 flex-shrink-0 flex items-center justify-center mt-0.5"><span class="w-2 h-2 bg-orange-600 rounded-full"></span></div>
+                                    <p class="text-sm font-black text-orange-900 italic">[HL] Evaluate the advantages of interpreters versus compilers for rapid software development.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <button onclick="showTab('checklist')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black py-4 px-10 rounded-full shadow-xl transition-all hover:scale-105 active:scale-95 tracking-wide">
+                            START REVISION TRACKER
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <!-- TRACKER TAB -->
-            <div id="checklist" class="tab-content active animate-fade">
+            <div id="checklist" class="tab-content animate-fade">
                 <div class="max-w-3xl mx-auto text-center">
                     <h2 class="text-4xl font-black text-slate-800 mb-2">Syllabus Tracker</h2>
                     <p class="text-slate-500 mb-12">Computer Fundamentals (A1.3 & A1.4)</p>
@@ -138,15 +233,15 @@
                     <div class="text-center"><h2 class="text-4xl font-black text-slate-800 mb-2">Role & Full Functions</h2><span class="px-4 py-1 bg-slate-100 rounded-full text-[10px] font-black uppercase text-slate-500">A1.3.1 & A1.3.2</span></div>
                     <div class="bg-indigo-600 text-white p-10 rounded-[3rem] shadow-xl"><p class="text-lg leading-relaxed">The OS <strong>abstracts hardware complexities</strong> to manage system resources and maintain <strong>system integrity</strong>.</p></div>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">1. Memory Management</h4><p class="text-sm text-slate-500">Allocates RAM, prevents interference, and handles <strong>Virtual Memory</strong>.</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">2. File System</h4><p class="text-sm text-slate-500">Organizes naming, storage, and retrieval on disk.</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">3. Device Management</h4><p class="text-sm text-slate-500">Communicates with hardware via <strong>Drivers</strong>.</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">4. Process Scheduling</h4><p class="text-sm text-slate-500">Decides which process gets CPU time.</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">5. Security</h4><p class="text-sm text-slate-500">Authentication and access control lists (ACLs).</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">6. Accounting</h4><p class="text-sm text-slate-500">Tracks usage for logs, performance, and billing.</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">7. GUI / Interface</h4><p class="text-sm text-slate-500">Human-Hardware interaction layer.</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">8. Virtualization</h4><p class="text-sm text-slate-500">Running multiple VMs on one physical box.</p></div>
-                        <div class="p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">9. Networking</h4><p class="text-sm text-slate-500">Managing protocols and network ports.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">1. Memory Management</h4><p class="text-sm text-slate-500">Allocates RAM, prevents interference, and handles <strong>Virtual Memory</strong>.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">2. File System</h4><p class="text-sm text-slate-500">Organizes naming, storage, and retrieval on disk.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">3. Device Management</h4><p class="text-sm text-slate-500">Communicates with hardware via <strong>Drivers</strong>.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">4. Process Scheduling</h4><p class="text-sm text-slate-500">Decides which process gets CPU time.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">5. Security</h4><p class="text-sm text-slate-500">Authentication and access control lists (ACLs).</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">6. Accounting</h4><p class="text-sm text-slate-500">Tracks usage for logs, performance, and billing.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">7. GUI / Interface</h4><p class="text-sm text-slate-500">Human-Hardware interaction layer.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">8. Virtualization</h4><p class="text-sm text-slate-500">Running multiple VMs on one physical box.</p></div>
+                        <div class="p-6 sm:p-8 bg-white border-2 border-slate-100 rounded-[2.5rem] shadow-sm hover:border-indigo-300 transition-colors"><h4 class="font-black text-indigo-600 mb-2 uppercase text-xs">9. Networking</h4><p class="text-sm text-slate-500">Managing protocols and network ports.</p></div>
                     </div>
                 </div>
             </div>
@@ -160,18 +255,18 @@
                             <h3 class="text-2xl font-black text-slate-800 italic">Algorithm Simulator</h3>
                             <div class="flex gap-4">
                                 <select id="algo-select" class="bg-slate-50 border-2 rounded-2xl px-5 py-2 text-sm font-black focus:ring-4 focus:ring-indigo-100 outline-none"><option value="fcfs">FCFS (First-Come First-Served)</option><option value="rr">Round Robin (Quantum=2ms)</option><option value="priority">Priority</option></select>
-                                <button onclick="resetSim()" class="bg-slate-100 px-6 py-2 rounded-2xl text-sm font-black transition-all">RESET</button>
+                                <button onclick="resetSim()" class="bg-slate-100 px-6 py-2 rounded-2xl text-sm font-black transition-all hover:bg-slate-200">RESET</button>
                             </div>
                         </div>
-                        <div class="grid lg:grid-cols-4 gap-12">
-                            <div class="lg:col-span-1"><div class="rounded-3xl border-2 border-slate-100 overflow-hidden shadow-sm"><table class="w-full text-xs font-bold"><thead class="bg-slate-50 text-slate-400"><tr><th class="p-4 text-left">ID</th><th class="p-4 text-right">REM</th></tr></thead><tbody id="proc-table-body" class="divide-y divide-slate-100"></tbody></table></div><button onclick="addProcess()" class="w-full mt-6 bg-indigo-50 text-indigo-600 border-2 border-dashed border-indigo-200 py-4 rounded-3xl text-xs font-black transition-all">+ NEW PROCESS</button></div>
+                        <div class="grid lg:grid-cols-4 gap-8 lg:gap-12">
+                            <div class="lg:col-span-1"><div class="rounded-3xl border-2 border-slate-100 overflow-hidden shadow-sm"><table class="w-full text-xs font-bold"><thead class="bg-slate-50 text-slate-400"><tr><th class="p-4 text-left">ID</th><th class="p-4 text-right">REM</th></tr></thead><tbody id="proc-table-body" class="divide-y divide-slate-100"></tbody></table></div><button onclick="addProcess()" class="w-full mt-6 bg-indigo-50 text-indigo-600 border-2 border-dashed border-indigo-200 py-4 rounded-3xl text-xs font-black transition-all hover:bg-indigo-100">+ NEW PROCESS</button></div>
                             <div class="lg:col-span-3 space-y-10">
-                                <div class="grid grid-cols-3 gap-6">
-                                    <div class="bg-slate-50 p-8 rounded-[3rem] border border-slate-100 text-center shadow-inner"><p class="text-[10px] uppercase font-black text-slate-400 mb-1">Time</p><p id="sim-time" class="text-4xl font-black text-slate-800">0</p></div>
-                                    <div class="bg-indigo-600 p-8 rounded-[3rem] text-center shadow-xl shadow-indigo-100 col-span-2"><p class="text-[10px] uppercase font-black text-indigo-200 mb-1 tracking-widest">Active Task</p><p id="sim-active" class="text-4xl font-black text-white">-</p></div>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
+                                    <div class="bg-slate-50 p-4 sm:p-8 rounded-[2rem] sm:rounded-[3rem] border border-slate-100 text-center shadow-inner flex flex-col justify-center"><p class="text-[10px] uppercase font-black text-slate-400 mb-1">Time</p><p id="sim-time" class="text-3xl sm:text-4xl font-black text-slate-800">0</p></div>
+                                    <div class="bg-indigo-600 p-4 sm:p-8 rounded-[2rem] sm:rounded-[3rem] text-center shadow-xl shadow-indigo-100 col-span-1 sm:col-span-2 flex flex-col justify-center"><p class="text-[10px] uppercase font-black text-indigo-200 mb-1 tracking-widest">Active Task</p><p id="sim-active" class="text-3xl sm:text-4xl font-black text-white">-</p></div>
                                 </div>
                                 <div><p class="text-[10px] uppercase font-black text-slate-400 mb-4 tracking-widest">Gantt Chart (Timeline Visualization)</p><div id="gantt-chart" class="h-20 w-full bg-slate-100 rounded-3xl flex overflow-hidden border-8 border-slate-100 shadow-inner"></div></div>
-                                <button onclick="stepSim()" class="w-full bg-indigo-600 text-white font-black py-6 rounded-[2.5rem] shadow-2xl flex items-center justify-center gap-4 text-xl">Next Cycle (1ms)</button>
+                                <button onclick="stepSim()" class="w-full bg-indigo-600 text-white font-black py-6 rounded-[2.5rem] shadow-2xl flex items-center justify-center gap-4 text-xl hover:bg-indigo-700 transition-colors">Next Cycle (1ms)</button>
                             </div>
                         </div>
                     </div>
@@ -179,7 +274,7 @@
                     <!-- REAL WORLD EXAMPLES BLOCK -->
                     <div class="bg-slate-900 text-white rounded-[3.5rem] p-12 shadow-2xl">
                         <h3 class="text-3xl font-black text-indigo-400 mb-10 italic uppercase tracking-widest text-center">When are these used?</h3>
-                        <div class="grid md:grid-cols-3 gap-8">
+                        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                             <!-- FCFS Example -->
                             <div class="space-y-4 p-8 bg-white/5 rounded-[2.5rem] border border-white/10 hover:bg-white/10 transition-all">
                                 <div class="w-12 h-12 bg-sky-500/20 rounded-2xl flex items-center justify-center text-sky-400 font-black mb-4">A</div>
@@ -204,6 +299,14 @@
                                     <strong>Example: Flight Control.</strong> In an airplane, a "Low Altitude Alert" task is far more important than a "Refresh In-Flight Entertainment" task. The critical safety task is assigned a higher priority and processed immediately.
                                 </p>
                             </div>
+                            <!-- Multilevel Queue Example -->
+                            <div class="space-y-4 p-8 bg-white/5 rounded-[2.5rem] border border-white/10 hover:bg-white/10 transition-all">
+                                <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center text-emerald-400 font-black mb-4">D</div>
+                                <h4 class="text-emerald-300 font-black uppercase text-sm tracking-widest">Multilevel Queue</h4>
+                                <p class="text-xs leading-relaxed text-slate-400">
+                                    <strong>Example: Complex OS.</strong> Processes are permanently assigned to separate scheduling queues based on their type (e.g., interactive foreground vs. background batch), each with distinct priority algorithms.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -218,79 +321,84 @@
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-8">
-                        <div class="bg-white border-4 border-sky-100 rounded-[3rem] p-8 shadow-xl flex flex-col">
-                            <div class="flex justify-between items-center mb-6"><h3 class="text-2xl font-black text-sky-700 italic">Multi-Device Polling</h3><div class="bg-sky-100 text-sky-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Inefficient Loop</div></div>
+                        <!-- Polling Simulator -->
+                        <div class="bg-white border-4 border-sky-100 rounded-[3rem] p-5 sm:p-8 shadow-xl flex flex-col">
+                            <div class="flex justify-between items-center mb-6"><h3 class="text-xl sm:text-2xl font-black text-sky-700 italic">Multi-Device Polling</h3><div class="bg-sky-100 text-sky-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Inefficient Loop</div></div>
                             <div class="relative py-12 px-4 flex flex-col items-center gap-8">
-                                <div id="polling-cpu-track" class="w-full h-24 border-b-2 border-dashed border-sky-100 relative"><div id="polling-cpu" class="cpu-box absolute left-0 top-0 w-20 h-20 bg-sky-600 rounded-2xl flex flex-col items-center justify-center text-white shadow-lg z-10"><span class="text-[10px] font-black uppercase opacity-60">CPU</span><span id="polling-status" class="text-xs font-bold">IDLE</span></div></div>
-                                <div class="grid grid-cols-3 gap-4 w-full">
-                                    <div id="p-dev-0" class="p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-center"><p class="text-[10px] font-black text-slate-400">DEV A</p><p id="p-dev-0-data" class="text-xs text-slate-300 font-bold mt-1">EMPTY</p></div>
-                                    <div id="p-dev-1" class="p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-center"><p class="text-[10px] font-black text-slate-400">DEV B</p><p id="p-dev-1-data" class="text-xs text-slate-300 font-bold mt-1">EMPTY</p></div>
-                                    <div id="p-dev-2" class="p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-center"><p class="text-[10px] font-black text-slate-400">DEV C</p><p id="p-dev-2-data" class="text-xs text-slate-300 font-bold mt-1">EMPTY</p></div>
+                                <div id="polling-cpu-track" class="w-full h-24 border-b-2 border-dashed border-sky-100 relative"><div id="polling-cpu" class="cpu-box absolute left-0 top-0 w-20 h-20 bg-sky-600 rounded-2xl flex flex-col items-center justify-center text-white shadow-lg z-10"><span class="text-[10px] font-black uppercase opacity-60">CPU</span><span id="polling-status" class="text-xs font-bold text-center leading-tight">IDLE</span></div></div>
+                                <div class="grid grid-cols-3 gap-2 sm:gap-4 w-full">
+                                    <div id="p-dev-0" class="p-2 sm:p-4 bg-slate-50 border-2 border-slate-100 rounded-xl sm:rounded-2xl text-center"><p class="text-[9px] sm:text-[10px] font-black text-slate-400">DEV A</p><p id="p-dev-0-data" class="text-[10px] sm:text-xs text-slate-300 font-bold mt-1">EMPTY</p></div>
+                                    <div id="p-dev-1" class="p-2 sm:p-4 bg-slate-50 border-2 border-slate-100 rounded-xl sm:rounded-2xl text-center"><p class="text-[9px] sm:text-[10px] font-black text-slate-400">DEV B</p><p id="p-dev-1-data" class="text-[10px] sm:text-xs text-slate-300 font-bold mt-1">EMPTY</p></div>
+                                    <div id="p-dev-2" class="p-2 sm:p-4 bg-slate-50 border-2 border-slate-100 rounded-xl sm:rounded-2xl text-center"><p class="text-[9px] sm:text-[10px] font-black text-slate-400">DEV C</p><p id="p-dev-2-data" class="text-[10px] sm:text-xs text-slate-300 font-bold mt-1">EMPTY</p></div>
                                 </div>
                             </div>
-                            <div class="bg-slate-50 p-6 rounded-[2rem] text-center space-y-4">
+                            <div class="bg-slate-50 p-6 rounded-[2rem] text-center space-y-4 flex-grow">
                                 <div class="flex justify-between text-[10px] font-black text-slate-400"><span>QUERYING: <span id="polling-target" class="text-sky-600">-</span></span><span>TOTAL CYCLES: <span id="polling-cycles" class="text-slate-800">0</span></span></div>
                                 <p class="text-xs text-slate-500 italic">The CPU visits each device in order. If a device has no data, that cycle is <strong>wasted</strong>.</p>
                             </div>
-                            <div class="mt-8 flex flex-wrap gap-2">
-                                <button onclick="togglePollingSim()" id="polling-btn" class="flex-1 bg-sky-600 text-white font-black py-4 rounded-2xl text-sm shadow-lg">Start Polling Loop</button>
+                            <div class="mt-8 flex flex-col gap-2">
+                                <button onclick="togglePollingSim()" id="polling-btn" class="w-full bg-sky-600 text-white font-black py-4 rounded-2xl text-sm shadow-lg hover:bg-sky-700 transition-colors">Start Polling Loop</button>
                                 <div class="w-full grid grid-cols-3 gap-2">
-                                    <button onclick="triggerPollingData(0)" class="bg-sky-50 text-sky-700 py-2 rounded-xl text-[10px] font-black">Send A</button>
-                                    <button onclick="triggerPollingData(1)" class="bg-sky-50 text-sky-700 py-2 rounded-xl text-[10px] font-black">Send B</button>
-                                    <button onclick="triggerPollingData(2)" class="bg-sky-50 text-sky-700 py-2 rounded-xl text-[10px] font-black">Send C</button>
+                                    <button onclick="triggerPollingData(0)" class="bg-sky-50 hover:bg-sky-100 text-sky-700 py-3 rounded-xl text-[10px] sm:text-xs font-black transition-colors">Send A</button>
+                                    <button onclick="triggerPollingData(1)" class="bg-sky-50 hover:bg-sky-100 text-sky-700 py-3 rounded-xl text-[10px] sm:text-xs font-black transition-colors">Send B</button>
+                                    <button onclick="triggerPollingData(2)" class="bg-sky-50 hover:bg-sky-100 text-sky-700 py-3 rounded-xl text-[10px] sm:text-xs font-black transition-colors">Send C</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white border-4 border-rose-100 rounded-[3rem] p-8 shadow-xl flex flex-col">
-                            <div class="flex justify-between items-center mb-6"><h3 class="text-2xl font-black text-rose-700 italic">Multi-Device Interrupts</h3><div class="bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Signal-Driven</div></div>
+
+                        <!-- Interrupt Simulator -->
+                        <div class="bg-white border-4 border-rose-100 rounded-[3rem] p-5 sm:p-8 shadow-xl flex flex-col">
+                            <div class="flex justify-between items-center mb-6"><h3 class="text-xl sm:text-2xl font-black text-rose-700 italic">Multi-Device Interrupts</h3><div class="bg-rose-100 text-rose-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Signal-Driven</div></div>
                             <div class="relative py-12 px-4 flex flex-col items-center gap-8">
-                                <div id="int-cpu" class="cpu-box w-24 h-24 bg-rose-600 rounded-3xl flex flex-col items-center justify-center text-white font-black shadow-lg relative"><span class="text-[10px] uppercase opacity-60">CPU</span><span id="int-task" class="text-xs">IDLE</span><div id="int-alert" class="absolute -top-2 -right-2 bg-yellow-400 text-slate-900 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black hidden">!</div></div>
-                                <div class="grid grid-cols-3 gap-4 w-full">
-                                    <div id="i-dev-0" class="p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-center"><p class="text-[10px] font-black text-slate-400">DEV A</p><p id="i-dev-0-status" class="text-[10px] text-slate-300 font-bold mt-1">STANDBY</p></div>
-                                    <div id="i-dev-1" class="p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-center"><p class="text-[10px] font-black text-slate-400">DEV B</p><p id="i-dev-1-status" class="text-[10px] text-slate-300 font-bold mt-1">STANDBY</p></div>
-                                    <div id="i-dev-2" class="p-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-center"><p class="text-[10px] font-black text-slate-400">DEV C</p><p id="i-dev-2-status" class="text-[10px] text-slate-300 font-bold mt-1">STANDBY</p></div>
+                                <div id="int-cpu" class="cpu-box w-24 h-24 bg-rose-600 rounded-3xl flex flex-col items-center justify-center text-white font-black shadow-lg relative transition-colors duration-300"><span class="text-[10px] uppercase opacity-60">CPU</span><span id="int-task" class="text-xs text-center leading-tight">IDLE</span><div id="int-alert" class="absolute -top-2 -right-2 bg-yellow-400 text-slate-900 rounded-full w-8 h-8 flex items-center justify-center text-xs font-black hidden shadow-md">!</div></div>
+                                <div class="grid grid-cols-3 gap-2 sm:gap-4 w-full">
+                                    <div id="i-dev-0" class="p-2 sm:p-4 bg-slate-50 border-2 border-slate-100 rounded-xl sm:rounded-2xl text-center"><p class="text-[9px] sm:text-[10px] font-black text-slate-400">DEV A</p><p id="i-dev-0-status" class="text-[9px] sm:text-[10px] text-slate-300 font-bold mt-1">STANDBY</p></div>
+                                    <div id="i-dev-1" class="p-2 sm:p-4 bg-slate-50 border-2 border-slate-100 rounded-xl sm:rounded-2xl text-center"><p class="text-[9px] sm:text-[10px] font-black text-slate-400">DEV B</p><p id="i-dev-1-status" class="text-[9px] sm:text-[10px] text-slate-300 font-bold mt-1">STANDBY</p></div>
+                                    <div id="i-dev-2" class="p-2 sm:p-4 bg-slate-50 border-2 border-slate-100 rounded-xl sm:rounded-2xl text-center"><p class="text-[9px] sm:text-[10px] font-black text-slate-400">DEV C</p><p id="i-dev-2-status" class="text-[9px] sm:text-[10px] text-slate-300 font-bold mt-1">STANDBY</p></div>
                                 </div>
                             </div>
-                            <div class="bg-slate-50 p-6 rounded-[2rem] text-center space-y-4">
+                            <div class="bg-slate-50 p-6 rounded-[2rem] text-center space-y-4 flex-grow">
                                 <div class="flex justify-between text-[10px] font-black text-slate-400"><span>STATUS: <span id="int-status" class="text-rose-600">IDLE</span></span><span>CYCLES: <span id="int-cycles" class="text-slate-800">0</span></span></div>
                                 <p class="text-xs text-slate-500 italic">The CPU ignores devices and does <strong>productive work</strong> until a device pulls the interrupt line.</p>
                             </div>
-                            <div class="mt-8 flex flex-wrap gap-2">
-                                <button onclick="toggleIntSim()" id="int-btn" class="flex-1 bg-rose-600 text-white font-black py-4 rounded-2xl text-sm shadow-lg">Start CPU Task</button>
+                            <div class="mt-8 flex flex-col gap-2">
+                                <button onclick="toggleIntSim()" id="int-btn" class="w-full bg-rose-600 text-white font-black py-4 rounded-2xl text-sm shadow-lg hover:bg-rose-700 transition-colors">Start CPU Task</button>
                                 <div class="w-full grid grid-cols-3 gap-2">
-                                    <button onclick="triggerInterrupt(0)" class="bg-rose-50 text-rose-700 py-2 rounded-xl text-[10px] font-black">Signal A</button>
-                                    <button onclick="triggerInterrupt(1)" class="bg-rose-50 text-rose-700 py-2 rounded-xl text-[10px] font-black">Signal B</button>
-                                    <button onclick="triggerInterrupt(2)" class="bg-rose-50 text-rose-700 py-2 rounded-xl text-[10px] font-black">Signal C</button>
+                                    <button onclick="triggerInterrupt(0)" class="bg-rose-50 hover:bg-rose-100 text-rose-700 py-3 rounded-xl text-[10px] sm:text-xs font-black transition-colors">Signal A</button>
+                                    <button onclick="triggerInterrupt(1)" class="bg-rose-50 hover:bg-rose-100 text-rose-700 py-3 rounded-xl text-[10px] sm:text-xs font-black transition-colors">Signal B</button>
+                                    <button onclick="triggerInterrupt(2)" class="bg-rose-50 hover:bg-rose-100 text-rose-700 py-3 rounded-xl text-[10px] sm:text-xs font-black transition-colors">Signal C</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="bg-slate-900 text-white rounded-[3.5rem] p-12 shadow-2xl">
-                        <h3 class="text-3xl font-black text-indigo-400 mb-10 italic uppercase tracking-widest text-center">How & When are they used?</h3>
+
+                    <div class="bg-slate-900 text-white rounded-[3.5rem] p-8 sm:p-12 shadow-2xl">
+                        <h3 class="text-2xl sm:text-3xl font-black text-indigo-400 mb-10 italic uppercase tracking-widest text-center">How & When are they used?</h3>
                         <div class="grid lg:grid-cols-2 gap-12">
                             <div>
                                 <h4 class="font-black text-sky-400 uppercase text-sm mb-6 border-b border-white/10 pb-2">Uses: Polling</h4>
                                 <div class="space-y-6">
-                                    <div class="flex gap-4 items-start"><div class="w-8 h-8 bg-sky-500/20 rounded flex-shrink-0 flex items-center justify-center text-sky-400 font-black">1</div><p class="text-sm leading-relaxed text-slate-300 italic"><strong>Game Loops:</strong> Games poll the keyboard/mouse every single frame (e.g. 144Hz) to ensure movement is perfectly responsive without latency jitter.</p></div>
+                                    <div class="flex gap-4 items-start"><div class="w-8 h-8 bg-sky-500/20 rounded flex-shrink-0 flex items-center justify-center text-sky-400 font-black">1</div><p class="text-sm leading-relaxed text-slate-300 italic"><strong>Game Loops:</strong> Games poll the keyboard/mouse every single frame to ensure movement is perfectly responsive without latency jitter.</p></div>
                                     <div class="flex gap-4 items-start"><div class="w-8 h-8 bg-sky-500/20 rounded flex-shrink-0 flex items-center justify-center text-sky-400 font-black">2</div><p class="text-sm leading-relaxed text-slate-300 italic"><strong>High-Speed Sensors:</strong> In automation, a sensor might trigger 10,000+ times a second. The context-switching overhead for interrupts would be slower than just polling the buffer.</p></div>
                                 </div>
                             </div>
                             <div>
                                 <h4 class="font-black text-rose-400 uppercase text-sm mb-6 border-b border-white/10 pb-2">Uses: Interrupts</h4>
                                 <div class="space-y-6">
-                                    <div class="flex gap-4 items-start"><div class="w-8 h-8 bg-rose-500/20 rounded flex-shrink-0 flex items-center justify-center text-rose-400 font-black">1</div><p class="text-sm leading-relaxed text-slate-300 italic"><strong>Keyboards:</strong> Humans type slowly (to a CPU). Interrupts allow the CPU to render graphics or run code until a key is actually pressed.</p></div>
-                                    <div class="flex gap-4 items-start"><div class="w-8 h-8 bg-rose-500/20 rounded flex-shrink-0 flex items-center justify-center text-rose-400 font-black">2</div><p class="text-sm leading-relaxed text-slate-300 italic"><strong>Network Cards:</strong> Data packets arrive at unpredictable times. The NIC card interrupts the CPU only when a full packet is ready in the buffer.</p></div>
+                                    <div class="flex gap-4 items-start"><div class="w-8 h-8 bg-rose-500/20 rounded flex-shrink-0 flex items-center justify-center text-rose-400 font-black">1</div><p class="text-sm leading-relaxed text-slate-300 italic"><strong>Disk I/O & Keyboards:</strong> Humans type slowly and Disk I/O is slow. Interrupts allow the CPU to render graphics or run code until data is actually ready.</p></div>
+                                    <div class="flex gap-4 items-start"><div class="w-8 h-8 bg-rose-500/20 rounded flex-shrink-0 flex items-center justify-center text-rose-400 font-black">2</div><p class="text-sm leading-relaxed text-slate-300 italic"><strong>Embedded Systems:</strong> Low-power microcontrollers (like a smartwatch) use interrupts to sleep and save battery, waking only when a button is pressed or timer fires.</p></div>
                                 </div>
                             </div>
                         </div>
                         <div class="mt-12 pt-12 border-t border-white/10">
                             <h4 class="text-indigo-400 font-black uppercase text-center text-xs tracking-widest mb-8">Syllabus Evaluation Factors (A1.3.4)</h4>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                                 <div class="p-4 bg-white/5 rounded-2xl text-center border border-white/10"><p class="text-[10px] font-bold text-white mb-1">Frequency</p><p class="text-[10px] text-slate-500 italic">High = Polling</p></div>
                                 <div class="p-4 bg-white/5 rounded-2xl text-center border border-white/10"><p class="text-[10px] font-bold text-white mb-1">Power Source</p><p class="text-[10px] text-slate-500 italic">Battery = Int</p></div>
                                 <div class="p-4 bg-white/5 rounded-2xl text-center border border-white/10"><p class="text-[10px] font-bold text-white mb-1">Predictability</p><p class="text-[10px] text-slate-500 italic">Unpredictable = Int</p></div>
                                 <div class="p-4 bg-white/5 rounded-2xl text-center border border-white/10"><p class="text-[10px] font-bold text-white mb-1">Overhead</p><p class="text-[10px] text-slate-500 italic">Context Switch Cost</p></div>
+                                <div class="p-4 bg-white/5 rounded-2xl text-center border border-white/10"><p class="text-[10px] font-bold text-white mb-1">Controlled Latency</p><p class="text-[10px] text-slate-500 italic">Strict timing needs</p></div>
+                                <div class="p-4 bg-white/5 rounded-2xl text-center border border-white/10"><p class="text-[10px] font-bold text-white mb-1">Security Concerns</p><p class="text-[10px] text-slate-500 italic">Interrupt Spoofing</p></div>
                             </div>
                         </div>
                     </div>
@@ -311,12 +419,12 @@
                             <div class="max-w-md"><h3 class="text-2xl font-black text-slate-800 mb-2">Circular Wait Interaction</h3><p class="text-sm text-slate-500 leading-relaxed">Manually trigger resource requests to see how a "Hold and Wait" cycle freezes the system.</p></div>
                             <button onclick="resetDeadlock()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-8 py-3 rounded-2xl text-xs font-black transition-all">RESET SYSTEM</button>
                         </div>
-                        <div class="grid grid-cols-2 gap-12 mb-12 relative">
-                            <div class="space-y-20"><div id="p1-node" class="resource-node p-8 bg-slate-50 rounded-[2rem] text-center border-4"><p class="font-black text-slate-800">PROCESS 1</p><p id="p1-status" class="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">IDLE</p></div><div id="p2-node" class="resource-node p-8 bg-slate-50 rounded-[2rem] text-center border-4"><p class="font-black text-slate-800">PROCESS 2</p><p id="p2-status" class="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">IDLE</p></div></div>
-                            <div class="space-y-20"><div id="res-printer" class="resource-node p-8 bg-slate-50 rounded-[2rem] text-center border-4"><p class="font-black uppercase tracking-widest">PRINTER</p><p id="printer-owner" class="text-[10px] font-bold text-slate-400 mt-2 uppercase">AVAILABLE</p></div><div id="res-scanner" class="resource-node p-8 bg-slate-50 rounded-[2rem] text-center border-4"><p class="font-black uppercase tracking-widest">SCANNER</p><p id="scanner-owner" class="text-[10px] font-bold text-slate-400 mt-2 uppercase">AVAILABLE</p></div></div>
-                            <div id="deadlock-alert" class="absolute inset-0 bg-rose-600/90 rounded-3xl flex flex-col items-center justify-center text-white hidden"><h3 class="text-3xl font-black uppercase">Deadlock Detected!</h3><p class="text-center px-8 mt-2">P1 waits for P2's Scanner. P2 waits for P1's Printer.</p></div>
+                        <div class="grid grid-cols-2 gap-4 md:gap-12 mb-12 relative">
+                            <div class="space-y-8 md:space-y-20"><div id="p1-node" class="resource-node p-4 md:p-8 bg-slate-50 rounded-2xl md:rounded-[2rem] text-center border-4"><p class="font-black text-slate-800 text-xs sm:text-base">PROCESS 1</p><p id="p1-status" class="text-[9px] sm:text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">IDLE</p></div><div id="p2-node" class="resource-node p-4 md:p-8 bg-slate-50 rounded-2xl md:rounded-[2rem] text-center border-4"><p class="font-black text-slate-800 text-xs sm:text-base">PROCESS 2</p><p id="p2-status" class="text-[9px] sm:text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">IDLE</p></div></div>
+                            <div class="space-y-8 md:space-y-20"><div id="res-printer" class="resource-node p-4 md:p-8 bg-slate-50 rounded-2xl md:rounded-[2rem] text-center border-4"><p class="font-black uppercase tracking-widest text-xs sm:text-base">PRINTER</p><p id="printer-owner" class="text-[9px] sm:text-[10px] font-bold text-slate-400 mt-2 uppercase">AVAILABLE</p></div><div id="res-scanner" class="resource-node p-4 md:p-8 bg-slate-50 rounded-2xl md:rounded-[2rem] text-center border-4"><p class="font-black uppercase tracking-widest text-xs sm:text-base">SCANNER</p><p id="scanner-owner" class="text-[9px] sm:text-[10px] font-bold text-slate-400 mt-2 uppercase">AVAILABLE</p></div></div>
+                            <div id="deadlock-alert" class="absolute inset-0 bg-rose-600/95 rounded-3xl flex flex-col items-center justify-center text-white hidden p-4"><h3 class="text-xl sm:text-3xl font-black uppercase text-center">Deadlock Detected!</h3><p class="text-center sm:px-8 mt-2 text-xs sm:text-base">P1 waits for P2's Scanner.<br/>P2 waits for P1's Printer.</p></div>
                         </div>
-                        <div class="grid grid-cols-2 gap-4"><button id="p1-btn" onclick="p1Action()" class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]">P1: ACQUIRE PRINTER</button><button id="p2-btn" onclick="p2Action()" class="w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]">P2: ACQUIRE SCANNER</button></div>
+                        <div class="grid grid-cols-2 gap-2 sm:gap-4"><button id="p1-btn" onclick="p1Action()" class="w-full bg-indigo-600 text-white font-black py-4 rounded-xl sm:rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] text-[10px] sm:text-xs md:text-sm">P1: ACQUIRE PRINTER</button><button id="p2-btn" onclick="p2Action()" class="w-full bg-indigo-600 text-white font-black py-4 rounded-xl sm:rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] text-[10px] sm:text-xs md:text-sm">P2: ACQUIRE SCANNER</button></div>
                     </div>
 
                     <!-- RESOLUTION STRATEGIES SECTION -->
@@ -808,39 +916,221 @@
         let isHL = true;
 
         // --- SCHEDULING SIMULATOR ---
-        let simProcesses = [{ id: 'P1', burst: 5, remaining: 5, priority: 2, color: '#4f46e5' }, { id: 'P2', burst: 3, remaining: 3, priority: 1, color: '#ec4899' }, { id: 'P3', burst: 2, remaining: 2, priority: 3, color: '#f59e0b' }];
-        let simTime = 0; let simHistory = []; let rrQueue = ['P1', 'P2', 'P3']; let rrCounter = 0; const QUANTUM = 2;
+        let simProcesses = [
+            { id: 'P1', burst: 5, remaining: 5, priority: 2, color: '#4f46e5' }, 
+            { id: 'P2', burst: 3, remaining: 3, priority: 1, color: '#ec4899' }, 
+            { id: 'P3', burst: 2, remaining: 2, priority: 3, color: '#f59e0b' }
+        ];
+        let simTime = 0; 
+        let simHistory = []; 
+        let rrQueue = ['P1', 'P2', 'P3']; 
+        let rrCounter = 0; 
+        const QUANTUM = 2;
+
         function updateSimUI() {
-            const timeEl = document.getElementById('sim-time'); if(timeEl) timeEl.innerText = simTime;
-            const tableBody = document.getElementById('proc-table-body'); if(tableBody) tableBody.innerHTML = simProcesses.map(p => `<tr class="${p.remaining === 0 ? 'opacity-30' : ''}"><td class="p-4" style="color: ${p.remaining > 0 ? p.color : ''}">${p.id}</td><td class="p-4 text-right">${p.remaining}ms</td></tr>`).join('');
-            const chart = document.getElementById('gantt-chart'); if(chart) { const totalSteps = Math.max(simTime, 12); chart.innerHTML = simHistory.map(entry => `<div class="gantt-block" style="background-color: ${entry.color}; width: ${100 / totalSteps}%">${entry.id}</div>`).join(''); }
-            const activeDisplay = document.getElementById('sim-active'); if(activeDisplay) { const last = simHistory[simHistory.length - 1]; activeDisplay.innerText = (last && simProcesses.find(p => p.id === last.id).remaining >= 0) ? last.id : '-'; }
-        }
-        function stepSim() {
-            const algo = document.getElementById('algo-select').value; let activeProc = null;
-            if (algo === 'fcfs') activeProc = simProcesses.find(p => p.remaining > 0);
-            else if (algo === 'priority') { const ready = simProcesses.filter(p => p.remaining > 0); if (ready.length > 0) activeProc = ready.reduce((prev, curr) => prev.priority <= curr.priority ? prev : curr); }
-            else if (algo === 'rr') { while (rrQueue.length > 0) { const cand = rrQueue[0]; const p = simProcesses.find(proc => proc.id === cand); if (p.remaining > 0) { activeProc = p; break; } else { rrQueue.shift(); } }
-                if (activeProc) { rrCounter++; if (rrCounter >= QUANTUM || (activeProc.remaining - 1) === 0) { rrQueue.shift(); if (activeProc.remaining - 1 > 0) rrQueue.push(activeProc.id); rrCounter = 0; } }
+            const timeEl = document.getElementById('sim-time'); 
+            if(timeEl) timeEl.innerText = simTime;
+            
+            const tableBody = document.getElementById('proc-table-body'); 
+            if(tableBody) {
+                tableBody.innerHTML = simProcesses.map(p => `
+                    <tr class="${p.remaining === 0 ? 'opacity-30' : ''}">
+                        <td class="p-4" style="color: ${p.remaining > 0 ? p.color : ''}">${p.id}</td>
+                        <td class="p-4 text-right">${p.remaining}ms</td>
+                    </tr>
+                `).join('');
             }
-            if (!activeProc) return; activeProc.remaining--; simTime++; simHistory.push({ id: activeProc.id, color: activeProc.color }); updateSimUI();
+            
+            const chart = document.getElementById('gantt-chart'); 
+            if(chart) { 
+                const totalSteps = Math.max(simTime, 12); 
+                chart.innerHTML = simHistory.map(entry => `
+                    <div class="gantt-block" style="background-color: ${entry.color}; width: ${100 / totalSteps}%">${entry.id}</div>
+                `).join(''); 
+            }
+            
+            const activeDisplay = document.getElementById('sim-active'); 
+            if(activeDisplay) { 
+                const last = simHistory[simHistory.length - 1]; 
+                activeDisplay.innerText = (last && simProcesses.find(p => p.id === last.id).remaining >= 0) ? last.id : '-'; 
+            }
         }
-        function resetSim() { simProcesses = [{ id: 'P1', burst: 5, remaining: 5, priority: 2, color: '#4f46e5' }, { id: 'P2', burst: 3, remaining: 3, priority: 1, color: '#ec4899' }, { id: 'P3', burst: 2, remaining: 2, priority: 3, color: '#f59e0b' }]; simTime = 0; simHistory = []; rrQueue = simProcesses.map(p => p.id); rrCounter = 0; updateSimUI(); }
-        function addProcess() { const id = 'P' + (simProcesses.length + 1); const colors = ['#8b5cf6', '#06b6d4', '#f43f5e']; simProcesses.push({ id: id, burst: 4, remaining: 4, priority: 2, color: colors[simProcesses.length % colors.length] }); resetSim(); }
+
+        function stepSim() {
+            const algo = document.getElementById('algo-select').value; 
+            let activeProc = null;
+            
+            if (algo === 'fcfs') {
+                activeProc = simProcesses.find(p => p.remaining > 0);
+            } else if (algo === 'priority') { 
+                const ready = simProcesses.filter(p => p.remaining > 0); 
+                if (ready.length > 0) {
+                    activeProc = ready.reduce((prev, curr) => prev.priority <= curr.priority ? prev : curr); 
+                }
+            } else if (algo === 'rr') { 
+                while (rrQueue.length > 0) { 
+                    const cand = rrQueue[0]; 
+                    const p = simProcesses.find(proc => proc.id === cand); 
+                    if (p.remaining > 0) { 
+                        activeProc = p; 
+                        break; 
+                    } else { 
+                        rrQueue.shift(); 
+                    } 
+                }
+                if (activeProc) { 
+                    rrCounter++; 
+                    if (rrCounter >= QUANTUM || (activeProc.remaining - 1) === 0) { 
+                        rrQueue.shift(); 
+                        if (activeProc.remaining - 1 > 0) rrQueue.push(activeProc.id); 
+                        rrCounter = 0; 
+                    } 
+                }
+            }
+            
+            if (!activeProc) return; 
+            
+            activeProc.remaining--; 
+            simTime++; 
+            simHistory.push({ id: activeProc.id, color: activeProc.color }); 
+            updateSimUI();
+        }
+
+        function resetSim() { 
+            simProcesses = [
+                { id: 'P1', burst: 5, remaining: 5, priority: 2, color: '#4f46e5' }, 
+                { id: 'P2', burst: 3, remaining: 3, priority: 1, color: '#ec4899' }, 
+                { id: 'P3', burst: 2, remaining: 2, priority: 3, color: '#f59e0b' }
+            ]; 
+            simTime = 0; 
+            simHistory = []; 
+            rrQueue = simProcesses.map(p => p.id); 
+            rrCounter = 0; 
+            updateSimUI(); 
+        }
+
+        function addProcess() { 
+            const id = 'P' + (simProcesses.length + 1); 
+            const colors = ['#8b5cf6', '#06b6d4', '#f43f5e']; 
+            simProcesses.push({ 
+                id: id, 
+                burst: 4, 
+                remaining: 4, 
+                priority: 2, 
+                color: colors[simProcesses.length % colors.length] 
+            }); 
+            resetSim(); 
+        }
 
         // --- POLLING & INTERRUPT LOGIC ---
-        let pollingActive = false; let pollingIdx = 0; let pCycles = 0; let pData = [false, false, false];
-        const pPositions = ["0%", "37%", "75%"]; const pNames = ["DEVICE A", "DEVICE B", "DEVICE C"];
-        function togglePollingSim() { pollingActive = !pollingActive; const btn = document.getElementById('polling-btn'); if(btn) btn.innerText = pollingActive ? "Stop Polling Loop" : "Resume Polling Loop"; if(pollingActive) runPollingStep(); }
-        function runPollingStep() { if(!pollingActive) return; const cpu = document.getElementById('polling-cpu'); const status = document.getElementById('polling-status'); const target = document.getElementById('polling-target'); const cycleCount = document.getElementById('polling-cycles'); if(cpu) cpu.style.left = pPositions[pollingIdx]; if(target) target.innerText = pNames[pollingIdx]; if(status) status.innerText = "QUERY..."; pCycles++; if(cycleCount) cycleCount.innerText = pCycles; [0,1,2].forEach(i => { if(document.getElementById(`p-dev-${i}`)) document.getElementById(`p-dev-${i}`).classList.remove('device-active'); }); if(document.getElementById(`p-dev-${pollingIdx}`)) document.getElementById(`p-dev-${pollingIdx}`).classList.add('device-active'); setTimeout(() => { if(pData[pollingIdx]) { if(status) status.innerText = "FETCHING!"; if(document.getElementById(`p-dev-${pollingIdx}-data`)) document.getElementById(`p-dev-${pollingIdx}-data`).innerText = "RECEIVED!"; pData[pollingIdx] = false; setTimeout(() => { if(document.getElementById(`p-dev-${pollingIdx}-data`)) document.getElementById(`p-dev-${pollingIdx}-data`).innerText = "EMPTY"; if(status) status.innerText = "NEXT >>"; pollingIdx = (pollingIdx + 1) % 3; setTimeout(runPollingStep, 600); }, 1000); } else { if(status) status.innerText = "NO DATA"; setTimeout(() => { pollingIdx = (pollingIdx + 1) % 3; runPollingStep(); }, 800); } }, 500); }
-        function triggerPollingData(idx) { pData[idx] = true; if(document.getElementById(`p-dev-${idx}-data`)) document.getElementById(`p-dev-${idx}-data`).innerText = "DATA READY"; }
-        let intActive = false; let iCycles = 0; let isHandlingInt = false; const iNames = ["DEVICE A", "DEVICE B", "DEVICE C"];
-        function toggleIntSim() { intActive = !intActive; const btn = document.getElementById('int-btn'); if(btn) btn.innerText = intActive ? "Stop CPU Work" : "Resume CPU Work"; if(intActive) runIntStep(); }
-        function runIntStep() { if(!intActive || isHandlingInt) return; iCycles++; if(document.getElementById('int-cycles')) document.getElementById('int-cycles').innerText = iCycles; if(document.getElementById('int-task')) document.getElementById('int-task').innerText = "BG PROCESS: " + (iCycles % 9999); if(document.getElementById('int-status')) document.getElementById('int-status').innerText = "BACKGROUND WORK"; setTimeout(runIntStep, 150); }
-        function triggerInterrupt(idx) { if(!intActive || isHandlingInt) return; isHandlingInt = true; const cpu = document.getElementById('int-cpu'); const status = document.getElementById('int-status'); const alert = document.getElementById('int-alert'); if(status) status.innerText = "SIGNAL FROM " + iNames[idx]; if(alert) alert.classList.remove('hidden'); if(cpu) { cpu.classList.add('status-pulse', 'bg-rose-700'); if(document.getElementById('int-task')) document.getElementById('int-task').innerText = "ISR [" + iNames[idx] + "]"; } setTimeout(() => { isHandlingInt = false; if(alert) alert.classList.add('hidden'); if(cpu) cpu.classList.remove('status-pulse', 'bg-rose-700'); runIntStep(); }, 2000); }
+        let pollingActive = false; 
+        let pollingIdx = 0; 
+        let pCycles = 0; 
+        let pData = [false, false, false];
+        const pPositions = ["0%", "37%", "75%"]; 
+        const pNames = ["DEVICE A", "DEVICE B", "DEVICE C"];
+        
+        function togglePollingSim() { 
+            pollingActive = !pollingActive; 
+            const btn = document.getElementById('polling-btn'); 
+            if(btn) btn.innerText = pollingActive ? "Stop Polling Loop" : "Resume Polling Loop"; 
+            if(pollingActive) runPollingStep(); 
+        }
+        
+        function runPollingStep() { 
+            if(!pollingActive) return; 
+            const cpu = document.getElementById('polling-cpu'); 
+            const status = document.getElementById('polling-status'); 
+            const target = document.getElementById('polling-target'); 
+            const cycleCount = document.getElementById('polling-cycles'); 
+            
+            if(cpu) cpu.style.left = pPositions[pollingIdx]; 
+            if(target) target.innerText = pNames[pollingIdx]; 
+            if(status) status.innerText = "QUERY..."; 
+            
+            pCycles++; 
+            if(cycleCount) cycleCount.innerText = pCycles; 
+            
+            [0,1,2].forEach(i => { 
+                if(document.getElementById(`p-dev-${i}`)) document.getElementById(`p-dev-${i}`).classList.remove('device-active'); 
+            }); 
+            
+            if(document.getElementById(`p-dev-${pollingIdx}`)) document.getElementById(`p-dev-${pollingIdx}`).classList.add('device-active'); 
+            
+            setTimeout(() => { 
+                if(pData[pollingIdx]) { 
+                    if(status) status.innerText = "FETCHING!"; 
+                    if(document.getElementById(`p-dev-${pollingIdx}-data`)) document.getElementById(`p-dev-${pollingIdx}-data`).innerText = "RECEIVED!"; 
+                    pData[pollingIdx] = false; 
+                    
+                    setTimeout(() => { 
+                        if(document.getElementById(`p-dev-${pollingIdx}-data`)) document.getElementById(`p-dev-${pollingIdx}-data`).innerText = "EMPTY"; 
+                        if(status) status.innerText = "NEXT >>"; 
+                        pollingIdx = (pollingIdx + 1) % 3; 
+                        setTimeout(runPollingStep, 600); 
+                    }, 1000); 
+                } else { 
+                    if(status) status.innerText = "NO DATA"; 
+                    setTimeout(() => { 
+                        pollingIdx = (pollingIdx + 1) % 3; 
+                        runPollingStep(); 
+                    }, 800); 
+                } 
+            }, 500); 
+        }
+
+        function triggerPollingData(idx) { 
+            pData[idx] = true; 
+            if(document.getElementById(`p-dev-${idx}-data`)) document.getElementById(`p-dev-${idx}-data`).innerText = "DATA READY"; 
+        }
+        
+        let intActive = false; 
+        let iCycles = 0; 
+        let isHandlingInt = false; 
+        const iNames = ["DEVICE A", "DEVICE B", "DEVICE C"];
+        
+        function toggleIntSim() { 
+            intActive = !intActive; 
+            const btn = document.getElementById('int-btn'); 
+            if(btn) btn.innerText = intActive ? "Stop CPU Work" : "Resume CPU Work"; 
+            if(intActive) runIntStep(); 
+        }
+
+        function runIntStep() { 
+            if(!intActive || isHandlingInt) return; 
+            iCycles++; 
+            if(document.getElementById('int-cycles')) document.getElementById('int-cycles').innerText = iCycles; 
+            if(document.getElementById('int-task')) document.getElementById('int-task').innerText = "BG PROCESS: " + (iCycles % 9999); 
+            if(document.getElementById('int-status')) document.getElementById('int-status').innerText = "BACKGROUND WORK"; 
+            setTimeout(runIntStep, 150); 
+        }
+
+        function triggerInterrupt(idx) { 
+            if(!intActive || isHandlingInt) return; 
+            isHandlingInt = true; 
+            const cpu = document.getElementById('int-cpu'); 
+            const status = document.getElementById('int-status'); 
+            const alert = document.getElementById('int-alert'); 
+            
+            if(status) status.innerText = "SIGNAL FROM " + iNames[idx]; 
+            if(alert) alert.classList.remove('hidden'); 
+            
+            if(cpu) { 
+                cpu.classList.add('status-pulse', 'bg-rose-700'); 
+                if(document.getElementById('int-task')) document.getElementById('int-task').innerText = "ISR [" + iNames[idx] + "]"; 
+            } 
+            
+            setTimeout(() => { 
+                isHandlingInt = false; 
+                if(alert) alert.classList.add('hidden'); 
+                if(cpu) cpu.classList.remove('status-pulse', 'bg-rose-700'); 
+                runIntStep(); 
+            }, 2000); 
+        }
 
         // --- DEADLOCK LOGIC (WITH NULL CHECKS) ---
         let deadlockState = { p1Holding: null, p1Requesting: null, p2Holding: null, p2Requesting: null };
+        
         function p1Action() { 
             if (deadlockState.p1Holding === null) { 
                 deadlockState.p1Holding = 'printer'; 
@@ -858,6 +1148,7 @@
                 checkDeadlock(); 
             } 
         }
+
         function p2Action() { 
             if (deadlockState.p2Holding === null) { 
                 deadlockState.p2Holding = 'scanner'; 
@@ -875,11 +1166,14 @@
                 checkDeadlock(); 
             } 
         }
+
         function checkDeadlock() { 
-            if (deadlockState.p1Holding === 'printer' && deadlockState.p1Requesting === 'scanner' && deadlockState.p2Holding === 'scanner' && deadlockState.p2Requesting === 'printer') { 
+            if (deadlockState.p1Holding === 'printer' && deadlockState.p1Requesting === 'scanner' && 
+                deadlockState.p2Holding === 'scanner' && deadlockState.p2Requesting === 'printer') { 
                 if(document.getElementById('deadlock-alert')) document.getElementById('deadlock-alert').classList.remove('hidden'); 
             } 
         }
+
         function resetDeadlock() { 
             deadlockState = { p1Holding: null, p1Requesting: null, p2Holding: null, p2Requesting: null }; 
             document.querySelectorAll('.resource-node').forEach(n => n.classList.remove('holding', 'requesting')); 
@@ -888,21 +1182,35 @@
             if(document.getElementById('p2-status')) document.getElementById('p2-status').innerText = "IDLE"; 
             if(document.getElementById('printer-owner')) document.getElementById('printer-owner').innerText = "AVAILABLE"; 
             if(document.getElementById('scanner-owner')) document.getElementById('scanner-owner').innerText = "AVAILABLE"; 
+            
             if(document.getElementById('p1-btn')) { 
                 document.getElementById('p1-btn').innerText = "P1: ACQUIRE PRINTER"; 
-                document.getElementById('p1-btn').className = "w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg transition-all"; 
+                document.getElementById('p1-btn').className = "w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"; 
             }
             if(document.getElementById('p2-btn')) { 
                 document.getElementById('p2-btn').innerText = "P2: ACQUIRE SCANNER"; 
-                document.getElementById('p2-btn').className = "w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg transition-all"; 
+                document.getElementById('p2-btn').className = "w-full bg-indigo-600 text-white font-black py-4 rounded-2xl shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98]"; 
             }
         }
 
         // --- CONTROL SYSTEM SIMULATOR LOGIC ---
-        let actualTemp = 22.0; let targetTemp = 22.0; let ambientTemp = 10.0; let loopType = 'closed'; let heaterOn = false;
+        let actualTemp = 22.0; 
+        let targetTemp = 22.0; 
+        let ambientTemp = 10.0; 
+        let loopType = 'closed'; 
+        let heaterOn = false;
         let controlState = 0; 
-        function updateTarget(val) { targetTemp = parseFloat(val); document.getElementById('target-val').innerText = targetTemp.toFixed(1); }
-        function updateAmbient(val) { ambientTemp = parseFloat(val); document.getElementById('ambient-val').innerText = ambientTemp.toFixed(1); }
+
+        function updateTarget(val) { 
+            targetTemp = parseFloat(val); 
+            document.getElementById('target-val').innerText = targetTemp.toFixed(1); 
+        }
+        
+        function updateAmbient(val) { 
+            ambientTemp = parseFloat(val); 
+            document.getElementById('ambient-val').innerText = ambientTemp.toFixed(1); 
+        }
+        
         function toggleLoopType() { 
             loopType = (loopType === 'closed' ? 'open' : 'closed'); 
             const btn = document.getElementById('toggle-loop-btn'); 
@@ -928,13 +1236,19 @@
                 }
             }
         }
+
         function runControlTick() { 
             const lossFactor = 0.05; 
             const comps = ['comp-sensor', 'comp-trans', 'comp-algo', 'comp-actuator'];
+            
             comps.forEach(id => {
                 const el = document.getElementById(id);
-                if(el) { el.classList.remove('border-indigo-500', 'shadow-lg', 'scale-110'); el.classList.add('border-slate-100'); }
+                if(el) { 
+                    el.classList.remove('border-indigo-500', 'shadow-lg', 'scale-110'); 
+                    el.classList.add('border-slate-100'); 
+                }
             });
+            
             const fbPath = document.getElementById('feedback-path');
             const fbLabel = document.getElementById('feedback-label');
             const fbArrow = document.getElementById('feedback-arrow');
@@ -955,14 +1269,21 @@
             else if (controlState === 2) {
                 const el = document.getElementById('comp-algo');
                 if(el) { el.classList.remove('border-slate-100'); el.classList.add('border-indigo-500', 'shadow-lg', 'scale-110'); }
-                if (loopType === 'closed') { heaterOn = actualTemp < targetTemp; } 
-                else { heaterOn = (Math.round(Date.now() / 1000) % 10 < 5); }
+                
+                if (loopType === 'closed') { 
+                    heaterOn = actualTemp < targetTemp; 
+                } else { 
+                    heaterOn = (Math.round(Date.now() / 1000) % 10 < 5); 
+                }
             }
             else if (controlState === 3) {
                 const el = document.getElementById('comp-actuator');
                 if(el) { el.classList.remove('border-slate-100'); el.classList.add('border-indigo-500', 'shadow-lg', 'scale-110'); }
                 const actStat = document.getElementById('actuator-status'); 
-                if(actStat) { actStat.innerText = heaterOn ? "Heater ON" : "Heater OFF"; actStat.style.color = heaterOn ? "#f43f5e" : "#94a3b8"; }
+                if(actStat) { 
+                    actStat.innerText = heaterOn ? "Heater ON" : "Heater OFF"; 
+                    actStat.style.color = heaterOn ? "#f43f5e" : "#94a3b8"; 
+                }
             }
             else if (controlState === 4) {
                 if (loopType === 'closed' && fbPath) {
@@ -970,17 +1291,25 @@
                     if(fbLabel) fbLabel.classList.replace('text-slate-400', 'text-indigo-600');
                     if(fbArrow) fbArrow.classList.replace('border-slate-200', 'border-indigo-500');
                 }
+                
                 actualTemp += (ambientTemp - actualTemp) * lossFactor; 
                 if (heaterOn) actualTemp += 0.8; 
                 
                 const tempDisplay = document.getElementById('actual-temp-display'); 
                 if(tempDisplay) tempDisplay.innerText = actualTemp.toFixed(1) + "°C";
+                
                 const visual = document.getElementById('temp-visual'); 
-                if(visual) { visual.style.height = ((actualTemp - 0) / 40 * 100) + "%"; visual.style.backgroundColor = actualTemp > 25 ? '#f43f5e' : actualTemp < 18 ? '#0ea5e9' : '#10b981'; }
+                if(visual) { 
+                    visual.style.height = ((actualTemp - 0) / 40 * 100) + "%"; 
+                    visual.style.backgroundColor = actualTemp > 25 ? '#f43f5e' : actualTemp < 18 ? '#0ea5e9' : '#10b981'; 
+                }
                 
                 const error = targetTemp - actualTemp;
                 const errDisplay = document.getElementById('error-display'); 
-                if(errDisplay) { errDisplay.innerText = error.toFixed(1) + "°C"; errDisplay.style.color = Math.abs(error) < 0.5 ? '#10b981' : '#f43f5e'; }
+                if(errDisplay) { 
+                    errDisplay.innerText = error.toFixed(1) + "°C"; 
+                    errDisplay.style.color = Math.abs(error) < 0.5 ? '#10b981' : '#f43f5e'; 
+                }
             }
             
             controlState = (controlState + 1) % 5;
@@ -1001,47 +1330,91 @@
             { question: "[HL] What is the primary benefit of translating source code into 'Bytecode' rather than native machine code?", options: ["It executes faster than native machine code.", "It requires zero RAM to run.", "It allows the code to be highly portable across different platforms (OS/Hardware).", "It prevents deadlocks in multitasking."], correct: 2, explanation: "Bytecode is a platform-neutral intermediate code. As long as a device has the correct Virtual Machine installed (like the Java JVM), it can run the bytecode." }
         ];
 
-        let currentQIndex = 0; let score = 0; let isQuestionAnswered = false;
+        let currentQIndex = 0; 
+        let score = 0; 
+        let isQuestionAnswered = false;
 
         function loadQuizQuestion() {
-            isQuestionAnswered = false; const q = quizData[currentQIndex];
-            const qNumEl = document.getElementById('quiz-q-num'); if(qNumEl) qNumEl.innerText = currentQIndex + 1;
-            const qTextEl = document.getElementById('quiz-question-text'); if(qTextEl) qTextEl.innerText = q.question;
-            const feedbackArea = document.getElementById('quiz-feedback-area'); if(feedbackArea) feedbackArea.classList.add('hidden');
+            isQuestionAnswered = false; 
+            const q = quizData[currentQIndex];
+            
+            const qNumEl = document.getElementById('quiz-q-num'); 
+            if(qNumEl) qNumEl.innerText = currentQIndex + 1;
+            
+            const qTextEl = document.getElementById('quiz-question-text'); 
+            if(qTextEl) qTextEl.innerText = q.question;
+            
+            const feedbackArea = document.getElementById('quiz-feedback-area'); 
+            if(feedbackArea) feedbackArea.classList.add('hidden');
+            
             const optionsContainer = document.getElementById('quiz-options-container'); 
             if(optionsContainer) {
                 optionsContainer.innerHTML = '';
                 q.options.forEach((opt, index) => {
                     const btn = document.createElement('button');
                     btn.className = "w-full text-left p-5 rounded-2xl border-2 border-slate-200 hover:border-indigo-400 hover:bg-indigo-50 font-semibold text-slate-700 transition-all block";
-                    btn.innerText = opt; btn.onclick = () => selectQuizAnswer(index, btn); optionsContainer.appendChild(btn);
+                    btn.innerText = opt; 
+                    btn.onclick = () => selectQuizAnswer(index, btn); 
+                    optionsContainer.appendChild(btn);
                 });
             }
         }
 
         function selectQuizAnswer(selectedIndex, btnElement) {
-            if (isQuestionAnswered) return; isQuestionAnswered = true; const q = quizData[currentQIndex]; const isCorrect = (selectedIndex === q.correct);
+            if (isQuestionAnswered) return; 
+            isQuestionAnswered = true; 
+            const q = quizData[currentQIndex]; 
+            const isCorrect = (selectedIndex === q.correct);
             const optionsContainer = document.getElementById('quiz-options-container');
+            
             if(optionsContainer) {
                 const allButtons = optionsContainer.children;
                 for(let i=0; i<allButtons.length; i++) {
-                    allButtons[i].classList.add('opacity-50', 'cursor-not-allowed'); allButtons[i].onclick = null;
-                    if(i === q.correct) { allButtons[i].classList.remove('opacity-50', 'border-slate-200', 'hover:border-indigo-400', 'hover:bg-indigo-50'); allButtons[i].classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-800'); }
+                    allButtons[i].classList.add('opacity-50', 'cursor-not-allowed'); 
+                    allButtons[i].onclick = null;
+                    if(i === q.correct) { 
+                        allButtons[i].classList.remove('opacity-50', 'border-slate-200', 'hover:border-indigo-400', 'hover:bg-indigo-50'); 
+                        allButtons[i].classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-800'); 
+                    }
                 }
             }
-            if (!isCorrect) { btnElement.classList.remove('opacity-50', 'border-slate-200'); btnElement.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-800', 'opacity-100'); } 
-            else { score++; const scoreEl = document.getElementById('quiz-score'); if(scoreEl) scoreEl.innerText = score; }
             
-            const feedbackArea = document.getElementById('quiz-feedback-area'); const feedbackBox = document.getElementById('quiz-feedback-box'); const feedbackTitle = document.getElementById('quiz-feedback-title');
+            if (!isCorrect) { 
+                btnElement.classList.remove('opacity-50', 'border-slate-200'); 
+                btnElement.classList.add('border-rose-500', 'bg-rose-50', 'text-rose-800', 'opacity-100'); 
+            } else { 
+                score++; 
+                const scoreEl = document.getElementById('quiz-score'); 
+                if(scoreEl) scoreEl.innerText = score; 
+            }
+            
+            const feedbackArea = document.getElementById('quiz-feedback-area'); 
+            const feedbackBox = document.getElementById('quiz-feedback-box'); 
+            const feedbackTitle = document.getElementById('quiz-feedback-title');
+            
             if(feedbackArea) feedbackArea.classList.remove('hidden');
             if(feedbackBox && feedbackTitle) {
-                if (isCorrect) { feedbackBox.className = "p-6 rounded-2xl border-2 mb-6 border-emerald-200 bg-emerald-50 text-emerald-900"; feedbackTitle.innerText = "Correct!"; } 
-                else { feedbackBox.className = "p-6 rounded-2xl border-2 mb-6 border-rose-200 bg-rose-50 text-rose-900"; feedbackTitle.innerText = "Incorrect"; }
+                if (isCorrect) { 
+                    feedbackBox.className = "p-6 rounded-2xl border-2 mb-6 border-emerald-200 bg-emerald-50 text-emerald-900"; 
+                    feedbackTitle.innerText = "Correct!"; 
+                } else { 
+                    feedbackBox.className = "p-6 rounded-2xl border-2 mb-6 border-rose-200 bg-rose-50 text-rose-900"; 
+                    feedbackTitle.innerText = "Incorrect"; 
+                }
             }
-            const feedbackText = document.getElementById('quiz-feedback-text'); if(feedbackText) feedbackText.innerText = q.explanation;
+            
+            const feedbackText = document.getElementById('quiz-feedback-text'); 
+            if(feedbackText) feedbackText.innerText = q.explanation;
         }
 
-        function nextQuizQuestion() { currentQIndex++; if (currentQIndex >= quizData.length) { showQuizResults(); } else { loadQuizQuestion(); } }
+        function nextQuizQuestion() { 
+            currentQIndex++; 
+            if (currentQIndex >= quizData.length) { 
+                showQuizResults(); 
+            } else { 
+                loadQuizQuestion(); 
+            } 
+        }
 
         function showQuizResults() {
             const qArea = document.getElementById('quiz-question-area'); if(qArea) qArea.classList.add('hidden'); 
@@ -1051,24 +1424,64 @@
             
             const percentage = Math.round((score / quizData.length) * 100); 
             const fScore = document.getElementById('quiz-final-score'); if(fScore) fScore.innerText = percentage + "%";
-            let msg = "Keep studying!"; if (percentage >= 80) msg = "Excellent job! You have a solid grasp of OS and Control Systems."; if (percentage === 100) msg = "Perfect Score! You've mastered this syllabus section.";
-            const fMsg = document.getElementById('quiz-final-message'); if(fMsg) fMsg.innerText = msg;
+            
+            let msg = "Keep studying!"; 
+            if (percentage >= 80) msg = "Excellent job! You have a solid grasp of OS and Control Systems."; 
+            if (percentage === 100) msg = "Perfect Score! You've mastered this syllabus section.";
+            
+            const fMsg = document.getElementById('quiz-final-message'); 
+            if(fMsg) fMsg.innerText = msg;
         }
 
         function resetQuiz() {
-            score = 0; currentQIndex = 0; 
-            const scoreEl = document.getElementById('quiz-score'); if(scoreEl) scoreEl.innerText = score;
+            score = 0; 
+            currentQIndex = 0; 
+            const scoreEl = document.getElementById('quiz-score'); 
+            if(scoreEl) scoreEl.innerText = score;
+            
             const qArea = document.getElementById('quiz-question-area'); if(qArea) qArea.classList.remove('hidden'); 
             const qHeader = document.getElementById('quiz-header'); if(qHeader) qHeader.classList.remove('hidden'); 
             const resArea = document.getElementById('quiz-results-area'); if(resArea) resArea.classList.add('hidden');
+            
             loadQuizQuestion();
         }
 
         // --- TAB & HL TOGGLE LOGIC ---
-        function toggleHL() { isHL = !isHL; const body = document.body; const toggleDot = document.getElementById('toggle-dot'); if (isHL) { body.classList.remove('sl-only'); if(toggleDot) toggleDot.style.left = '1.5rem'; } else { body.classList.add('sl-only'); if(toggleDot) toggleDot.style.left = '0.25rem'; const activeTab = document.querySelector('.tab-content.active'); if (activeTab && ['multitasking', 'control', 'translation'].includes(activeTab.id)) { showTab('checklist'); } } }
-        function showTab(tabId) { document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active')); const target = document.getElementById(tabId); if(target) target.classList.add('active'); document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active')); const btn = document.getElementById('btn-' + tabId); if(btn) btn.classList.add('active'); }
+        function toggleHL() { 
+            isHL = !isHL; 
+            const body = document.body; 
+            const toggleDot = document.getElementById('toggle-dot'); 
+            
+            if (isHL) { 
+                body.classList.remove('sl-only'); 
+                if(toggleDot) toggleDot.style.left = '1.5rem'; 
+            } else { 
+                body.classList.add('sl-only'); 
+                if(toggleDot) toggleDot.style.left = '0.25rem'; 
+                const activeTab = document.querySelector('.tab-content.active'); 
+                if (activeTab && ['multitasking', 'control', 'translation'].includes(activeTab.id)) { 
+                    showTab('checklist'); 
+                } 
+            } 
+        }
+
+        function showTab(tabId) { 
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active')); 
+            const target = document.getElementById(tabId); 
+            if(target) target.classList.add('active'); 
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active')); 
+            const btn = document.getElementById('btn-' + tabId); 
+            if(btn) btn.classList.add('active'); 
+        }
         
-        window.onload = () => { updateSimUI(); resetSim(); resetDeadlock(); runControlTick(); loadQuizQuestion(); };
+        window.onload = () => { 
+            updateSimUI(); 
+            resetSim(); 
+            resetDeadlock(); 
+            runControlTick(); 
+            loadQuizQuestion(); 
+        };
     </script>
 </body>
 </html>

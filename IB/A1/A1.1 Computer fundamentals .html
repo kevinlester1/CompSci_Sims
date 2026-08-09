@@ -14,7 +14,10 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .active-tab-btn { border-bottom: 4px solid #3b82f6; color: #1e3a8a; font-weight: bold; background-color: #f0fdfa; }
+        .active-tab-btn { border-bottom: 4px solid #3b82f6; color: #1e3a8a !important; font-weight: bold; background-color: #f0fdfa; }
+        /* Hide scrollbar for tab navigation but keep functionality */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
@@ -26,7 +29,7 @@
                 <i class="fas fa-microchip text-4xl mr-4 text-blue-300"></i>
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight">Unit A.1: Computer Systems</h1>
-                    <p class="text-blue-200 text-sm mt-1">Task-Based Interactive Learning Guide (First Assessment 2027)</p>
+                    <p class="text-blue-200 text-sm mt-1">Interactive Learning Guide (First Assessment 2027)</p>
                 </div>
             </div>
         </div>
@@ -36,10 +39,16 @@
     <div class="bg-white shadow-sm border-b border-slate-200 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav class="flex overflow-x-auto hide-scroll" aria-label="Tabs">
-                <button onclick="switchTab('tab1')" id="btn-tab1" class="active-tab-btn whitespace-nowrap py-4 px-6 border-b-4 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors flex items-center">
+                <button onclick="switchTab('tab-questions')" id="btn-tab-questions" class="active-tab-btn whitespace-nowrap py-4 px-6 border-b-4 border-transparent text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-50 transition-colors flex items-center">
+                    <i class="fas fa-question-circle mr-2"></i> Q&A Review
+                </button>
+                <button onclick="switchTab('tab-syllabus')" id="btn-tab-syllabus" class="whitespace-nowrap py-4 px-6 border-b-4 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors flex items-center">
+                    <i class="fas fa-list-ul mr-2"></i> Full Syllabus
+                </button>
+                <button onclick="switchTab('tab-task1')" id="btn-tab-task1" class="whitespace-nowrap py-4 px-6 border-b-4 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors flex items-center">
                     <i class="fas fa-server mr-2"></i> Task 1: CPU Architect
                 </button>
-                <button onclick="switchTab('tab2')" id="btn-tab2" class="whitespace-nowrap py-4 px-6 border-b-4 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors flex items-center">
+                <button onclick="switchTab('tab-task2')" id="btn-tab-task2" class="whitespace-nowrap py-4 px-6 border-b-4 border-transparent text-sm font-medium text-slate-500 hover:text-slate-700 hover:bg-slate-50 transition-colors flex items-center">
                     <i class="fas fa-database mr-2"></i> Task 2: Storage & Cloud
                 </button>
             </nav>
@@ -50,9 +59,243 @@
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
 
         <!-- ==========================================
-             TAB 1: CPU ARCHITECT
+             TAB 0: QUESTIONS REVIEW
              ========================================== -->
-        <div id="tab1" class="tab-content active">
+        <div id="tab-questions" class="tab-content active">
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 rounded-r-xl p-6 mb-8 shadow-sm">
+                <div class="flex items-start">
+                    <i class="fas fa-brain text-3xl text-indigo-600 mt-1"></i>
+                    <div class="ml-4">
+                        <h2 class="text-2xl font-bold text-indigo-900 mb-2">Unit A.1: Conceptual & Factual Review</h2>
+                        <p class="text-indigo-800">Test your knowledge with these conceptual and factual questions derived directly from the 2027 DP Computer Science syllabus (Theme A).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Factual Questions -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b-2 border-slate-200 pb-2"><i class="fas fa-book mr-2 text-blue-500"></i>Factual Questions</h3>
+                    
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('fq1', 'icon-fq1')">
+                            <h4 class="font-semibold text-slate-800 text-sm">1. Identify the components of the CPU.</h4>
+                            <i id="icon-fq1" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="fq1" class="hidden px-4 pb-4 border-t border-slate-100 bg-blue-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> The main components include the Arithmetic Logic Unit (ALU), the Control Unit (CU), and Registers (such as the PC, MAR, MDR, IR, and Accumulator).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('fq2', 'icon-fq2')">
+                            <h4 class="font-semibold text-slate-800 text-sm">2. Define the purpose of the Memory Address Register (MAR).</h4>
+                            <i id="icon-fq2" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="fq2" class="hidden px-4 pb-4 border-t border-slate-100 bg-blue-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> The MAR holds the memory address of the data or instruction that is to be fetched from, or written to, primary memory.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('fq3', 'icon-fq3')">
+                            <h4 class="font-semibold text-slate-800 text-sm">3. State three functions of an operating system.</h4>
+                            <i id="icon-fq3" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="fq3" class="hidden px-4 pb-4 border-t border-slate-100 bg-blue-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> Memory management, file system management, device management, process scheduling, security management, and providing a graphical user interface (GUI).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('fq4', 'icon-fq4')">
+                            <h4 class="font-semibold text-slate-800 text-sm">4. Describe the differences between RAM and ROM.</h4>
+                            <i id="icon-fq4" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="fq4" class="hidden px-4 pb-4 border-t border-slate-100 bg-blue-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> RAM (Random Access Memory) is volatile and stores data and instructions for currently running programs. ROM (Read-Only Memory) is non-volatile and permanently stores essential boot-up instructions (firmware/BIOS) that cannot be easily altered.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('fq5', 'icon-fq5')">
+                            <h4 class="font-semibold text-slate-800 text-sm">5. State the purpose of cache memory.</h4>
+                            <i id="icon-fq5" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="fq5" class="hidden px-4 pb-4 border-t border-slate-100 bg-blue-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> Cache memory is a small, ultra-fast memory located inside or close to the CPU. Its purpose is to store frequently used data and instructions, reducing the time the CPU spends fetching data from the slower main memory (RAM).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('fq6', 'icon-fq6')">
+                            <h4 class="font-semibold text-slate-800 text-sm">6. Identify three types of secondary storage.</h4>
+                            <i id="icon-fq6" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="fq6" class="hidden px-4 pb-4 border-t border-slate-100 bg-blue-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> Magnetic (e.g., Hard Disk Drives/HDD), Solid State (e.g., Solid State Drives/SSD, flash drives), and Optical (e.g., CDs, DVDs).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('fq7', 'icon-fq7')">
+                            <h4 class="font-semibold text-slate-800 text-sm">7. Outline the three primary models of cloud computing.</h4>
+                            <i id="icon-fq7" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="fq7" class="hidden px-4 pb-4 border-t border-slate-100 bg-blue-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> SaaS (Software as a Service) provides ready-to-use software accessed via a browser; PaaS (Platform as a Service) provides development frameworks/tools for programmers; IaaS (Infrastructure as a Service) provides raw virtualized hardware (servers, storage) where the user manages the OS and apps.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conceptual Questions -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b-2 border-slate-200 pb-2"><i class="fas fa-lightbulb mr-2 text-orange-500"></i>Conceptual Questions</h3>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('cq1', 'icon-cq1')">
+                            <h4 class="font-semibold text-slate-800 text-sm">1. Explain how pipelining improves CPU performance. (HL)</h4>
+                            <i id="icon-cq1" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="cq1" class="hidden px-4 pb-4 border-t border-slate-100 bg-orange-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> Pipelining overlaps the fetch, decode, and execute stages of different instructions. Instead of waiting for one instruction to completely finish, the CPU can fetch a second instruction while the first is being decoded, significantly increasing overall instruction throughput per clock cycle.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('cq2', 'icon-cq2')">
+                            <h4 class="font-semibold text-slate-800 text-sm">2. Evaluate the use of polling versus interrupt handling.</h4>
+                            <i id="icon-cq2" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="cq2" class="hidden px-4 pb-4 border-t border-slate-100 bg-orange-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> Polling requires the CPU to continuously check a device's status, wasting processing overhead and power if events are rare. Interrupts allow the CPU to perform other tasks until a hardware device signals it needs attention. Interrupts are more efficient for unpredictable events, while polling might be useful for continuous, predictable high-speed data transfers.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('cq3', 'icon-cq3')">
+                            <h4 class="font-semibold text-slate-800 text-sm">3. Distinguish between an interpreter and a compiler. (HL)</h4>
+                            <i id="icon-cq3" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="cq3" class="hidden px-4 pb-4 border-t border-slate-100 bg-orange-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> A compiler translates the entire source code into machine code in one go before execution, producing a standalone executable that runs quickly but requires recompilation if changed. An interpreter translates and executes the source code line-by-line in real time, making debugging easier but resulting in slower overall execution.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('cq4', 'icon-cq4')">
+                            <h4 class="font-semibold text-slate-800 text-sm">4. Explain how a CPU differs functionally from a GPU. (HL)</h4>
+                            <i id="icon-cq4" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="cq4" class="hidden px-4 pb-4 border-t border-slate-100 bg-orange-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> A CPU has a few highly complex cores designed for general-purpose, sequential processing and fast execution of single tasks. A GPU features thousands of simpler, smaller cores optimized for parallel processing, making it highly efficient at handling multiple simple computations simultaneously (ideal for rendering graphics or training machine learning models).</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('cq5', 'icon-cq5')">
+                            <h4 class="font-semibold text-slate-800 text-sm">5. Compare lossy and lossless data compression.</h4>
+                            <i id="icon-cq5" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="cq5" class="hidden px-4 pb-4 border-t border-slate-100 bg-orange-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> Lossy compression significantly reduces file size by permanently removing non-essential data, which is acceptable for audio/video but lowers quality. Lossless compression reduces file size by identifying data patterns (like RLE) without losing any actual information, allowing the original file to be perfectly restored.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('cq6', 'icon-cq6')">
+                            <h4 class="font-semibold text-slate-800 text-sm">6. Compare FCFS and Round Robin scheduling approaches.</h4>
+                            <i id="icon-cq6" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="cq6" class="hidden px-4 pb-4 border-t border-slate-100 bg-orange-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> First-Come First-Served (FCFS) executes processes in the exact order they arrive, which is simple but can cause long wait times if a large process arrives first. Round Robin allocates a fixed time slice (quantum) to each process in turn, cycling through them, which ensures fairness and responsiveness but adds switching overhead.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('cq7', 'icon-cq7')">
+                            <h4 class="font-semibold text-slate-800 text-sm">7. Explain the role of the OS in managing resource deadlocks. (HL)</h4>
+                            <i id="icon-cq7" class="fas fa-chevron-down text-slate-400"></i>
+                        </div>
+                        <div id="cq7" class="hidden px-4 pb-4 border-t border-slate-100 bg-orange-50 text-sm">
+                            <p class="text-slate-700 mt-2"><strong>Answer:</strong> Deadlocks occur when two or more processes are blocked forever, each waiting for a resource held by the other. The OS manages this by employing strategies like deadlock prevention (ensuring wait conditions can't occur), deadlock avoidance (dynamically checking resource allocation states), or deadlock detection and recovery (aborting conflicting processes).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 0.5: FULL SYLLABUS A.1
+             ========================================== -->
+        <div id="tab-syllabus" class="tab-content">
+            <div class="bg-emerald-50 border-l-4 border-emerald-500 rounded-r-xl p-6 mb-8 shadow-sm">
+                <div class="flex items-start">
+                    <i class="fas fa-clipboard-check text-3xl text-emerald-600 mt-1"></i>
+                    <div class="ml-4">
+                        <h2 class="text-2xl font-bold text-emerald-900 mb-2">A.1 Computer Fundamentals Syllabus</h2>
+                        <p class="text-emerald-800">Comprehensive syllabus outline for Unit A.1 as specified in the "First Assessment 2027" guide.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- A1.1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 border-b pb-2">A1.1 Computer hardware and operation</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+                        <li><strong>A1.1.1</strong> Describe the functions and interactions of the main CPU components (ALU, CU, Registers, Buses, Processors).</li>
+                        <li><strong>A1.1.2</strong> Describe the role of a GPU and architectures suitable for complex computations.</li>
+                        <li><strong class="text-purple-600">A1.1.3 (HL)</strong> Explain the differences between the CPU and the GPU.</li>
+                        <li><strong>A1.1.4</strong> Explain the purposes of different types of primary memory (RAM, ROM, cache, registers).</li>
+                        <li><strong>A1.1.5</strong> Describe the fetch, decode and execute cycle.</li>
+                        <li><strong class="text-purple-600">A1.1.6 (HL)</strong> Describe the process of pipelining in multi-core architectures.</li>
+                        <li><strong>A1.1.7</strong> Describe internal and external types of secondary memory storage (SSD, HDD, Optical, NAS, etc.).</li>
+                        <li><strong>A1.1.8</strong> Describe the concept of compression (Lossy vs Lossless, RLE).</li>
+                        <li><strong>A1.1.9</strong> Describe the different types of services in cloud computing (SaaS, PaaS, IaaS).</li>
+                    </ul>
+                </div>
+
+                <!-- A1.2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 border-b pb-2">A1.2 Data representation and computer logic</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+                        <li><strong>A1.2.1</strong> Describe the principal methods of representing data (binary, hexadecimal conversions).</li>
+                        <li><strong>A1.2.2</strong> Explain how binary is used to store data (integers, strings, audio, video).</li>
+                        <li><strong>A1.2.3</strong> Describe the purpose and use of logic gates (AND, OR, NOT, NAND, NOR, XOR, XNOR).</li>
+                        <li><strong>A1.2.4</strong> Construct and analyse truth tables (predicting outputs, Karnaugh maps for algebraic simplification).</li>
+                        <li><strong>A1.2.5</strong> Construct logic diagrams from expressions.</li>
+                    </ul>
+                </div>
+
+                <!-- A1.3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 border-b pb-2">A1.3 Operating systems and control systems</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+                        <li><strong>A1.3.1</strong> Describe the role of operating systems.</li>
+                        <li><strong>A1.3.2</strong> Describe the functions of an operating system (memory management, scheduling, GUI, etc.).</li>
+                        <li><strong>A1.3.3</strong> Compare different approaches to scheduling (FCFS, round robin, priority).</li>
+                        <li><strong>A1.3.4</strong> Evaluate the use of polling and interrupt handling.</li>
+                        <li><strong class="text-purple-600">A1.3.5 (HL)</strong> Explain the role of the OS in managing multitasking and resource allocation (deadlocks).</li>
+                        <li><strong class="text-purple-600">A1.3.6 (HL)</strong> Describe the use of control system components (sensors, actuators, open/closed loop).</li>
+                        <li><strong class="text-purple-600">A1.3.7 (HL)</strong> Explain the use of control systems in a range of real-world applications.</li>
+                    </ul>
+                </div>
+
+                <!-- A1.4 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-l-purple-500">
+                    <h3 class="text-lg font-bold text-slate-800 mb-3 border-b pb-2">A1.4 Translation (HL Only)</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-slate-700">
+                        <li><strong class="text-purple-600">A1.4.1 (HL)</strong> Evaluate the translation processes of interpreters and compilers, including JIT and bytecode.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==========================================
+             TAB 1: TASK 1: CPU ARCHITECT
+             ========================================== -->
+        <div id="tab-task1" class="tab-content">
             
             <!-- The Task -->
             <div class="bg-orange-50 border-l-4 border-orange-500 rounded-r-xl p-6 mb-8 shadow-sm">
@@ -66,17 +309,6 @@
                             <li>Model the Fetch-Decode-Execute cycle in your simulation, showing exactly how data moves across all specific buses and registers.</li>
                             <li>Incorporate advanced A.1 concepts into your model: demonstrate how <strong>Instruction Pipelining</strong> increases efficiency, show the interaction with different <strong>memory types (Cache, RAM, ROM)</strong>, and distinguish between single vs multi-core / CPU vs GPU execution.</li>
                         </ol>
-                        <div class="mt-4 bg-orange-100 p-3 rounded-lg border border-orange-200">
-                            <h4 class="text-xs font-bold text-orange-900 mb-2 uppercase tracking-wide">Syllabus Coverage:</h4>
-                            <ul class="text-xs text-orange-800 space-y-1">
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.1 Outline the architecture of the central processing unit (CPU).</li>
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.2 Describe the fetch–decode–execute cycle.</li>
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.3 Identify the function of primary memory.</li>
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.4 Describe the use of cache memory.</li>
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.5 Describe the use of pipelining in the CPU.</li>
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.6 Compare the function of CPUs and GPUs.</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -110,7 +342,7 @@
                         
                         <!-- Group 2 -->
                         <div>
-                            <h4 class="font-bold text-slate-700 mb-3 text-sm border-b-2 border-slate-100 pb-1">2. Memory & Cache (A.1.3, A.1.4)</h4>
+                            <h4 class="font-bold text-slate-700 mb-3 text-sm border-b-2 border-slate-100 pb-1">2. Memory & Cache (A.1.1)</h4>
                             <ul class="space-y-3">
                                 <li class="flex items-start">
                                     <input type="checkbox" class="mt-1 mr-3 w-4 h-4 rounded text-blue-600 focus:ring-blue-500 cursor-pointer border-slate-300">
@@ -125,7 +357,7 @@
 
                         <!-- Group 3 -->
                         <div>
-                            <h4 class="font-bold text-slate-700 mb-3 text-sm border-b-2 border-slate-100 pb-1">3. The FDE Cycle (A.1.2)</h4>
+                            <h4 class="font-bold text-slate-700 mb-3 text-sm border-b-2 border-slate-100 pb-1">3. The FDE Cycle (A.1.1.5)</h4>
                             <ul class="space-y-3">
                                 <li class="flex items-start">
                                     <input type="checkbox" class="mt-1 mr-3 w-4 h-4 rounded text-blue-600 focus:ring-blue-500 cursor-pointer border-slate-300">
@@ -144,7 +376,7 @@
 
                         <!-- Group 4 -->
                         <div>
-                            <h4 class="font-bold text-slate-700 mb-3 text-sm border-b-2 border-slate-100 pb-1">4. Advanced Execution (A.1.5, A.1.6)</h4>
+                            <h4 class="font-bold text-slate-700 mb-3 text-sm border-b-2 border-slate-100 pb-1">4. Advanced Execution (HL / A.1.1)</h4>
                             <ul class="space-y-3">
                                 <li class="flex items-start">
                                     <input type="checkbox" class="mt-1 mr-3 w-4 h-4 rounded text-blue-600 focus:ring-blue-500 cursor-pointer border-slate-300">
@@ -227,7 +459,7 @@
             <!-- Task 1 Resources Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
-                <!-- Explanations & Vocab -->
+                <!-- Explanations -->
                 <div class="space-y-6">
                     <div class="bg-white rounded-xl shadow-md p-6 border border-slate-100">
                         <h3 class="text-xl font-bold border-b pb-2 mb-4 text-blue-900"><i class="fas fa-book-open mr-2"></i>Hardware Explanations</h3>
@@ -252,14 +484,13 @@
                             <li><strong>Cores & Processors:</strong> A core is an independent processing unit in a CPU.
                                 <ul class="list-[circle] pl-5 mt-1 space-y-1 text-sm text-slate-500">
                                     <li><em>CPU:</em> Few powerful cores optimized for sequential, general-purpose tasks.</li>
-                                    <li><em>GPU (Graphics Processing Unit):</em> Thousands of simpler cores designed for highly parallel processing (ideal for graphics and AI/Machine Learning).</li>
+                                    <li><em>GPU (Graphics Processing Unit):</em> Thousands of simpler cores designed for highly parallel processing.</li>
                                 </ul>
                             </li>
                             <li class="bg-blue-50 p-4 rounded-lg border border-blue-200 mt-4">
                                 <strong class="text-blue-900 text-lg block border-b border-blue-200 pb-2 mb-2"><i class="fas fa-stream mr-2"></i>Instruction Pipelining (Deep Dive)</strong>
-                                <p class="text-sm text-slate-700 mb-2"><strong>Sequential vs. Pipelined:</strong> In a basic (sequential) CPU, an instruction must go completely through the Fetch, Decode, and Execute stages before the next instruction can even begin. This leaves parts of the CPU idle.</p>
-                                <p class="text-sm text-slate-700 mb-3"><strong>How Pipelining Works:</strong> Instruction Pipelining overlaps the execution of multiple instructions to increase overall performance (throughput). It works like an assembly line. As soon as Instruction 1 finishes <em>Fetching</em> and moves to the <em>Decode</em> unit, the Fetch unit is immediately freed up to grab Instruction 2.</p>
-                                <p class="text-sm text-slate-700 mb-4">Once the pipeline is "full," the CPU completes one instruction every single clock cycle, drastically speeding up execution.</p>
+                                <p class="text-sm text-slate-700 mb-2"><strong>Sequential vs. Pipelined:</strong> In a basic CPU, an instruction must go completely through the Fetch, Decode, and Execute stages before the next instruction can begin.</p>
+                                <p class="text-sm text-slate-700 mb-3"><strong>How Pipelining Works:</strong> Instruction Pipelining overlaps the execution of multiple instructions to increase throughput. As soon as Instruction 1 finishes <em>Fetching</em> and moves to <em>Decode</em>, the Fetch unit is freed up to grab Instruction 2.</p>
                                 <div class="w-full mt-2">
                                     <a href="https://www.youtube.com/watch?v=8Nh9QvemW3M" target="_blank" rel="noopener noreferrer" class="block relative group rounded-lg overflow-hidden shadow-md border border-slate-200">
                                         <img src="https://img.youtube.com/vi/8Nh9QvemW3M/hqdefault.jpg" alt="Instruction Pipelining Explained" class="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-300">
@@ -272,15 +503,9 @@
                             </li>
                             <li class="mt-4"><strong>Memory Types:</strong>
                                 <ul class="list-[circle] pl-5 mt-1 space-y-1 text-sm text-slate-500">
-                                    <li><em>RAM (Random Access Memory):</em> Volatile working memory storing currently active programs and data.</li>
-                                    <li><em>ROM (Read-Only Memory):</em> Non-volatile memory storing essential bootup instructions (BIOS).</li>
-                                    <li><em>Cache:</em> Small, ultra-fast memory near/on the CPU storing frequently used data. Divided into levels:
-                                        <ul class="list-disc pl-5 mt-1 text-xs space-y-1 text-slate-500">
-                                            <li><strong>L1 Cache:</strong> Smallest and fastest, located directly on the CPU core.</li>
-                                            <li><strong>L2 Cache:</strong> Larger but slightly slower, usually dedicated to a specific core.</li>
-                                            <li><strong>L3 Cache:</strong> Largest and slowest cache, typically shared across all cores.</li>
-                                        </ul>
-                                    </li>
+                                    <li><em>RAM:</em> Volatile working memory storing active programs and data.</li>
+                                    <li><em>ROM:</em> Non-volatile memory storing essential bootup instructions (BIOS).</li>
+                                    <li><em>Cache:</em> Small, ultra-fast memory near the CPU storing frequently used data (L1, L2, L3).</li>
                                 </ul>
                             </li>
                         </ul>
@@ -290,7 +515,6 @@
                         <h3 class="text-xl font-bold border-b pb-2 mb-4 text-purple-900"><i class="fas fa-spell-check mr-2"></i>Task 1 Vocabulary</h3>
                         <dl class="space-y-3 text-sm">
                             <div><dt class="font-bold text-slate-800">Accumulator (AC)</dt><dd class="text-slate-600">A CPU register that temporarily stores results of ALU operations.</dd></div>
-                            <div><dt class="font-bold text-slate-800">Big-Endian / Little-Endian</dt><dd class="text-slate-600">Methods of organizing bytes in memory.</dd></div>
                             <div><dt class="font-bold text-slate-800">Cache Hit / Miss</dt><dd class="text-slate-600">Finding needed data in fast cache (Hit) vs fetching from slower RAM (Miss).</dd></div>
                             <div><dt class="font-bold text-slate-800">Pipelining</dt><dd class="text-slate-600">Overlapping the stages of the FDE cycle for multiple instructions to improve CPU throughput.</dd></div>
                         </dl>
@@ -390,29 +614,14 @@
                             <button onclick="stepPipeline()" id="btnPipe" class="flex-1 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 font-bold text-sm shadow-sm transition-colors">Tick Clock (+1)</button>
                         </div>
                     </div>
-
-                    <!-- Active Recall Q -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('ans1', 'icon1')">
-                            <h3 class="font-semibold text-slate-800 text-sm"><span class="text-red-500 mr-1">Q1.</span>Outline the function of an accumulator. [2]</h3>
-                            <i id="icon1" class="fas fa-chevron-down text-slate-400"></i>
-                        </div>
-                        <div id="ans1" class="hidden px-4 pb-4 border-t border-slate-100 bg-red-50 text-sm">
-                            <p class="text-slate-700 mt-2 font-medium">Markscheme Guidance:</p>
-                            <ul class="list-disc pl-5 mt-1 text-slate-600">
-                                <li>To store intermediate arithmetic/logic results [1]</li>
-                                <li>Reduces main memory accesses during processing cycles [1]</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- ==========================================
-             TAB 2: STORAGE & CLOUD
+             TAB 2: TASK 2: STORAGE & CLOUD
              ========================================== -->
-        <div id="tab2" class="tab-content">
+        <div id="tab-task2" class="tab-content">
             
             <!-- The Task -->
             <div class="bg-orange-50 border-l-4 border-orange-500 rounded-r-xl p-6 mb-8 shadow-sm">
@@ -426,14 +635,6 @@
                             <li>Explain the need for data compression and simulate how Run-Length Encoding (RLE) compresses a string of data.</li>
                             <li>Evaluate IaaS, PaaS, and SaaS, and recommend a cloud service model for a startup with limited hardware budget.</li>
                         </ol>
-                        <div class="mt-4 bg-orange-100 p-3 rounded-lg border border-orange-200">
-                            <h4 class="text-xs font-bold text-orange-900 mb-2 uppercase tracking-wide">Syllabus Coverage:</h4>
-                            <ul class="text-xs text-orange-800 space-y-1">
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.x Outline the use of secondary storage.</li>
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.x Describe data compression (Lossy, Lossless, RLE).</li>
-                                <li class="flex items-start"><i class="fas fa-check-square text-orange-500 mt-0.5 mr-2"></i>A.1.10 Explain the characteristics of cloud computing (SaaS, PaaS, IaaS).</li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -453,28 +654,18 @@
                             </li>
                             <li><strong>Data Compression:</strong> Reducing file sizes to save storage space and transmission time.
                                 <ul class="list-[circle] pl-5 mt-1 space-y-1 text-sm text-slate-500">
-                                    <li><em>Lossy:</em> Permanently removes non-essential data (e.g., JPEG, MP3).</li>
-                                    <li><em>Lossless:</em> Reduces size without losing any data; perfectly restorable (e.g., ZIP).</li>
-                                    <li><em>Run-Length Encoding (RLE):</em> A form of lossless compression that replaces sequences of identical data with a single count and the value (e.g., 'AAAA' becomes '4A').</li>
+                                    <li><em>Lossy:</em> Permanently removes non-essential data.</li>
+                                    <li><em>Lossless:</em> Reduces size without losing any data; perfectly restorable.</li>
                                 </ul>
                             </li>
                             <li><strong>Cloud Computing Models:</strong>
                                 <ul class="list-[circle] pl-5 mt-1 space-y-1 text-sm text-slate-500">
-                                    <li><em>SaaS (Software as a Service):</em> Ready-to-use software accessed via browser (e.g., Google Workspace).</li>
-                                    <li><em>PaaS (Platform as a Service):</em> Provides development frameworks/tools for programmers without hardware management (e.g., Heroku).</li>
-                                    <li><em>IaaS (Infrastructure as a Service):</em> Raw virtualized hardware (servers, storage). You manage the OS and apps (e.g., AWS EC2).</li>
+                                    <li><em>SaaS:</em> Software as a Service.</li>
+                                    <li><em>PaaS:</em> Platform as a Service.</li>
+                                    <li><em>IaaS:</em> Infrastructure as a Service.</li>
                                 </ul>
                             </li>
                         </ul>
-                    </div>
-
-                    <div class="bg-white rounded-xl shadow-md p-6 border border-slate-100">
-                        <h3 class="text-xl font-bold border-b pb-2 mb-4 text-purple-900"><i class="fas fa-spell-check mr-2"></i>Task 2 Vocabulary</h3>
-                        <dl class="space-y-3 text-sm">
-                            <div><dt class="font-bold text-slate-800">IaaS / PaaS / SaaS</dt><dd class="text-slate-600">Infrastructure, Platform, and Software delivered "as a service" over the internet.</dd></div>
-                            <div><dt class="font-bold text-slate-800">RLE (Run-Length Encoding)</dt><dd class="text-slate-600">A simple lossless compression technique checking for repeating consecutive characters.</dd></div>
-                            <div><dt class="font-bold text-slate-800">Solid State Drive (SSD)</dt><dd class="text-slate-600">Secondary storage using NAND flash memory chips.</dd></div>
-                        </dl>
                     </div>
                 </div>
 
@@ -503,21 +694,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Active Recall Q -->
-                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                        <div class="p-4 flex justify-between items-center cursor-pointer hover:bg-slate-50" onclick="toggleAnswer('ansCloud', 'iconCloud')">
-                            <h3 class="font-semibold text-slate-800 text-sm"><span class="text-red-500 mr-1">Q2.</span>Outline why PaaS is suitable for a team building applications. [2]</h3>
-                            <i id="iconCloud" class="fas fa-chevron-down text-slate-400"></i>
-                        </div>
-                        <div id="ansCloud" class="hidden px-4 pb-4 border-t border-slate-100 bg-red-50 text-sm">
-                            <p class="text-slate-700 mt-2 font-medium">Markscheme Guidance:</p>
-                            <ul class="list-disc pl-5 mt-1 text-slate-600">
-                                <li>Offers a range of pre-built components/libraries to accelerate development [1]</li>
-                                <li>Developers concentrate purely on coding rather than managing underlying infrastructure [1]</li>
-                            </ul>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -530,29 +706,38 @@
 
     <!-- Interactive Scripts -->
     <script>
-        // --- Tab Switching Logic ---
+        // --- Robust Tab Switching Logic ---
         function switchTab(tabId) {
             // Hide all tabs
             const tabs = document.querySelectorAll('.tab-content');
             tabs.forEach(tab => tab.classList.remove('active'));
             
             // Remove active styling from all buttons
-            const btns = document.querySelectorAll('[id^="btn-tab"]');
+            const btns = document.querySelectorAll('button[id^="btn-tab-"]');
             btns.forEach(btn => {
                 btn.classList.remove('active-tab-btn');
+                btn.classList.remove('text-slate-900');
                 btn.classList.replace('text-slate-700', 'text-slate-500');
             });
 
-            // Show selected tab
-            document.getElementById(tabId).classList.add('active');
+            // Show selected tab (safely check if it exists)
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            } else {
+                console.error(`Tab container with id "${tabId}" not found.`);
+            }
             
-            // Add active styling to clicked button
+            // Add active styling to clicked button safely
             const activeBtn = document.getElementById('btn-' + tabId);
-            activeBtn.classList.add('active-tab-btn');
-            activeBtn.classList.replace('text-slate-500', 'text-slate-700');
+            if (activeBtn) {
+                activeBtn.classList.add('active-tab-btn');
+                activeBtn.classList.replace('text-slate-500', 'text-slate-700');
+                activeBtn.classList.add('text-slate-900');
+            }
         }
 
-        // --- RLE Simulator Logic (Tab 2) ---
+        // --- RLE Simulator Logic (Task 2) ---
         function calculateRLE() {
             const input = document.getElementById('rleInput').value.toUpperCase();
             document.getElementById('rleInput').value = input; // Keep it uppercase
@@ -580,7 +765,6 @@
             const sizeOutEl = document.getElementById('rleSizeOut');
             sizeOutEl.innerText = outSize + " chars";
             
-            // Visual indicator to show if RLE actually saved space or made it worse
             if (outSize < input.length) {
                 sizeOutEl.className = "text-xl font-bold text-green-600";
             } else if (outSize > input.length) {
@@ -590,11 +774,12 @@
             }
         }
 
-        // --- FDE Cycle Simulator Logic (Tab 1) ---
+        // --- FDE Cycle Simulator Logic (Task 1) ---
         let fdeStep = 0;
         
         function updateReg(id, val, highlight=false) {
             const el = document.getElementById(id);
+            if (!el) return;
             el.innerHTML = id.replace('reg','') + ': <span class="font-bold">' + val + '</span>';
             if(highlight) {
                 el.classList.add('bg-yellow-200', 'border-yellow-500');
@@ -704,7 +889,7 @@
             document.getElementById('btnNextFDE').innerText = "Start Cycle";
         }
 
-        // --- Pipelining Visualizer Logic (Tab 1) ---
+        // --- Pipelining Visualizer Logic (Task 1) ---
         let pipeClock = 0;
         function stepPipeline() {
             pipeClock++;
@@ -763,6 +948,7 @@
         function toggleCollapse(contentId, iconId) {
             const content = document.getElementById(contentId);
             const icon = document.getElementById(iconId);
+            if (!content || !icon) return;
             
             if (content.classList.contains('hidden')) {
                 content.classList.remove('hidden');
@@ -777,6 +963,7 @@
         function toggleAnswer(ansId, iconId) {
             const ansDiv = document.getElementById(ansId);
             const icon = document.getElementById(iconId);
+            if (!ansDiv || !icon) return;
             
             if (ansDiv.classList.contains('hidden')) {
                 ansDiv.classList.remove('hidden');
