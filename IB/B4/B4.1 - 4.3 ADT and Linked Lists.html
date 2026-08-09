@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit B4 - Abstract Data Types (Linked Lists)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .tab-btn.active {
+            background-color: #4f46e5;
+            color: white;
+            border-color: #4f46e5;
+        }
+        /* Custom scrollbar for logs and code blocks */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-indigo-900 text-white p-6 shadow-md">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-3xl font-bold">Unit B4: Abstract Data Types</h1>
+            <p class="text-indigo-200 mt-2">Interactive Guide & Simulations - Focus: Linked Lists</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-slate-200 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-2 overflow-x-auto py-3">
+                <button onclick="openTab('tab-fundamentals')" id="btn-tab-fundamentals" class="tab-btn px-4 py-2 rounded-lg border border-slate-200 font-medium text-sm transition-colors whitespace-nowrap active">B4.1 Fundamentals</button>
+                <button onclick="openTab('tab-linkedlist')" id="btn-tab-linkedlist" class="tab-btn px-4 py-2 rounded-lg border border-slate-200 font-medium text-sm transition-colors whitespace-nowrap text-slate-600 hover:bg-slate-50">Linked Lists Simulation</button>
+                <button onclick="openTab('tab-apps')" id="btn-tab-apps" class="tab-btn px-4 py-2 rounded-lg border border-slate-200 font-medium text-sm transition-colors whitespace-nowrap text-slate-600 hover:bg-slate-50">Real-World Apps</button>
+                <button onclick="openTab('tab-code')" id="btn-tab-code" class="tab-btn px-4 py-2 rounded-lg border border-slate-200 font-medium text-sm transition-colors whitespace-nowrap text-slate-600 hover:bg-slate-50">Python Code</button>
+                <button onclick="openTab('tab-task')" id="btn-tab-task" class="tab-btn px-4 py-2 rounded-lg border border-slate-200 font-medium text-sm transition-colors whitespace-nowrap text-slate-600 hover:bg-slate-50">Student Task</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-1 max-w-7xl mx-auto w-full p-4 sm:p-6 lg:p-8">
+        
+        <!-- TAB 1: Fundamentals -->
+        <section id="tab-fundamentals" class="space-y-6">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4">B4.1.1 Properties and Purpose of ADTs</h2>
+                <p class="text-slate-600 mb-6">An <strong>Abstract Data Type (ADT)</strong> is a logical description of how we view the data and the operations that are allowed on it, completely independent of how it will be implemented in a specific programming language.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- High Level -->
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-lg p-5">
+                        <h3 class="font-bold text-indigo-900 mb-2">The "What" (Logical Level)</h3>
+                        <p class="text-sm text-indigo-800 mb-3">ADTs provide a high-level description. They specify <em>what</em> data is stored and <em>what</em> operations can be performed.</p>
+                        <ul class="text-sm text-indigo-700 space-y-2 list-disc pl-4">
+                            <li>Defines operations (e.g., insert, delete, search).</li>
+                            <li>Hides complex implementation details (Abstraction).</li>
+                            <li>Allows developers to focus on problem-solving rather than memory management.</li>
+                        </ul>
+                    </div>
+                    <!-- Implementation -->
+                    <div class="bg-emerald-50 border border-emerald-100 rounded-lg p-5">
+                        <h3 class="font-bold text-emerald-900 mb-2">The "How" (Implementation Level)</h3>
+                        <p class="text-sm text-emerald-800 mb-3">Data Structures are the actual concrete implementation of an ADT in code.</p>
+                        <ul class="text-sm text-emerald-700 space-y-2 list-disc pl-4">
+                            <li>Involves writing the actual algorithms for the operations.</li>
+                            <li>Requires understanding of memory (e.g., contiguous vs. non-contiguous).</li>
+                            <li>A single ADT (like a List) can be implemented in multiple ways (Array or Linked List).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Knowledge Check -->
+            <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                    Conceptual & Factual Knowledge Check
+                </h3>
+                <div class="space-y-4">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        <p class="text-sm font-semibold text-slate-800">Q: What is the primary difference between an ADT and a Data Structure?</p>
+                        <p class="text-sm text-slate-600 mt-2 italic group cursor-pointer">
+                            <span class="group-hover:hidden text-indigo-500 font-medium">Hover to reveal answer...</span>
+                            <span class="hidden group-hover:inline">An ADT is the theoretical concept outlining what operations are possible (e.g., a "List"). A Data Structure is the concrete implementation in code indicating how it exists in memory (e.g., a "Linked List" or "Static Array").</span>
+                        </p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        <p class="text-sm font-semibold text-slate-800">Q: Why is "Information Hiding" an important property of an ADT?</p>
+                        <p class="text-sm text-slate-600 mt-2 italic group cursor-pointer">
+                            <span class="group-hover:hidden text-indigo-500 font-medium">Hover to reveal answer...</span>
+                            <span class="hidden group-hover:inline">It allows the programmer to use the ADT without needing to understand the complex code underneath. If the internal implementation changes (e.g., upgrading for efficiency), the rest of the program using the ADT does not need to be rewritten.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: Linked Lists Simulation -->
+        <section id="tab-linkedlist" class="hidden space-y-6">
+            <!-- Control Panel -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 flex flex-wrap gap-4 items-center justify-between shadow-sm">
+                <div class="flex gap-2">
+                    <button id="btn-type-single" onclick="setListType('single')" class="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium transition-all text-sm shadow">Singly Linked</button>
+                    <button id="btn-type-double" onclick="setListType('double')" class="text-slate-600 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg font-medium transition-all text-sm">Doubly Linked</button>
+                    <button id="btn-type-circular" onclick="setListType('circular')" class="text-slate-600 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg font-medium transition-all text-sm">Circular</button>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="insertNodeUI()" class="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium shadow-sm transition-colors text-sm flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        Insert Node
+                    </button>
+                    <button onclick="deleteNodeUI()" class="bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg font-medium shadow-sm transition-colors text-sm flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path></svg>
+                        Delete Node
+                    </button>
+                </div>
+            </div>
+
+            <!-- Simulation Area -->
+            <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Canvas & Logs Container (Left Side) -->
+                <div class="flex-1 flex flex-col gap-4">
+                    <!-- CANVAS WRAPPER: Crucial for responsive sizing without collapsing -->
+                    <div id="canvas-container" class="bg-white border border-slate-200 rounded-xl shadow-sm relative w-full h-[400px] overflow-hidden">
+                        <canvas id="simulationCanvas" class="absolute inset-0 w-full h-full touch-none outline-none"></canvas>
+                    </div>
+                    
+                    <!-- Execution Logs -->
+                    <div class="bg-slate-900 h-48 rounded-xl p-4 overflow-y-auto border border-slate-800 shadow-inner">
+                        <div class="text-xs font-mono text-slate-400 mb-2 uppercase tracking-wider">Algorithm Execution Log</div>
+                        <div id="sim-logs" class="font-mono text-sm space-y-1 text-emerald-400">
+                            <div>System initialized. Waiting for operation...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theory Sidebar (Right Side) -->
+                <div class="w-full lg:w-1/3 space-y-4">
+                    <!-- Data Structure Comparison -->
+                    <div class="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
+                        <h3 class="text-lg font-bold text-slate-800 mb-3">Comparisons</h3>
+                        <div class="space-y-3 text-sm">
+                            <div class="pb-2 border-b border-slate-100">
+                                <span class="font-bold text-indigo-700">Vs. Static Arrays:</span> Lists dynamically resize and allow O(1) insertions/deletions (once found). Arrays have fixed size but allow O(1) random access.
+                            </div>
+                            <div class="pb-2 border-b border-slate-100">
+                                <span class="font-bold text-emerald-700">Vs. Stacks:</span> Stacks are strictly LIFO (Last In, First Out). Linked Lists can insert/delete anywhere.
+                            </div>
+                            <div>
+                                <span class="font-bold text-rose-700">Vs. Trees (BST):</span> Trees allow O(log n) searching (if balanced). Linked Lists require O(n) linear searching.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Knowledge Check -->
+                    <div class="bg-indigo-50 border border-indigo-100 rounded-xl p-5 shadow-sm">
+                        <h3 class="text-base font-bold text-indigo-900 mb-3">Knowledge Check</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-sm font-semibold text-indigo-900">Q: Why might a Doubly Linked List use more memory?</p>
+                                <p class="text-xs text-indigo-800 mt-1 italic group cursor-pointer bg-white/60 p-2 rounded border border-indigo-200">
+                                    <span class="group-hover:hidden font-medium">Hover for answer...</span>
+                                    <span class="hidden group-hover:inline">Every node must store an additional pointer addressing the previous node, increasing memory overhead.</span>
+                                </p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-indigo-900">Q: What happens if a Circular List algorithm doesn't check for the starting node?</p>
+                                <p class="text-xs text-indigo-800 mt-1 italic group cursor-pointer bg-white/60 p-2 rounded border border-indigo-200">
+                                    <span class="group-hover:hidden font-medium">Hover for answer...</span>
+                                    <span class="hidden group-hover:inline">It will result in an infinite loop during traversal, as there is no NULL terminator.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: Real-World Apps -->
+        <section id="tab-apps" class="hidden space-y-6">
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Real-World Applications</h2>
+            <p class="text-slate-600 mb-6">How are Linked Lists used in modern software development?</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- App 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-indigo-100 p-3 rounded-lg text-indigo-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Music Player Playlist</h3>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-3"><strong>Type Used:</strong> Doubly Linked List</p>
+                    <p class="text-sm text-slate-600">In a music player, you need to navigate to the 'Next' track and the 'Previous' track seamlessly. A Doubly Linked List stores song objects as nodes, where <code>next</code> points to the upcoming song and <code>prev</code> points to the last played song.</p>
+                </div>
+
+                <!-- App 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-emerald-100 p-3 rounded-lg text-emerald-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Web Browser History</h3>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-3"><strong>Type Used:</strong> Doubly Linked List</p>
+                    <p class="text-sm text-slate-600">When you hit the 'Back' and 'Forward' buttons on a browser, you are traversing a Doubly Linked List of URLs. Each new page visited is inserted as a new node, updating the current pointer.</p>
+                </div>
+
+                <!-- App 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-sky-100 p-3 rounded-lg text-sky-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">Undo/Redo Mechanisms</h3>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-3"><strong>Type Used:</strong> Doubly Linked List</p>
+                    <p class="text-sm text-slate-600">Software like Word Processors or Image Editors track state changes. An Undo moves the pointer <code>prev</code> to the previous state, while Redo moves it <code>next</code>. If a new action is taken after an undo, the forward chain is severed and replaced.</p>
+                </div>
+
+                <!-- App 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 hover:shadow-md transition-shadow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-rose-100 p-3 rounded-lg text-rose-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">CPU Task Scheduling</h3>
+                    </div>
+                    <p class="text-sm text-slate-600 mb-3"><strong>Type Used:</strong> Circular Linked List</p>
+                    <p class="text-sm text-slate-600">In Operating Systems (like Windows or Linux), the CPU uses Round-Robin scheduling to allocate time slices to running applications. A Circular List allows the OS to continuously loop through open tasks indefinitely.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: Python Code -->
+        <section id="tab-code" class="hidden space-y-8">
+            <h2 class="text-2xl font-bold text-slate-800">Python Implementations</h2>
+            
+            <!-- Singly Linked List -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-1 space-y-4">
+                    <h3 class="text-lg font-bold text-indigo-700">Singly Linked List</h3>
+                    <p class="text-sm text-slate-600">The fundamental implementation. Notice how <strong>deletion</strong> requires keeping track of a <code>prev</code> pointer manually during traversal to bridge the gap when removing a node.</p>
+                </div>
+                <div class="lg:col-span-2 bg-slate-900 rounded-xl p-4 overflow-x-auto shadow-sm">
+<pre><code class="text-sm text-emerald-400 font-mono">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SinglyLinkedList:
+    def __init__(self):
+        self.head = None
+        
+    def insert(self, data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+        
+    def search(self, key):
+        current = self.head
+        while current is not None:
+            if current.data == key:
+                return True
+            current = current.next
+        return False
+        
+    def delete(self, key):
+        current = self.head
+        prev = None
+        
+        while current is not None:
+            if current.data == key:
+                if prev is None: # Deleting head
+                    self.head = current.next
+                else:            # Bridge the gap
+                    prev.next = current.next
+                return True
+            prev = current
+            current = current.next
+        return False
+</code></pre>
+                </div>
+            </div>
+
+            <hr class="border-slate-200">
+
+            <!-- Doubly Linked List -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-1 space-y-4">
+                    <h3 class="text-lg font-bold text-indigo-700">Doubly Linked List</h3>
+                    <p class="text-sm text-slate-600">Nodes now have a <code>prev</code> property. <strong>Deletion</strong> is simpler conceptually (no need to track a separate <code>prev</code> variable in the loop), but requires updating <em>two</em> pointers (next and prev) to securely bridge gaps.</p>
+                </div>
+                <div class="lg:col-span-2 bg-slate-900 rounded-xl p-4 overflow-x-auto shadow-sm">
+<pre><code class="text-sm text-sky-400 font-mono">class DNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+        self.prev = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        
+    def insert(self, data):
+        new_node = DNode(data)
+        if self.head is not None:
+            self.head.prev = new_node
+        new_node.next = self.head
+        self.head = new_node
+        
+    def delete(self, key):
+        current = self.head
+        while current is not None:
+            if current.data == key:
+                if current.prev is not None:
+                    current.prev.next = current.next
+                else:
+                    self.head = current.next # Was head
+                    
+                if current.next is not None:
+                    current.next.prev = current.prev
+                return True
+            current = current.next
+        return False
+</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: Student Task -->
+        <section id="tab-task" class="hidden space-y-6">
+            <div class="bg-indigo-900 text-white p-8 rounded-xl shadow-md">
+                <h2 class="text-3xl font-bold mb-2">IA Practice Task: Implementation</h2>
+                <p class="text-indigo-200 text-lg">Apply computational thinking to solve a real-world scenario.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="md:col-span-2 space-y-6">
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">1. Problem Specification</h3>
+                        <p class="text-slate-600 mb-4">A local hospital needs a digital triage system to manage the queue of patients waiting for the Emergency Room. Patients arrive continuously, but occasionally, an ambulance brings a critical patient who must immediately jump to the front of the queue.</p>
+                        <p class="text-slate-600 font-semibold mb-2">Success Criteria:</p>
+                        <ul class="list-disc pl-5 space-y-1 text-slate-600 text-sm">
+                            <li>Add a standard patient to the end of the queue.</li>
+                            <li>Add a critical patient to the front of the queue.</li>
+                            <li>Remove and return the next patient to be treated.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 mb-3">2. Algorithmic Design</h3>
+                        <p class="text-slate-600 text-sm mb-4">Before coding, determine which Abstract Data Type is most appropriate. While a standard Queue (FIFO) works for regular patients, the need to insert at the front violates strict Queue rules. A <strong>Linked List</strong> allows O(1) insertion at the head (for critical patients) and O(1) insertion at the tail (for standard patients, if a tail pointer is maintained).</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4">3. Your Assignment</h3>
+                    <div class="space-y-4 text-sm text-slate-700">
+                        <p><strong>Step 1:</strong> Write the Python <code>PatientNode</code> class containing patient data (name, severity) and a pointer.</p>
+                        <p><strong>Step 2:</strong> Write the <code>TriageList</code> class utilizing a Singly Linked List.</p>
+                        <p><strong>Step 3:</strong> Implement <code>add_standard()</code> to traverse and append to the end.</p>
+                        <p><strong>Step 4:</strong> Implement <code>add_critical()</code> to modify the Head pointer.</p>
+                        <div class="mt-6 p-4 bg-amber-100 text-amber-900 rounded-lg text-xs font-semibold">
+                            Tip: To improve efficiency, can you modify your design to keep track of a <code>self.tail</code> pointer? How does this change the Big-O complexity of add_standard()?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Initialize Highlight.js
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+
+        // Tab Navigation Logic
+        function openTab(tabId) {
+            // Hide all sections
+            document.querySelectorAll('main > section').forEach(el => {
+                el.classList.add('hidden');
+            });
+            // Show selected section
+            const target = document.getElementById(tabId);
+            if(target) target.classList.remove('hidden');
+            
+            // Update button styles
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-indigo-600', 'text-white');
+                btn.classList.add('text-slate-600', 'bg-slate-100');
+            });
+            
+            // Highlight active button
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active', 'bg-indigo-600', 'text-white');
+                activeBtn.classList.remove('text-slate-600', 'bg-slate-100');
+            }
+
+            // Trigger canvas resize if switching to simulation tab
+            if (tabId === 'tab-linkedlist') {
+                setTimeout(resizeCanvas, 50);
+            }
+        }
+
+        // --- Canvas & Simulation State ---
+        let canvas, ctx;
+        let animationId;
+        
+        // State
+        let nodes = [];
+        let listType = 'single'; // 'single', 'double', 'circular'
+        let nextValue = 10;
+        let op = null; // Tracks step-by-step pointer manipulation: { type, index, step, node }
+        
+        // Visual Constants
+        const nodeWidth = 60;
+        const nodeHeight = 40;
+        const startX = 80;
+        const spacing = 100;
+        const centerY = 150;
+
+        // Initialization
+        window.onload = () => {
+            canvas = document.getElementById('simulationCanvas');
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
+                
+                // Add initial nodes with targetY for vertical animations
+                nodes.push({ value: nextValue++, x: -50, y: centerY, targetX: startX, targetY: centerY });
+                nodes.push({ value: nextValue++, x: -50, y: centerY, targetX: startX + spacing, targetY: centerY });
+                
+                // Start render loop
+                animate();
+            }
+            
+            // Ensure first tab is open
+            openTab('tab-fundamentals');
+        };
+
+        // Resize handler
+        function resizeCanvas() {
+            if (!canvas) return;
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+        }
+
+        function recalculatePositions() {
+            nodes.forEach((n, i) => {
+                n.targetX = startX + (i * spacing);
+                n.targetY = centerY;
+            });
+        }
+
+        // UI Actions
+        function setListType(type) {
+            if (op) { addLog("Wait for current operation to finish.", true); return; }
+            listType = type;
+            
+            // Reset button styles
+            ['single', 'double', 'circular'].forEach(t => {
+                const btn = document.getElementById(`btn-type-${t}`);
+                if(btn) {
+                    btn.classList.remove('bg-indigo-600', 'text-white');
+                    btn.classList.add('bg-slate-100', 'text-slate-600');
+                }
+            });
+            
+            const activeBtn = document.getElementById(`btn-type-${type}`);
+            if(activeBtn) {
+                activeBtn.classList.add('bg-indigo-600', 'text-white');
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            }
+            
+            addLog(`Switched architecture to ${type.toUpperCase()} Linked List.`);
+        }
+
+        function insertNodeUI() {
+            if (op) { addLog("Operation in progress. Please wait.", true); return; }
+            if (nodes.length >= 6) { addLog("Memory limit reached. Cannot insert more nodes.", true); return; }
+            
+            let val = nextValue++;
+            // Insert at index 1 (middle) to best demonstrate pointer breaking, or at tail if too short
+            let targetIdx = nodes.length >= 2 ? 1 : nodes.length; 
+            
+            let insertX = startX + targetIdx * spacing;
+            let spawnY = centerY + 80;
+            
+            op = { type: 'INSERT', index: targetIdx, step: 1, node: { value: val, x: insertX, y: spawnY, targetX: insertX, targetY: spawnY } };
+            
+            addLog(`[INSERT] Step 1: Allocate memory for New Node [${val}].`);
+            
+            // Push subsequent nodes right to make visual space
+            for(let i = targetIdx; i < nodes.length; i++) {
+                 nodes[i].targetX = startX + (i + 1) * spacing;
+            }
+
+            // Step 2: Assign new node's NEXT pointer
+            setTimeout(() => {
+                op.step = 2;
+                let nextVal = nodes[targetIdx] ? nodes[targetIdx].value : "NULL";
+                addLog(`[INSERT] Step 2: Set New Node's NEXT pointer to [${nextVal}].`);
+                
+                // Step 3: Break old link and assign to new node
+                setTimeout(() => {
+                    op.step = 3;
+                    if(targetIdx > 0) {
+                        addLog(`[INSERT] Step 3: Update Previous Node's NEXT to point to New Node. (Link Broken)`);
+                    } else {
+                        addLog(`[INSERT] Step 3: Update HEAD pointer to New Node.`);
+                    }
+                    setTimeout(finishInsert, 2500);
+                }, 2500);
+            }, 2500);
+        }
+
+        function finishInsert() {
+            addLog(`[INSERT] Complete. List structure updated.`);
+            op.node.targetY = centerY;
+            nodes.splice(op.index, 0, op.node);
+            op = null;
+            recalculatePositions();
+        }
+
+        function deleteNodeUI() {
+            if (op) { addLog("Operation in progress. Please wait.", true); return; }
+            if (nodes.length === 0) { addLog("List is empty. Cannot delete.", true); return; }
+            
+            let targetIdx = nodes.length >= 3 ? 1 : nodes.length - 1; // Delete index 1 if possible
+            let targetNode = nodes[targetIdx];
+            
+            op = { type: 'DELETE', index: targetIdx, step: 1 };
+            
+            addLog(`[DELETE] Step 1: Locate target Node [${targetNode.value}].`);
+            targetNode.targetY = centerY + 80; // Drop down visually
+            
+            setTimeout(() => {
+                op.step = 2;
+                if (targetIdx > 0) {
+                    let nextVal = nodes[targetIdx + 1] ? nodes[targetIdx + 1].value : "NULL";
+                    addLog(`[DELETE] Step 2: Update Previous Node's NEXT to bypass to [${nextVal}].`);
+                } else {
+                    addLog(`[DELETE] Step 2: Update HEAD pointer to next node.`);
+                }
+                setTimeout(finishDelete, 2500);
+            }, 2500);
+        }
+
+        function finishDelete() {
+            addLog(`[DELETE] Complete. Disconnected memory freed.`);
+            nodes.splice(op.index, 1);
+            op = null;
+            recalculatePositions();
+        }
+
+        function addLog(msg, isError = false) {
+            const logs = document.getElementById('sim-logs');
+            if(!logs) return;
+            const div = document.createElement('div');
+            div.textContent = `> ${msg}`;
+            div.className = isError ? "text-rose-400 font-bold" : "text-emerald-400";
+            logs.appendChild(div);
+            logs.scrollTop = logs.scrollHeight;
+        }
+
+        // --- Render Engine ---
+        function animate() {
+            animationId = requestAnimationFrame(animate);
+            if (!ctx) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 1. Update positions (easing) for smooth animations
+            nodes.forEach(n => {
+                n.x += (n.targetX - n.x) * 0.1;
+                n.y += (n.targetY - n.y) * 0.1;
+            });
+            if (op && op.type === 'INSERT') {
+                op.node.x += (op.node.targetX - op.node.x) * 0.1;
+                op.node.y += (op.node.targetY - op.node.y) * 0.1;
+            }
+
+            // 2. Determine and Draw HEAD pointer
+            let headTarget = null;
+            if (nodes.length > 0) {
+                if (op && op.type === 'INSERT' && op.index === 0 && op.step >= 3) headTarget = op.node;
+                else if (op && op.type === 'DELETE' && op.index === 0 && op.step >= 2) headTarget = nodes[1] || null;
+                else headTarget = nodes[0];
+            } else if (op && op.type === 'INSERT' && op.index === 0 && op.step >= 3) {
+                headTarget = op.node;
+            }
+            
+            if (headTarget) {
+                drawText("HEAD", 30, centerY + 5, "#4f46e5", "bold 14px Inter", "right");
+                drawArrow(35, centerY, headTarget.x, headTarget.y, "#4f46e5");
+            } else {
+                drawText("HEAD -> NULL", startX, centerY, "#64748b", "bold 16px Inter", "left");
+            }
+
+            // 3. Draw Nodes and Connections
+            for (let i = 0; i < nodes.length; i++) {
+                const n = nodes[i];
+                let nextN = nodes[i + 1];
+                let linkColor = "#94a3b8"; // Default slate
+                
+                // Intercept pointers based on operation state
+                if (op && op.type === 'INSERT' && i === op.index - 1) {
+                    if (op.step >= 3) {
+                        nextN = op.node;
+                        linkColor = "#10b981"; // Green (New connection)
+                    }
+                } else if (op && op.type === 'DELETE' && i === op.index - 1) {
+                    if (op.step >= 2) {
+                        nextN = nodes[i + 2];
+                        linkColor = "#f59e0b"; // Orange (Bypass connection)
+                    }
+                } else if (op && op.type === 'DELETE' && i === op.index) {
+                    if (op.step >= 2) nextN = null; // Deleted node severs outbound link visually
+                }
+
+                // Draw the determined outgoing connection
+                if (nextN) {
+                    if (listType === 'single' || listType === 'circular') {
+                        drawArrow(n.x + nodeWidth, n.y, nextN.x, nextN.y, linkColor);
+                    } else if (listType === 'double') {
+                        drawArrow(n.x + nodeWidth, n.y - 5, nextN.x, nextN.y - 5, linkColor);
+                        drawArrow(nextN.x, nextN.y + 5, n.x + nodeWidth, n.y + 5, linkColor === "#94a3b8" ? "#f43f5e" : linkColor);
+                    }
+                } else if (!(listType === 'circular' && nodes.length > 0)) {
+                    // Draw NULL terminator if tail (and not circular)
+                    if ((i === nodes.length - 1 && !(op && op.type==='INSERT' && op.index===nodes.length && op.step>=3)) ||
+                        (op && op.type === 'DELETE' && i === op.index - 1 && !nextN && op.step >= 2)) {
+                        drawArrow(n.x + nodeWidth, n.y, n.x + nodeWidth + 40, n.y, linkColor);
+                        drawText("NULL", n.x + nodeWidth + 45, n.y + 5, "#64748b", "bold 14px Inter", "left");
+                    }
+                }
+
+                // Fade out nodes that are currently being deleted
+                ctx.globalAlpha = (op && op.type === 'DELETE' && i === op.index && op.step >= 2) ? 0.3 : 1.0;
+                drawNodeBox(n, "#4f46e5");
+                ctx.globalAlpha = 1.0;
+            }
+
+            // 4. Draw Spawning Node for Insertions
+            if (op && op.type === 'INSERT') {
+                let n = op.node;
+                if (op.step >= 2) { // Step 2 draws the forward looking pointer from the new node
+                    let nextN = nodes[op.index];
+                    let color = "#10b981";
+                    if (nextN) {
+                        if (listType === 'single' || listType === 'circular') {
+                            drawArrow(n.x + nodeWidth, n.y, nextN.x, nextN.y, color);
+                        } else if (listType === 'double') {
+                            drawArrow(n.x + nodeWidth, n.y - 5, nextN.x, nextN.y - 5, color);
+                            drawArrow(nextN.x, nextN.y + 5, n.x + nodeWidth, n.y + 5, color);
+                        }
+                    } else if (listType !== 'circular') {
+                        drawArrow(n.x + nodeWidth, n.y, n.x + nodeWidth + 40, n.y, color);
+                        drawText("NULL", n.x + nodeWidth + 45, n.y + 5, "#64748b", "bold 14px Inter", "left");
+                    }
+                }
+                drawNodeBox(n, "#10b981");
+            }
+
+            // 5. Draw Circular Loop Back
+            if (listType === 'circular' && nodes.length > 0) {
+                let tailN = nodes[nodes.length - 1];
+                let headN = nodes[0];
+                
+                // Adjust circular bounds during active operations
+                if (op && op.type === 'INSERT' && op.index === nodes.length && op.step >= 3) tailN = op.node;
+                else if (op && op.type === 'DELETE' && op.index === nodes.length - 1 && op.step >= 2) tailN = nodes[nodes.length - 2]; 
+                
+                if (op && op.type === 'INSERT' && op.index === 0 && op.step >= 3) headN = op.node;
+                else if (op && op.type === 'DELETE' && op.index === 0 && op.step >= 2) headN = nodes[1];
+                
+                if (tailN && headN) drawCircularLink(tailN, headN);
+            }
+        }
+
+        function drawNodeBox(n, borderColor) {
+            ctx.fillStyle = "#ffffff";
+            ctx.strokeStyle = borderColor;
+            ctx.lineWidth = 2;
+            ctx.fillRect(n.x, n.y - (nodeHeight/2), nodeWidth, nodeHeight);
+            ctx.strokeRect(n.x, n.y - (nodeHeight/2), nodeWidth, nodeHeight);
+            drawText(n.value, n.x + (nodeWidth/2), n.y + 5, "#1e293b", "bold 16px Inter", "center");
+        }
+
+        function drawCircularLink(tailN, headN) {
+            ctx.beginPath();
+            ctx.strokeStyle = "#8b5cf6"; // Purple for circular to stand out
+            ctx.lineWidth = 2;
+            ctx.moveTo(tailN.x + nodeWidth, tailN.y);
+            ctx.lineTo(tailN.x + nodeWidth + 20, tailN.y);
+            ctx.lineTo(tailN.x + nodeWidth + 20, tailN.y + 60);
+            ctx.lineTo(headN.x + (nodeWidth/2), tailN.y + 60);
+            ctx.lineTo(headN.x + (nodeWidth/2), headN.y + (nodeHeight/2));
+            ctx.stroke();
+            
+            // Arrowhead
+            ctx.beginPath();
+            ctx.fillStyle = "#8b5cf6";
+            ctx.moveTo(headN.x + (nodeWidth/2), headN.y + (nodeHeight/2));
+            ctx.lineTo(headN.x + (nodeWidth/2) - 5, headN.y + (nodeHeight/2) + 10);
+            ctx.lineTo(headN.x + (nodeWidth/2) + 5, headN.y + (nodeHeight/2) + 10);
+            ctx.fill();
+        }
+
+        function drawArrow(fromX, fromY, toX, toY, color) {
+            const headlen = 8; 
+            const dx = toX - fromX;
+            const dy = toY - fromY;
+            const angle = Math.atan2(dy, dx);
+            
+            // Adjust so arrow doesn't overlap borders
+            const adjustedToX = toX - (1 * Math.cos(angle));
+            const adjustedToY = toY - (1 * Math.sin(angle));
+
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(adjustedToX, adjustedToY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(adjustedToX, adjustedToY);
+            ctx.lineTo(adjustedToX - headlen * Math.cos(angle - Math.PI / 6), adjustedToY - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.lineTo(adjustedToX - headlen * Math.cos(angle + Math.PI / 6), adjustedToY - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.lineTo(adjustedToX, adjustedToY);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        function drawText(text, x, y, color, font, align) {
+            ctx.font = font;
+            ctx.fillStyle = color;
+            ctx.textAlign = align;
+            ctx.fillText(text, x, y);
+        }
+    </script>
+</body>
+</html>

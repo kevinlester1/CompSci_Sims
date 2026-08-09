@@ -226,8 +226,8 @@
 <body>
     <div class="shell">
         <header>
-            <h1>Course File Explorer</h1>
-            <p class="subtitle">Choose a course, open a subfolder, then view or download any file.</p>
+            <h1>Coding &amp; Algorithm Task Hub</h1>
+            <p class="subtitle">Teachers set coding tasks for students, and students submit their work using the builder-based activities below.</p>
             <div class="selector" id="courseSelector" aria-label="Course selector"></div>
         </header>
 
@@ -247,7 +247,7 @@
         </section>
 
         <footer>
-            Files must exist at the listed paths for download links to work.
+            This hub highlights builder-based coding and algorithm tasks only.
         </footer>
     </div>
 
@@ -256,24 +256,7 @@
             "Data Science": {
                 "Data Science": [
                     "algorithms.html",
-                    "algos poster.html",
-                    "cospaces chllanges.html",
-                    "Data storyTelling.html",
-                    "data visualisation.html",
-                    "Data visualtisation Lesson 1.html",
-                    "Data visualtisation Lesson 1.txt",
-                    "Database normalisation.html",
-                    "database.html",
-                    "Decision Trees.html",
-                    "flowchrts.html",
-                    "ib poster.html",
-                    "IGCSE Computer Science poster.html",
-                    "normalisation.html",
-                    "pandas.html",
-                    "regression.html",
-                    "reinforced.html",
-                    "Sheets.html",
-                    "Sql intro.html"
+                    "flowchrts.html"
                 ]
             },
             GCSE: {
@@ -293,9 +276,9 @@
                 ],
                 "Unit 3": [
                     "3 Assessment_task.html",
-                    "3.1 CPU architecture.html"
+                    "3.1 CPU architecture.html",
+                    "3.1_CPU_Architecture.html"
                 ],
-                "Unit 4": [],
                 "Unit 5": [
                     "gap analysis how the internet works.html",
                     "how the internet works.html",
@@ -304,7 +287,6 @@
                 "Unit 6": [
                     "autonomous_systems_simulator.html"
                 ],
-                "Unit 7": [],
                 "Unit 8": [
                     "8 Common algos using arrays.html",
                     "8 Common algos.html",
@@ -332,31 +314,66 @@
                     "machine learning everyone wants to be a millionaire.html"
                 ],
                 A1: [
-                    "A.1 Computer Fundamentals.html",
-                    "A1 Computer fundamentals .html",
+                    "A1.1 Computer fundamentals .html",
                     "A1.2 content.html",
                     "A1.2 Logic gates.html",
                     "A1.2 Quiz.html",
+                    "A1.3 Translation.html",
                     "karnaugh Maps.html"
                 ],
-                A2: [],
+                A2: [
+                    "A2.1 Network_fundamentals_lab.html",
+                    "A2.2 Network_architecture_lab.html",
+                    "A2.3 Data_transmissions_lab.html",
+                    "A2.4 network_security_lab.html"
+                ],
                 A3: [
-                    "A3 Knowledge map.html"
+                    "A3 Knowledge map.html",
+                    "Database normalisation.html",
+                    "database option A.html",
+                    "Database Revision.html",
+                    "Exam technique.html",
+                    "insertions , Deletions and update DB.html",
+                    "New database.html",
+                    "normalisation.html"
                 ],
-                A4: [],
-                B1: [
-                    "perceptron.html"
+                A4: [
+                    "A4 Machine Learning Revision.html",
+                    "A4,3 Classification_explainer.html",
+                    "A4.1 Machine learning fundamentals.html",
+                    "A4.2 Data_preprocessing.html",
+                    "A4.2 Feature_selection_dimensionality_reduction.html",
+                    "A4.2 Hardware requirements.html",
+                    "A4.3.1 Linear_regression_explainer.html",
+                    "A4.3.10 Model_selection_guide.html",
+                    "A4.3.2 Classification_explainer.html",
+                    "A4.3.3 Hyperparameter_tuning_simulation.html",
+                    "A4.3.4 Describe how clustering techniques.html",
+                    "A4.3.5 Association rules unplugged.html",
+                    "A4.3.5 Association_rule_learning_simulator.html",
+                    "A4.3.6 Re-enforced learning.html",
+                    "A4.3.7 Genetic_algorithm_tsp_light_theme.html",
+                    "A4.3.8 Structure and function of ANNs.html",
+                    "A4.4 Ethics_in_tech_interactive_resource.html",
+                    "ANN Regression.html",
+                    "density clustering.html",
+                    "hierachial clustering.html",
+                    "Machine Learning Revision Quiz..html",
+                    "mahine learning Knowledge maps.html",
+                    "perceptron.html",
+                    "Random Forest.html",
+                    "Recommneders.html",
+                    "reinforced.html"
                 ],
-                B2: [],
-                B3: [],
-                B4: []
+                B2: [
+                    "lnked list .html"
+                ],
+                B4: [
+                    "B4.1 - 4.3 ADT and Linked Lists.html"
+                ]
             },
             MYP: {
-                MYP: [
-                    "biting monkeys.html",
-                    "Cospaces Challenges.html",
-                    "machine Learning Training and testing.html"
-                ]
+                MYP: []
             }
         };
 
@@ -371,6 +388,7 @@
         function buildPath(course, folder, fileName) {
             const rootFolders = {
                 "Data Science": "Data Science",
+                GCSE: "GCSE",
                 IB: "IB",
                 MYP: "MYP"
             };
@@ -433,7 +451,7 @@
             if (files.length === 0) {
                 const empty = document.createElement("div");
                 empty.className = "empty-note";
-                empty.textContent = "No files listed in this folder yet.";
+                empty.textContent = "No coding tasks are listed in this folder yet.";
                 fileList.appendChild(empty);
                 return;
             }

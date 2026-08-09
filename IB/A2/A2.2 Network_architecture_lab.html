@@ -2,16 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>NetArch Lab: Network Architecture</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body {
             background-color: #f8fafc; /* slate-50 */
             color: #0f172a; /* slate-900 */
             font-family: 'Inter', system-ui, sans-serif;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         
         .canvas-container {
@@ -31,6 +33,7 @@
             left: 0;
             width: 100%;
             height: 100%;
+            touch-action: none; /* Prevent scrolling when interacting with canvas */
         }
 
         .tab-btn {
@@ -101,11 +104,11 @@
     <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center h-auto md:h-16 py-3 md:py-0">
-                <div class="flex items-center mb-3 md:mb-0">
+                <div class="flex items-center mb-3 md:mb-0 w-full md:w-auto justify-center md:justify-start">
                     <i class="fa-solid fa-network-wired text-sky-500 text-2xl mr-3"></i>
                     <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-blue-600 tracking-tight">NetArch Lab</h1>
                 </div>
-                <nav class="flex space-x-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-hide">
+                <nav class="flex space-x-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-hide justify-start md:justify-end">
                     <button class="tab-btn active px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-target="topologies">
                         <i class="fa-solid fa-diagram-project mr-2"></i>Topologies
                     </button>
@@ -130,26 +133,28 @@
             <div class="lg:col-span-1 space-y-6">
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <h2 class="text-xl font-bold mb-3 text-sky-600 border-b border-slate-100 pb-2">A2.2.1 Network Topologies</h2>
-                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">Topologies define the physical or logical layout of a network. Compare them based on <strong>reliability</strong>, <strong>transmission speed</strong>, <strong>scalability</strong>, and <strong>cost</strong>.</p>
+                    <!-- SYLLABUS ALIGNMENT: Added "data collisions" to factors -->
+                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">Topologies define the physical or logical layout of a network. Compare them based on <strong>reliability</strong>, <strong>transmission speed</strong>, <strong>scalability</strong>, <strong>data collisions</strong>, and <strong>cost</strong>.</p>
                     
                     <div class="space-y-2 mb-6 flex flex-col">
-                        <button id="btn-star" class="control-btn active px-4 py-2 rounded text-left flex justify-between items-center">
-                            <span><i class="fa-solid fa-star text-amber-500 mr-2"></i> Star Topology</span>
-                            <span class="text-xs bg-slate-100 text-slate-600 px-2 rounded">Home / Office</span>
+                        <!-- SYLLABUS ALIGNMENT: Updated real-world examples -->
+                        <button id="btn-star" class="control-btn active px-4 py-3 rounded-lg text-left flex justify-between items-center w-full">
+                            <span><i class="fa-solid fa-star text-amber-500 w-5 text-center mr-2"></i> Star</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded text-right leading-tight">Home /<br>Small Office</span>
                         </button>
-                        <button id="btn-mesh" class="control-btn px-4 py-2 rounded text-left flex justify-between items-center">
-                            <span><i class="fa-solid fa-dharmachakra text-emerald-500 mr-2"></i> Mesh Topology</span>
-                            <span class="text-xs bg-slate-100 text-slate-600 px-2 rounded">Core Routers</span>
+                        <button id="btn-mesh" class="control-btn px-4 py-3 rounded-lg text-left flex justify-between items-center w-full">
+                            <span><i class="fa-solid fa-dharmachakra text-emerald-500 w-5 text-center mr-2"></i> Mesh</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded text-right leading-tight">Govt /<br>Military</span>
                         </button>
-                        <button id="btn-hybrid" class="control-btn px-4 py-2 rounded text-left flex justify-between items-center">
-                            <span><i class="fa-solid fa-sitemap text-purple-500 mr-2"></i> Hybrid Topology</span>
-                            <span class="text-xs bg-slate-100 text-slate-600 px-2 rounded">Campuses</span>
+                        <button id="btn-hybrid" class="control-btn px-4 py-3 rounded-lg text-left flex justify-between items-center w-full">
+                            <span><i class="fa-solid fa-sitemap text-purple-500 w-5 text-center mr-2"></i> Hybrid</span>
+                            <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded text-right leading-tight">Corporate<br>Campuses</span>
                         </button>
                     </div>
 
                     <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
                         <h3 class="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2">Simulation Controls</h3>
-                        <p class="text-xs text-slate-500 mb-3">Click on a node or link to break/repair it to test reliability and routing.</p>
+                        <p class="text-xs text-slate-500 mb-3">Tap on a node or link to break/repair it to test reliability and routing.</p>
                         <div class="flex space-x-2">
                             <button id="btn-sim-send" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm transition-colors font-semibold shadow-sm">
                                 <i class="fa-solid fa-paper-plane mr-1"></i> Send Data
@@ -163,7 +168,7 @@
                 
                 <div class="lg:col-span-2 space-y-6 flex flex-col">
                     <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm">
-                        <div class="canvas-container w-full h-full cursor-crosshair">
+                        <div class="canvas-container w-full h-full cursor-pointer touch-none">
                             <canvas id="topo-canvas"></canvas>
                         </div>
                     </div>
@@ -180,23 +185,27 @@
             <div class="lg:col-span-1 space-y-6">
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <h2 class="text-xl font-bold mb-3 text-sky-600 border-b border-slate-100 pb-2">A2.2.2 Server Functions</h2>
-                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">Servers provide services to clients. Key factors include <strong>scalability</strong> (handling more requests), <strong>reliability</strong> (uptime), and <strong>security</strong>.</p>
+                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">Servers provide specific services to clients. Key factors to consider for implementation include <strong>function</strong>, <strong>scalability</strong>, <strong>reliability</strong>, and <strong>security</strong>.</p>
                     
-                    <div class="space-y-2 mb-4">
-                        <button id="btn-serv-dhcp" class="control-btn px-3 py-2 rounded text-left w-full text-sm">
-                            <i class="fa-solid fa-id-card text-blue-500 w-6"></i> <strong class="text-slate-800">DHCP:</strong> Assigns IP Addresses
+                    <!-- SYLLABUS ALIGNMENT: Added Mail Server and arranged in a grid to fit all 6 types -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2 mb-4">
+                        <button id="btn-serv-dhcp" class="control-btn px-2 py-2 rounded-lg text-left w-full text-xs flex items-center">
+                            <i class="fa-solid fa-id-card text-blue-500 w-6 text-center mr-1"></i> <span><strong>DHCP:</strong> Assigns IPs</span>
                         </button>
-                        <button id="btn-serv-dns" class="control-btn px-3 py-2 rounded text-left w-full text-sm">
-                            <i class="fa-solid fa-book-journal-whills text-emerald-500 w-6"></i> <strong class="text-slate-800">DNS:</strong> Resolves Domain to IP
+                        <button id="btn-serv-dns" class="control-btn px-2 py-2 rounded-lg text-left w-full text-xs flex items-center">
+                            <i class="fa-solid fa-book-journal-whills text-emerald-500 w-6 text-center mr-1"></i> <span><strong>DNS:</strong> Domains to IPs</span>
                         </button>
-                        <button id="btn-serv-web" class="control-btn px-3 py-2 rounded text-left w-full text-sm">
-                            <i class="fa-solid fa-globe text-orange-500 w-6"></i> <strong class="text-slate-800">Web Server:</strong> Hosts web pages
+                        <button id="btn-serv-web" class="control-btn px-2 py-2 rounded-lg text-left w-full text-xs flex items-center">
+                            <i class="fa-solid fa-globe text-orange-500 w-6 text-center mr-1"></i> <span><strong>Web:</strong> Hosts Pages</span>
                         </button>
-                        <button id="btn-serv-file" class="control-btn px-3 py-2 rounded text-left w-full text-sm">
-                            <i class="fa-solid fa-folder-open text-amber-500 w-6"></i> <strong class="text-slate-800">File Server:</strong> Stores shared data
+                        <button id="btn-serv-file" class="control-btn px-2 py-2 rounded-lg text-left w-full text-xs flex items-center">
+                            <i class="fa-solid fa-folder-open text-amber-500 w-6 text-center mr-1"></i> <span><strong>File:</strong> Stores Data</span>
                         </button>
-                        <button id="btn-serv-proxy" class="control-btn px-3 py-2 rounded text-left w-full text-sm">
-                            <i class="fa-solid fa-shield-halved text-purple-500 w-6"></i> <strong class="text-slate-800">Proxy Server:</strong> Intermediary/Cache
+                        <button id="btn-serv-mail" class="control-btn px-2 py-2 rounded-lg text-left w-full text-xs flex items-center">
+                            <i class="fa-solid fa-envelope text-red-500 w-6 text-center mr-1"></i> <span><strong>Mail:</strong> Manages Email</span>
+                        </button>
+                        <button id="btn-serv-proxy" class="control-btn px-2 py-2 rounded-lg text-left w-full text-xs flex items-center">
+                            <i class="fa-solid fa-shield-halved text-purple-500 w-6 text-center mr-1"></i> <span><strong>Proxy:</strong> Cache/Filter</span>
                         </button>
                     </div>
 
@@ -205,7 +214,7 @@
                         <button id="btn-serv-simulate" class="w-full bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm transition-colors font-semibold shadow-sm">
                             <i class="fa-solid fa-play mr-1"></i> Start Request Lifecycle
                         </button>
-                        <p id="serv-status" class="text-xs text-emerald-600 mt-2 font-mono h-4"></p>
+                        <p id="serv-status" class="text-xs text-emerald-600 mt-2 font-mono h-8 md:h-4 overflow-hidden"></p>
                     </div>
                 </div>
             </div>
@@ -230,13 +239,15 @@
                     <p class="text-sm text-slate-600 mb-4 leading-relaxed">Compare how data and processing are distributed. Real-world applications vary based on the model's benefits and drawbacks.</p>
                     
                     <div class="space-y-4 mb-6">
-                        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+                        <div class="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
                             <h4 class="font-bold text-blue-700 text-sm mb-1"><i class="fa-solid fa-server mr-1"></i> Client-Server</h4>
-                            <p class="text-xs text-blue-900/70">Centralized control, easier to secure and backup (e.g., Banking, Web Browsing). Prone to bottlenecks.</p>
+                            <!-- SYLLABUS ALIGNMENT: Added exact application examples -->
+                            <p class="text-xs text-blue-900/70">Centralized control, easier to secure and backup (e.g., <strong>Web Browsing, Email Services, Online Banking</strong>). Prone to bottlenecks.</p>
                         </div>
-                        <div class="bg-emerald-50 p-3 rounded border-l-4 border-emerald-500">
+                        <div class="bg-emerald-50 p-4 rounded-lg border-l-4 border-emerald-500">
                             <h4 class="font-bold text-emerald-700 text-sm mb-1"><i class="fa-solid fa-people-arrows mr-1"></i> Peer-to-Peer (P2P)</h4>
-                            <p class="text-xs text-emerald-900/70">Decentralized, highly scalable, no single point of failure (e.g., File Sharing, Blockchain, VoIP). Harder to secure.</p>
+                            <!-- SYLLABUS ALIGNMENT: Added exact application examples -->
+                            <p class="text-xs text-emerald-900/70">Decentralized, highly scalable, no single point of failure (e.g., <strong>File Sharing, VoIP Services, Blockchain</strong>). Harder to secure centrally.</p>
                         </div>
                     </div>
 
@@ -266,14 +277,15 @@
             <div class="lg:col-span-1 space-y-6">
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <h2 class="text-xl font-bold mb-3 text-sky-600 border-b border-slate-100 pb-2">A2.2.4 Segmentation</h2>
-                    <p class="text-sm text-slate-600 mb-4 leading-relaxed">Dividing a network into smaller segments (using Subnets or VLANs) isolates traffic, reducing congestion (fewer collisions) and improving security.</p>
+                    <!-- SYLLABUS ALIGNMENT: Rewritten to perfectly map to syllabus terms (subnetting, resources) -->
+                    <p class="text-sm text-slate-600 mb-4 leading-relaxed"><strong>Network segmentation</strong> involves dividing a network into smaller zones. Using physical segmenting, logical <strong>subnetting</strong>, or <strong>Virtual Local Area Networks (VLANs)</strong> improves network performance and security. It reduces congestion (by limiting broadcast domains) and allows administrators to <strong>manage network resources efficiently</strong>.</p>
                     
                     <div class="space-y-4 mb-6">
-                        <div class="flex items-center justify-between bg-slate-50 p-3 rounded border border-slate-200">
-                            <span class="text-sm font-medium text-slate-700">Network Architecture</span>
-                            <div class="flex space-x-2">
-                                <button id="btn-seg-flat" class="control-btn active px-3 py-1 rounded text-xs">Flat</button>
-                                <button id="btn-seg-vlan" class="control-btn px-3 py-1 rounded text-xs">VLANs</button>
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between bg-slate-50 p-4 rounded-lg border border-slate-200 gap-3">
+                            <span class="text-sm font-medium text-slate-700">Architecture</span>
+                            <div class="flex space-x-2 w-full sm:w-auto">
+                                <button id="btn-seg-flat" class="control-btn active px-4 py-2 rounded flex-1 sm:flex-none text-xs font-semibold">Flat</button>
+                                <button id="btn-seg-vlan" class="control-btn px-4 py-2 rounded flex-1 sm:flex-none text-xs font-semibold">VLANs</button>
                             </div>
                         </div>
                     </div>
@@ -319,7 +331,15 @@
                 canvas.height = rect.height;
             });
         }
-        window.addEventListener('resize', resizeCanvases);
+        
+        window.addEventListener('resize', () => {
+            resizeCanvases();
+            // Re-initialize the active simulation so elements are correctly placed based on new dimensions
+            if (currentTab === 'topologies') TopoSim.init(TopoSim.currentType);
+            if (currentTab === 'servers') ServSim.init();
+            if (currentTab === 'models') ModSim.init();
+            if (currentTab === 'segmentation') SegSim.init();
+        });
 
         // Tab Switching Logic
         tabBtns.forEach(btn => {
@@ -400,10 +420,10 @@
                     explanation: "VLANs segment a physical network into multiple logical networks. This breaks up the broadcast domain, containing broadcast traffic within specific segments and reducing overall congestion."
                 },
                 {
-                    q: "How does network segmentation improve security in a corporate environment?",
-                    options: ["By encrypting all data packets automatically.", "By preventing external hackers from finding the IP address.", "By isolating sensitive systems (e.g., HR data) from general user traffic.", "By increasing the transmission speed of security updates."],
+                    q: "How does network segmentation allow administrators to manage network resources more efficiently and securely?",
+                    options: ["By encrypting all data packets automatically over the internet.", "By forcing all computers to share a single collision domain.", "By isolating sensitive systems (e.g., HR data) from general user traffic.", "By bypassing the DNS server for faster lookups."],
                     answer: 2,
-                    explanation: "Segmentation isolates different parts of the network. If a regular employee's computer is compromised, the segmentation (e.g., via subnets or VLANs) prevents the attacker from easily pivoting to access secure servers."
+                    explanation: "Segmentation (like subnetting or VLANs) isolates different parts of the network. If a regular employee's segment is compromised, the isolation prevents the attacker from easily pivoting to access secure servers."
                 }
             ]
         };
@@ -429,7 +449,7 @@
 
                 item.options.forEach((opt, oIndex) => {
                     const btn = document.createElement('button');
-                    btn.className = 'answer-btn text-left p-3 rounded border text-sm';
+                    btn.className = 'answer-btn text-left p-3 rounded-lg border text-sm';
                     btn.innerText = opt;
                     
                     btn.addEventListener('click', function() {
@@ -639,7 +659,7 @@
                     let py = lerp(fromNode.y, toNode.y, p.progress);
                     
                     ctx.beginPath();
-                    ctx.arc(px, py, 5, 0, Math.PI*2);
+                    ctx.arc(px, py, 6, 0, Math.PI*2);
                     ctx.fillStyle = '#0ea5e9'; // sky-500
                     ctx.fill();
                     ctx.shadowBlur = 8;
@@ -651,7 +671,7 @@
                 // Draw Nodes
                 this.nodes.forEach(n => {
                     ctx.beginPath();
-                    let radius = n.type === 'switch' || n.type === 'router' ? 20 : 12;
+                    let radius = n.type === 'switch' || n.type === 'router' ? 22 : 14;
                     ctx.arc(n.x, n.y, radius, 0, Math.PI*2);
                     
                     if (n.status === 'down') {
@@ -687,8 +707,8 @@
             handleInteraction(x, y) {
                 // Check node click to toggle status
                 for(let n of this.nodes) {
-                    let radius = n.type === 'switch' || n.type === 'router' ? 20 : 12;
-                    if (dist(x, y, n.x, n.y) < radius + 5) {
+                    let radius = n.type === 'switch' || n.type === 'router' ? 22 : 14;
+                    if (dist(x, y, n.x, n.y) < radius + 10) { // slightly larger hit area for touch
                         n.status = n.status === 'up' ? 'down' : 'up';
                         return; // handled
                     }
@@ -705,7 +725,7 @@
                     t = Math.max(0, Math.min(1, t));
                     let projX = n1.x + t * (n2.x - n1.x);
                     let projY = n1.y + t * (n2.y - n1.y);
-                    if (dist(x, y, projX, projY) < 10) {
+                    if (dist(x, y, projX, projY) < 15) { // generous hit area for links
                         e.status = e.status === 'up' ? 'down' : 'up';
                         return;
                     }
@@ -726,10 +746,25 @@
             TopoSim.nodes.forEach(n => n.status = 'up');
             TopoSim.edges.forEach(e => e.status = 'up');
         });
-        document.getElementById('topo-canvas').addEventListener('mousedown', (e) => {
+
+        // Unified handler for mouse and touch interactions on the topology canvas
+        const handleTopoCanvasInteraction = (e) => {
+            e.preventDefault(); // Prevent scrolling on touch
             const rect = e.target.getBoundingClientRect();
-            TopoSim.handleInteraction(e.clientX - rect.left, e.clientY - rect.top);
-        });
+            let clientX, clientY;
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            TopoSim.handleInteraction(clientX - rect.left, clientY - rect.top);
+        };
+
+        const topoCanvas = document.getElementById('topo-canvas');
+        topoCanvas.addEventListener('mousedown', handleTopoCanvasInteraction);
+        topoCanvas.addEventListener('touchstart', handleTopoCanvasInteraction, {passive: false});
 
 
         // ==========================================
@@ -754,15 +789,16 @@
                 const w = this.ctx.canvas.width;
                 const h = this.ctx.canvas.height;
                 
-                this.client = {x: w*0.1, y: h/2};
+                this.client = {x: w*0.15, y: h/2};
                 
-                // Position servers on right side
+                // Position 6 servers: 5 on right side, proxy in middle
                 this.servers = {
-                    'DHCP': {x: w*0.8, y: h*0.15, color: '#60a5fa', icon: '\uf2c2'}, // id-card
-                    'DNS': {x: w*0.8, y: h*0.35, color: '#34d399', icon: '\uf02d'}, // book
-                    'Proxy': {x: w*0.5, y: h/2, color: '#c084fc', icon: '\uf3ed'}, // shield
-                    'Web': {x: w*0.8, y: h*0.65, color: '#fb923c', icon: '\uf0ac'}, // globe
-                    'File': {x: w*0.8, y: h*0.85, color: '#facc15', icon: '\uf07b'}  // folder
+                    'DHCP': {x: w*0.8, y: h*0.15, color: '#3b82f6', icon: '\uf2c2'}, // id-card
+                    'DNS': {x: w*0.8, y: h*0.32, color: '#10b981', icon: '\uf02d'}, // book
+                    'Mail': {x: w*0.8, y: h*0.50, color: '#ef4444', icon: '\uf0e0'}, // envelope
+                    'Web': {x: w*0.8, y: h*0.68, color: '#f97316', icon: '\uf0ac'}, // globe
+                    'File': {x: w*0.8, y: h*0.85, color: '#eab308', icon: '\uf07b'},  // folder
+                    'Proxy': {x: w*0.5, y: h/2, color: '#a855f7', icon: '\uf3ed'} // shield
                 };
             },
 
@@ -791,21 +827,21 @@
                 if(this.step < msgs.length) {
                     this.statusEl.innerText = msgs[this.step];
                     // Highlight corresponding button
-                    document.querySelectorAll('#servers-view .control-btn').forEach(b => b.classList.remove('ring-2', 'ring-cyan-500'));
-                    if (this.step === 1 || this.step === 2) document.getElementById('btn-serv-dhcp').classList.add('ring-2', 'ring-cyan-500');
-                    if (this.step === 3 || this.step === 4) document.getElementById('btn-serv-dns').classList.add('ring-2', 'ring-cyan-500');
-                    if (this.step === 5 || this.step === 6 || this.step === 9 || this.step === 10) document.getElementById('btn-serv-proxy').classList.add('ring-2', 'ring-cyan-500');
-                    if (this.step === 6 || this.step === 7 || this.step === 8 || this.step === 9) document.getElementById('btn-serv-web').classList.add('ring-2', 'ring-cyan-500');
-                    if (this.step === 7 || this.step === 8) document.getElementById('btn-serv-file').classList.add('ring-2', 'ring-cyan-500');
+                    document.querySelectorAll('#servers-view .control-btn').forEach(b => b.classList.remove('ring-2', 'ring-cyan-500', 'bg-slate-100'));
+                    if (this.step === 1 || this.step === 2) document.getElementById('btn-serv-dhcp').classList.add('ring-2', 'ring-cyan-500', 'bg-slate-100');
+                    if (this.step === 3 || this.step === 4) document.getElementById('btn-serv-dns').classList.add('ring-2', 'ring-cyan-500', 'bg-slate-100');
+                    if (this.step === 5 || this.step === 6 || this.step === 9 || this.step === 10) document.getElementById('btn-serv-proxy').classList.add('ring-2', 'ring-cyan-500', 'bg-slate-100');
+                    if (this.step === 6 || this.step === 7 || this.step === 8 || this.step === 9) document.getElementById('btn-serv-web').classList.add('ring-2', 'ring-cyan-500', 'bg-slate-100');
+                    if (this.step === 7 || this.step === 8) document.getElementById('btn-serv-file').classList.add('ring-2', 'ring-cyan-500', 'bg-slate-100');
                 } else {
                     this.active = false;
-                    document.querySelectorAll('#servers-view .control-btn').forEach(b => b.classList.remove('ring-2', 'ring-cyan-500'));
+                    document.querySelectorAll('#servers-view .control-btn').forEach(b => b.classList.remove('ring-2', 'ring-cyan-500', 'bg-slate-100'));
                 }
             },
 
             update() {
                 if(this.active) {
-                    this.progress += 0.015;
+                    this.progress += 0.012; // slightly slower for better readability
                     if (this.progress >= 1) {
                         this.progress = 0;
                         this.step++;
@@ -821,8 +857,8 @@
                 ctx.beginPath();
                 ctx.setLineDash([5, 10]);
                 ctx.strokeStyle = '#cbd5e1'; // slate-300
-                ctx.moveTo(this.client.x + 40, 0); ctx.lineTo(this.client.x + 40, ctx.canvas.height);
-                ctx.moveTo(this.servers['Proxy'].x + 40, 0); ctx.lineTo(this.servers['Proxy'].x + 40, ctx.canvas.height);
+                ctx.moveTo(this.client.x + (ctx.canvas.width*0.1), 0); ctx.lineTo(this.client.x + (ctx.canvas.width*0.1), ctx.canvas.height);
+                ctx.moveTo(this.servers['Proxy'].x + (ctx.canvas.width*0.1), 0); ctx.lineTo(this.servers['Proxy'].x + (ctx.canvas.width*0.1), ctx.canvas.height);
                 ctx.stroke();
                 ctx.setLineDash([]);
                 
@@ -839,7 +875,8 @@
                     if (s === this.servers['Proxy'] || s === this.servers['DHCP'] || s === this.servers['DNS']) {
                         ctx.moveTo(this.client.x, this.client.y);
                         ctx.lineTo(s.x, s.y);
-                    } else if (s === this.servers['Web']) {
+                    } else if (s === this.servers['Web'] || s === this.servers['Mail']) {
+                        // Show both Web and Mail available through the Proxy
                         ctx.moveTo(this.servers['Proxy'].x, this.servers['Proxy'].y);
                         ctx.lineTo(s.x, s.y);
                     } else if (s === this.servers['File']) {
@@ -850,26 +887,37 @@
                 });
 
                 // Draw Client
-                ctx.beginPath(); ctx.arc(this.client.x, this.client.y, 20, 0, Math.PI*2);
+                ctx.beginPath(); ctx.arc(this.client.x, this.client.y, 22, 0, Math.PI*2);
                 ctx.fillStyle = '#ffffff'; ctx.fill();
                 ctx.strokeStyle = '#64748b'; ctx.lineWidth = 2; ctx.stroke(); // slate-500
-                ctx.fillStyle = '#64748b'; ctx.font = '16px "Font Awesome 6 Free"'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fontWeight = '900';
+                ctx.fillStyle = '#64748b'; ctx.font = '18px "Font Awesome 6 Free"'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fontWeight = '900';
                 ctx.fillText('\uf108', this.client.x, this.client.y); // desktop
 
                 // Draw Servers
                 for (const [name, s] of Object.entries(this.servers)) {
                     ctx.beginPath();
                     // Draw rack shape
-                    ctx.rect(s.x - 20, s.y - 15, 40, 30);
+                    ctx.rect(s.x - 22, s.y - 18, 44, 36);
                     ctx.fillStyle = '#ffffff'; ctx.fill();
-                    ctx.strokeStyle = s.color; ctx.lineWidth = 2; ctx.stroke();
                     
-                    ctx.fillStyle = s.color;
-                    ctx.font = '14px "Font Awesome 6 Free"'; ctx.fillText(s.icon, s.x, s.y);
+                    // Highlight active server
+                    let isActive = false;
+                    if (this.step === 1 || this.step === 2) isActive = (name === 'DHCP');
+                    if (this.step === 3 || this.step === 4) isActive = (name === 'DNS');
+                    if (this.step === 5 || this.step === 6 || this.step === 9 || this.step === 10) isActive = (name === 'Proxy');
+                    if (this.step === 6 || this.step === 7 || this.step === 8 || this.step === 9) isActive = (name === 'Web');
+                    if (this.step === 7 || this.step === 8) isActive = (name === 'File');
+                    
+                    ctx.strokeStyle = isActive ? s.color : '#cbd5e1'; 
+                    ctx.lineWidth = isActive ? 3 : 2; 
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = isActive ? s.color : '#94a3b8';
+                    ctx.font = '16px "Font Awesome 6 Free"'; ctx.fillText(s.icon, s.x, s.y);
                     
                     ctx.fillStyle = '#475569'; // slate-600
-                    ctx.font = '10px sans-serif';
-                    ctx.fillText(name, s.x, s.y + 25);
+                    ctx.font = '11px sans-serif';
+                    ctx.fillText(name, s.x, s.y + 28);
                 }
 
                 // Draw Animation Packet based on step
@@ -916,7 +964,6 @@
             csPackets: [],
             p2pPackets: [],
             fileSize: 100, // 100 chunks
-            serverLoad: 0,
 
             init() {
                 this.active = false;
@@ -933,7 +980,7 @@
                 for(let i=0; i<4; i++) {
                     let angle = Math.PI + (Math.PI / 3) * i;
                     let r = h * 0.35;
-                    this.csNodes.push({id: i, x: cxCS + Math.cos(angle)*r, y: cyCS + Math.sin(angle)*r, type: 'client', dl: 0, color: '#94a3b8'});
+                    this.csNodes.push({id: i, x: cxCS + Math.cos(angle)*r, y: cyCS + Math.sin(angle)*r, type: 'client', dl: 0, color: '#64748b'});
                 }
 
                 // P2P Setup (Right half)
@@ -969,7 +1016,7 @@
                 // Move CS packets
                 for(let i=this.csPackets.length-1; i>=0; i--) {
                     let p = this.csPackets[i];
-                    p.progress += 0.02; // slow due to load
+                    p.progress += 0.015; // slow due to load
                     if(p.progress >= 1) {
                         p.to.dl += 5; // Download chunks
                         this.csPackets.splice(i, 1);
@@ -997,7 +1044,7 @@
                 // Move P2P packets
                 for(let i=this.p2pPackets.length-1; i>=0; i--) {
                     let p = this.p2pPackets[i];
-                    p.progress += 0.03; // faster generally because distributed
+                    p.progress += 0.025; // faster generally because distributed
                     if(p.progress >= 1) {
                         p.to.dl += 5;
                         this.p2pPackets.splice(i, 1);
@@ -1026,18 +1073,18 @@
 
                 // Helper to draw nodes with progress bars
                 const drawNode = (n) => {
-                    ctx.beginPath(); ctx.arc(n.x, n.y, 15, 0, Math.PI*2);
+                    ctx.beginPath(); ctx.arc(n.x, n.y, 16, 0, Math.PI*2);
                     ctx.fillStyle = '#ffffff'; ctx.fill();
                     ctx.strokeStyle = n.color; ctx.lineWidth = 2; ctx.stroke();
-                    ctx.fillStyle = n.color; ctx.font = '12px "Font Awesome 6 Free"'; ctx.textBaseline = 'middle'; ctx.fontWeight = '900';
+                    ctx.fillStyle = n.color; ctx.font = '14px "Font Awesome 6 Free"'; ctx.textBaseline = 'middle'; ctx.fontWeight = '900';
                     ctx.fillText(n.type==='server' ? '\uf233' : '\uf108', n.x, n.y); // server / laptop
 
                     // Progress bar
                     if(n.type !== 'server') {
-                        let pWidth = 30;
-                        ctx.fillStyle = '#e2e8f0'; ctx.fillRect(n.x - pWidth/2, n.y + 20, pWidth, 4); // slate-200
+                        let pWidth = 32;
+                        ctx.fillStyle = '#e2e8f0'; ctx.fillRect(n.x - pWidth/2, n.y + 22, pWidth, 4); // slate-200
                         ctx.fillStyle = n.dl >= this.fileSize ? '#10b981' : n.color;
-                        ctx.fillRect(n.x - pWidth/2, n.y + 20, pWidth * (Math.min(n.dl, this.fileSize)/this.fileSize), 4);
+                        ctx.fillRect(n.x - pWidth/2, n.y + 22, pWidth * (Math.min(n.dl, this.fileSize)/this.fileSize), 4);
                     }
                 };
 
@@ -1045,9 +1092,9 @@
                 const drawPacket = (p, color) => {
                     let px = lerp(p.from.x, p.to.x, p.progress);
                     let py = lerp(p.from.y, p.to.y, p.progress);
-                    ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI*2);
+                    ctx.beginPath(); ctx.arc(px, py, 4, 0, Math.PI*2);
                     ctx.fillStyle = color; ctx.fill();
-                    ctx.shadowBlur = 5; ctx.shadowColor = color; ctx.fill(); ctx.shadowBlur = 0;
+                    ctx.shadowBlur = 6; ctx.shadowColor = color; ctx.fill(); ctx.shadowBlur = 0;
                 };
 
                 // Draw CS Links
@@ -1151,9 +1198,9 @@
                 // Background zones if VLAN
                 if (this.mode === 'vlan') {
                     ctx.save();
-                    ctx.fillStyle = 'rgba(59, 130, 246, 0.1)'; // Blue tint right, slightly more opaque for light mode
+                    ctx.fillStyle = 'rgba(59, 130, 246, 0.08)'; // Blue tint
                     ctx.beginPath(); ctx.arc(this.switchNode.x, this.switchNode.y, Math.min(ctx.canvas.width, ctx.canvas.height)*0.45, -Math.PI/2, Math.PI/2); ctx.fill();
-                    ctx.fillStyle = 'rgba(16, 185, 129, 0.1)'; // Green tint left
+                    ctx.fillStyle = 'rgba(16, 185, 129, 0.08)'; // Green tint
                     ctx.beginPath(); ctx.arc(this.switchNode.x, this.switchNode.y, Math.min(ctx.canvas.width, ctx.canvas.height)*0.45, Math.PI/2, -Math.PI/2); ctx.fill();
                     ctx.restore();
 
@@ -1179,8 +1226,8 @@
                     
                     // Add ripple effect for broadcast simulation
                     ctx.beginPath(); ctx.arc(px, py, 15 * p.progress, 0, Math.PI*2);
-                    ctx.strokeStyle = color + '80'; // transparent
-                    ctx.lineWidth = 1; ctx.stroke();
+                    ctx.strokeStyle = color + '60'; // transparent
+                    ctx.lineWidth = 2; ctx.stroke();
 
                     ctx.beginPath(); ctx.arc(px, py, 5, 0, Math.PI*2);
                     ctx.fillStyle = color; ctx.fill();
@@ -1188,15 +1235,15 @@
                 });
 
                 // Draw Switch
-                ctx.beginPath(); ctx.rect(this.switchNode.x-25, this.switchNode.y-15, 50, 30);
+                ctx.beginPath(); ctx.rect(this.switchNode.x-28, this.switchNode.y-18, 56, 36);
                 ctx.fillStyle = '#ffffff'; ctx.fill();
                 ctx.strokeStyle = '#eab308'; ctx.lineWidth = 2; ctx.stroke(); // yellow-500
-                ctx.fillStyle = '#eab308'; ctx.font = '14px "Font Awesome 6 Free"'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fontWeight='900';
+                ctx.fillStyle = '#eab308'; ctx.font = '16px "Font Awesome 6 Free"'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fontWeight='900';
                 ctx.fillText('\uf0e8', this.switchNode.x, this.switchNode.y);
 
                 // Draw Nodes
                 this.nodes.forEach(n => {
-                    ctx.beginPath(); ctx.arc(n.x, n.y, 15, 0, Math.PI*2);
+                    ctx.beginPath(); ctx.arc(n.x, n.y, 16, 0, Math.PI*2);
                     ctx.fillStyle = '#ffffff'; ctx.fill();
                     
                     let strokeColor = this.mode === 'vlan' ? n.color : '#64748b'; // slate-500

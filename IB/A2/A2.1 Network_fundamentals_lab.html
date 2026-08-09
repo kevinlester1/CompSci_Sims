@@ -6,6 +6,7 @@
     <title>NetArch Lab: Network Fundamentals</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         body {
             background-color: #f8fafc; /* slate-50 */
@@ -56,12 +57,12 @@
             border-color: #94a3b8;
         }
         .answer-btn.correct {
-            background-color: #d1fae5; /* emerald-100 */
+            background-color: #d1fae5; 
             color: #065f46; 
             border-color: #10b981; 
         }
         .answer-btn.incorrect {
-            background-color: #ffe4e6; /* rose-100 */
+            background-color: #ffe4e6; 
             color: #9f1239; 
             border-color: #f43f5e; 
         }
@@ -106,7 +107,10 @@
                     <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-sky-500 to-indigo-600 tracking-tight">Network Fundamentals</h1>
                 </div>
                 <nav class="flex space-x-1 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 scrollbar-hide">
-                    <button class="tab-btn active px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-target="types">
+                    <button class="tab-btn active px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-target="questions">
+                        <i class="fa-solid fa-list-check mr-2"></i>A2.1 Questions
+                    </button>
+                    <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-target="types">
                         <i class="fa-solid fa-globe mr-2"></i>Network Types
                     </button>
                     <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-target="devices">
@@ -118,6 +122,9 @@
                     <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-target="tcpip">
                         <i class="fa-solid fa-layer-group mr-2"></i>TCP/IP Model (HL)
                     </button>
+                    <button class="tab-btn px-4 py-2 text-sm font-medium rounded-t-lg whitespace-nowrap" data-target="vocabulary">
+                        <i class="fa-solid fa-book-bookmark mr-2"></i>Vocabulary
+                    </button>
                 </nav>
             </div>
         </div>
@@ -125,7 +132,119 @@
 
     <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
         
-        <div id="types-view" class="view-section grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div id="questions-view" class="view-section grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Factual Questions Column -->
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm h-full">
+                    <h2 class="text-xl font-bold mb-4 text-emerald-600 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-book-open mr-2"></i>Factual Questions (AO1)
+                    </h2>
+                    <p class="text-sm text-slate-600 mb-6">Test your knowledge and understanding of fundamental A2.1 definitions and concepts.</p>
+                    
+                    <div class="space-y-3" id="factual-accordion">
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>1. Distinguish between a LAN and a WAN.</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                A <strong>LAN (Local Area Network)</strong> connects devices within a limited geographical area (like a home or school), is typically owned by a single organization, and offers high speed and low latency. A <strong>WAN (Wide Area Network)</strong> spans large geographical distances (like cities or countries), connects multiple LANs, and often relies on leased telecommunication lines (ISPs), typically resulting in lower bandwidth and higher latency.
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>2. Identify the layers of the TCP/IP model in order.</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                From top to bottom (data generation to transmission): <strong>Application Layer</strong>, <strong>Transport Layer</strong>, <strong>Internet Layer</strong>, and <strong>Network Interface (Access) Layer</strong>.
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>3. State the purpose of a router in a network.</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                A router operates at the Internet Layer (Layer 3) to connect distinct networks together. It inspects the destination IP address of incoming data packets and uses routing tables to determine the most efficient path to forward the packet toward its final destination.
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>4. Describe the difference between TCP and UDP.</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                <strong>TCP (Transmission Control Protocol)</strong> is connection-oriented, requiring a 3-way handshake before transmitting. It guarantees ordered delivery via acknowledgments, making it reliable but slower. <strong>UDP (User Datagram Protocol)</strong> is connectionless and sends datagrams without verifying receipt. It is unreliable but significantly faster, making it ideal for streaming video or VoIP.
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>5. What is the function of DHCP?</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                <strong>DHCP (Dynamic Host Configuration Protocol)</strong> automatically assigns dynamic IP addresses, subnet masks, and other network configurations to devices as they join a network, eliminating the need for manual, static IP assignment.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conceptual Questions Column -->
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm h-full">
+                    <h2 class="text-xl font-bold mb-4 text-indigo-600 border-b border-slate-100 pb-2">
+                        <i class="fa-solid fa-lightbulb mr-2"></i>Conceptual Questions (AO2/AO3)
+                    </h2>
+                    <p class="text-sm text-slate-600 mb-6">Apply, analyse, and evaluate network concepts in real-world scenarios.</p>
+                    
+                    <div class="space-y-3" id="conceptual-accordion">
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>1. Explain why packet switching is preferred over circuit switching for the internet.</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                Circuit switching requires a dedicated, unbroken physical path for the duration of a connection, which wastes resources when idle. <strong>Packet switching</strong> segments data into small packets that are routed independently across shared, dynamic paths. This optimizes network bandwidth, handles congestion gracefully, and provides fault tolerance if a single link fails.
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>2. Evaluate the use of a VPN for a remote employee on public Wi-Fi.</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                <ul class="list-disc pl-4 space-y-1">
+                                    <li><strong>Advantages:</strong> The VPN encrypts all data, creating a secure "tunnel" that prevents Man-in-the-Middle (MitM) attacks or eavesdropping on insecure public Wi-Fi. It authenticates the user, securely extending the corporate LAN to the remote machine.</li>
+                                    <li><strong>Disadvantages:</strong> It requires client software and adds processing overhead (encryption/decryption), which can increase latency and slightly reduce overall transmission speed.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>3. How does layer abstraction facilitate network communication?</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                Abstraction allows each layer of the TCP/IP model to focus solely on its specific task (e.g., routing, reliability, physical transmission) without needing to understand the internal workings of the other layers. A web browser (Application Layer) doesn't need to know if the data travels via fiber optic or Wi-Fi (Network Interface), enabling diverse hardware and software to interoperate seamlessly.
+                            </div>
+                        </div>
+                        <div class="border border-slate-200 rounded-lg overflow-hidden">
+                            <button class="q-btn w-full text-left px-4 py-3 font-semibold text-sm text-slate-800 bg-slate-50 hover:bg-slate-100 flex justify-between items-center transition-colors">
+                                <span>4. Why is edge computing necessary for autonomous vehicles?</span>
+                                <i class="fa-solid fa-chevron-down text-slate-400 transition-transform"></i>
+                            </button>
+                            <div class="q-content hidden px-4 py-3 text-sm text-slate-600 border-t border-slate-200 bg-white">
+                                Autonomous vehicles process massive amounts of sensor data in real-time. Sending this data to a centralized Cloud infrastructure for processing introduces unacceptable latency (delay) that could cause accidents. <strong>Edge computing</strong> places processing power locally within the vehicle (or at nearby cell towers), allowing for instant decision-making and reducing overall network bandwidth usage.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="types-view" class="view-section hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="lg:col-span-1 space-y-6">
                 <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
                     <h2 class="text-xl font-bold mb-3 text-sky-600 border-b border-slate-100 pb-2">A2.1.1 & .2 Network Types</h2>
@@ -146,13 +265,17 @@
                         <button id="btn-type-vpn" class="control-btn px-3 py-2 rounded text-left w-full text-sm font-semibold">
                             <i class="fa-solid fa-shield-halved text-rose-500 w-6"></i> VPN (Virtual Private)
                         </button>
+                        <button id="btn-type-cloud" class="control-btn px-3 py-2 rounded text-left w-full text-sm font-semibold">
+                            <i class="fa-solid fa-cloud text-purple-500 w-6"></i> Cloud & Edge (Infra)
+                        </button>
                     </div>
 
-                    <div id="types-info" class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 min-h-[120px]">
+                    <div id="types-info" class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 max-h-72 overflow-y-auto">
                         <!-- Dynamic Info -->
                     </div>
                 </div>
             </div>
+            
             <div class="lg:col-span-2 space-y-6 flex flex-col">
                 <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm relative">
                     <div class="canvas-container w-full h-full">
@@ -176,7 +299,7 @@
                         <i class="fa-solid fa-circle-info mr-1"></i> Click on any device in the diagram to view its specific function and TCP/IP layer mapping.
                     </div>
 
-                    <div id="devices-info" class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-4 min-h-[140px] transition-all">
+                    <div id="devices-info" class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-4 min-h-[140px] max-h-72 overflow-y-auto transition-all">
                         <h4 class="font-bold text-slate-800 border-b pb-1 mb-2">Device Inspector</h4>
                         <p class="text-slate-500 italic">Select a device...</p>
                     </div>
@@ -186,6 +309,7 @@
                     </button>
                 </div>
             </div>
+            
             <div class="lg:col-span-2 space-y-6 flex flex-col">
                 <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm">
                     <div class="canvas-container w-full h-full">
@@ -209,8 +333,17 @@
                         <button id="btn-proto-udp" class="flex-1 control-btn py-2 text-sm font-semibold rounded shadow-sm">UDP (Fast)</button>
                     </div>
 
-                    <div id="proto-info" class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-4 h-[140px] overflow-y-auto">
+                    <div id="proto-info" class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm text-slate-700 mb-2 h-[280px] overflow-y-auto">
                         <!-- Dynamic Info -->
+                    </div>
+                    
+                    <div class="bg-indigo-50 p-4 rounded-lg border border-indigo-100 mb-4 shadow-sm">
+                        <h4 class="text-sm font-bold text-indigo-800 border-b border-indigo-200 pb-1 mb-2"><i class="fa-solid fa-layer-group mr-1"></i> Application Protocols (A2.1.4)</h4>
+                        <ul class="text-xs text-indigo-900 space-y-2">
+                            <li><strong>HTTP (Hypertext Transfer Protocol):</strong> Transmits unencrypted web page data. Relies on TCP for reliable delivery.</li>
+                            <li><strong>HTTPS (HTTP Secure):</strong> Encrypts web data (via TLS/SSL) to protect sensitive information like passwords during transit. Relies on TCP.</li>
+                            <li><strong>DHCP (Dynamic Host Config Protocol):</strong> Automatically assigns dynamic IP addresses to devices joining a network. Uses UDP for fast, broadcast communication.</li>
+                        </ul>
                     </div>
 
                     <div class="mb-4">
@@ -227,6 +360,7 @@
                     </button>
                 </div>
             </div>
+            
             <div class="lg:col-span-2 space-y-6 flex flex-col">
                 <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm relative">
                     <div class="absolute top-4 left-4 z-10 bg-white/90 p-2 rounded shadow text-xs border border-slate-200 font-mono">
@@ -275,6 +409,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="lg:col-span-2 space-y-6 flex flex-col">
                 <div class="bg-white p-2 rounded-xl border border-slate-200 shadow-sm">
                     <div class="canvas-container w-full h-full">
@@ -288,12 +423,103 @@
             </div>
         </div>
 
+        <div id="vocabulary-view" class="view-section hidden space-y-6">
+            <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm h-full">
+                <h2 class="text-xl font-bold mb-4 text-sky-600 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-book-bookmark mr-2"></i>A2.1 Glossary of Terms
+                </h2>
+                <p class="text-sm text-slate-600 mb-6">Key vocabulary and definitions for Network Fundamentals.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">LAN (Local Area Network)</h4>
+                        <p class="text-sm text-slate-600">A network connecting devices within a limited geographical area, such as a school or home. Typically owned by a single organization, offering high speed and low latency.</p>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">WAN (Wide Area Network)</h4>
+                        <p class="text-sm text-slate-600">A network spanning a large geographical distance, connecting multiple LANs together. The Internet is the largest example of a WAN.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">PAN (Personal Area Network)</h4>
+                        <p class="text-sm text-slate-600">A network covering a very small area (usually within 10 meters), primarily for connecting personal peripheral devices via Bluetooth or Zigbee.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">VPN (Virtual Private Network)</h4>
+                        <p class="text-sm text-slate-600">A service that creates a secure, encrypted "tunnel" over a public network, ensuring data confidentiality and allowing secure remote access to corporate LANs.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">Router</h4>
+                        <p class="text-sm text-slate-600">A Layer 3 (Internet layer) device that directs data packets between entirely different networks using logical IP addresses and routing tables.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">Switch</h4>
+                        <p class="text-sm text-slate-600">A Layer 2 (Network Interface layer) device that connects devices on the same LAN. It uses a MAC address table to forward frames only to specific destination ports.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">Gateway</h4>
+                        <p class="text-sm text-slate-600">A node that serves as an entrance and exit point between differing networks. It actively translates different protocols and architectures so incompatible networks can communicate.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">TCP (Transmission Control Protocol)</h4>
+                        <p class="text-sm text-slate-600">A connection-oriented, reliable protocol that guarantees data delivery via a 3-way handshake and retransmission of lost packets. Used for HTTP, HTTPS, and email.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">UDP (User Datagram Protocol)</h4>
+                        <p class="text-sm text-slate-600">A connectionless, fast protocol that blasts packets without verifying receipt. Unreliable but ideal for real-time video streaming, VoIP, and gaming.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">DHCP (Dynamic Host Configuration Protocol)</h4>
+                        <p class="text-sm text-slate-600">An application layer protocol that automatically assigns dynamic IP addresses and other network configurations to devices joining a network.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">HTTP & HTTPS</h4>
+                        <p class="text-sm text-slate-600"><strong>HTTP</strong> transmits unencrypted web data. <strong>HTTPS (Secure)</strong> encrypts the data to protect sensitive info. Both are Application Layer protocols that rely on TCP.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">Packet Switching</h4>
+                        <p class="text-sm text-slate-600">The process of breaking data into small, manageable blocks (packets) that are routed independently across dynamic network paths and reassembled at the destination.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">Encapsulation</h4>
+                        <p class="text-sm text-slate-600">The process of wrapping data with necessary header information (like ports, IP addresses, and MAC addresses) as it passes down the layers of the TCP/IP stack.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">Edge Computing</h4>
+                        <p class="text-sm text-slate-600">A distributed computing framework that brings computation and data storage closer to the sources of data. This drastically reduces latency for real-time applications (e.g., autonomous vehicles).</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">MAC Address</h4>
+                        <p class="text-sm text-slate-600">Media Access Control address. A unique, physical, 48-bit hard-coded address assigned to a Network Interface Card (NIC) by the manufacturer.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 hover:shadow-md transition-shadow">
+                        <h4 class="font-bold text-slate-800 mb-2 text-sky-700">IP Address</h4>
+                        <p class="text-sm text-slate-600">Internet Protocol address. A logical numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <script>
         const views = document.querySelectorAll('.view-section');
         const tabBtns = document.querySelectorAll('.tab-btn');
-        let currentTab = 'types';
+        let currentTab = 'questions';
         let animFrameId = null;
 
         function resizeCanvases() {
@@ -301,12 +527,23 @@
             const canvases = document.querySelectorAll('canvas');
             canvases.forEach((canvas, index) => {
                 const rect = containers[index].getBoundingClientRect();
-                canvas.width = rect.width;
-                canvas.height = rect.height;
+                // Only resize if container is actually visible (width > 0)
+                if (rect.width > 0 && rect.height > 0) {
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                }
             });
         }
-        window.addEventListener('resize', resizeCanvases);
+        
+        window.addEventListener('resize', () => {
+            resizeCanvases();
+            if (currentTab === 'types') TypesSim.init(TypesSim.currentMode);
+            if (currentTab === 'devices') DevicesSim.init();
+            if (currentTab === 'protocols') ProtoSim.init(ProtoSim.currentMode);
+            if (currentTab === 'tcpip') TcpIpSim.init();
+        });
 
+        // Tab Navigation with render delay fix
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const target = btn.getAttribute('data-target');
@@ -319,12 +556,15 @@
                 document.getElementById(`${target}-view`).classList.remove('hidden');
                 
                 currentTab = target;
-                resizeCanvases();
                 
-                if (target === 'types') TypesSim.init(TypesSim.currentMode);
-                if (target === 'devices') DevicesSim.init();
-                if (target === 'protocols') ProtoSim.init(ProtoSim.currentMode);
-                if (target === 'tcpip') TcpIpSim.init();
+                // CRITICAL FIX: Allow browser layout to update `display:block` before measuring the canvas
+                setTimeout(() => {
+                    resizeCanvases();
+                    if (target === 'types') TypesSim.init(TypesSim.currentMode);
+                    if (target === 'devices') DevicesSim.init();
+                    if (target === 'protocols') ProtoSim.init(ProtoSim.currentMode);
+                    if (target === 'tcpip') TcpIpSim.init();
+                }, 50);
             });
         });
 
@@ -459,10 +699,11 @@
             updateInfo() {
                 const infoBox = document.getElementById('types-info');
                 const content = {
-                    pan: "<strong>PAN (Personal Area Network):</strong> Covers a very small area (few meters), usually for a single person. <em>Examples:</em> Bluetooth headphones connected to a smartphone, wireless mouse.",
-                    lan: "<strong>LAN (Local Area Network):</strong> Connects computers within a limited area like a home, school, or office building. Managed locally, offers high bandwidth and low latency.",
-                    wan: "<strong>WAN (Wide Area Network):</strong> Covers a large geographical area (cities, countries). The Internet is the largest WAN. Often utilizes leased telecommunication lines.",
-                    vpn: "<strong>VPN (Virtual Private Network):</strong> Creates a private, encrypted connection over a public network (like the Internet). Allows remote users to securely access a corporate LAN."
+                    pan: "<strong>PAN (Personal Area Network):</strong> Covers a very small area (approx. 10 meters). It focuses on connecting devices within an individual's immediate workspace. <em>Examples:</em> Wireless earbuds via Bluetooth, smartwatches, or IoT sensors via Zigbee. Prioritizes low power consumption and short-range peripheral connection over a host device like a smartphone.",
+                    lan: "<strong>LAN (Local Area Network):</strong> Connects computers within a limited geographical area like a home, school, or single office building. Typically owned, controlled, and managed by a single organization. Offers highly reliable, high-bandwidth (1Gbps+ Ethernet), and low-latency connections. Utilizes switches to segment traffic efficiently.",
+                    wan: "<strong>WAN (Wide Area Network):</strong> Covers a large geographical area, potentially spanning cities, countries, or globally. The Internet is the largest WAN. It connects multiple LANs together using Routers. Because WANs rely on shared or leased telecommunication lines (ISPs), they typically exhibit higher latency and lower bandwidth compared to LANs.",
+                    vpn: "<strong>VPN (Virtual Private Network):</strong> Creates a secure, encrypted 'tunnel' over a public network (like the Internet). It ensures data confidentiality, integrity, and authentication, making it essential for remote workers accessing corporate LANs securely. However, the encryption algorithms introduce a slight processing overhead that can marginally reduce speed.",
+                    cloud: "<strong>Cloud & Edge Computing (A2.1.2):</strong> <em>Cloud computing</em> centralizes scalable resources (servers, storage) accessed over the internet, saving local hardware costs. <em>Edge computing</em> decentralizes this by moving processing closer to the data source (e.g., IoT sensors or autonomous vehicles), drastically reducing latency for real-time applications and saving bandwidth."
                 };
                 infoBox.innerHTML = content[this.currentMode];
             },
@@ -473,10 +714,10 @@
 
             drawIcon(ctx, icon, x, y, size, color) {
                 ctx.fillStyle = color;
-                ctx.font = `${size}px "Font Awesome 6 Free"`;
+                // CRITICAL FIX: Explicitly setting font-weight 900 for FontAwesome Solid to render correctly in Canvas
+                ctx.font = `900 ${size}px "Font Awesome 6 Free"`;
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                ctx.fontWeight = '900';
                 ctx.fillText(icon, x, y);
             },
 
@@ -604,45 +845,89 @@
                     this.drawIcon(ctx, '\uf1ad', hqX, cy, 40, '#0ea5e9'); // HQ
                     ctx.fillText('Corporate LAN', hqX, cy+30);
                 }
+                else if (this.currentMode === 'cloud') {
+                    // Cloud & Edge Computing Visualization
+                    this.drawIcon(ctx, '\uf0c2', cx, cy - 40, 80, '#a855f7'); // Cloud
+                    ctx.fillStyle = '#6b21a8'; ctx.font='bold 14px sans-serif'; ctx.fillText('Central Cloud', cx, cy - 40);
+                    
+                    const edgeNodes = [
+                        {x: cx - 120, y: cy + 60},
+                        {x: cx, y: cy + 80},
+                        {x: cx + 120, y: cy + 60}
+                    ];
+
+                    edgeNodes.forEach((node, i) => {
+                        // Connection to cloud
+                        ctx.strokeStyle = '#d8b4fe'; ctx.lineWidth = 2; ctx.setLineDash([4, 4]);
+                        ctx.beginPath(); ctx.moveTo(cx, cy - 10); ctx.lineTo(node.x, node.y - 20); ctx.stroke();
+                        ctx.setLineDash([]);
+                        
+                        // Edge Server
+                        this.drawIcon(ctx, '\uf233', node.x, node.y, 30, '#9333ea');
+                        ctx.fillStyle = '#334155'; ctx.font='10px sans-serif'; ctx.fillText('Edge Node', node.x, node.y+25);
+
+                        // IoT Devices processing locally (Edge computing concept)
+                        let t = (this.time * 2 + i) % (Math.PI * 2);
+                        let devX = node.x + Math.cos(t) * 30;
+                        let devY = node.y + Math.sin(t) * 20;
+                        ctx.fillStyle = '#f59e0b'; ctx.beginPath(); ctx.arc(devX, devY, 4, 0, Math.PI*2); ctx.fill();
+                    });
+                }
             }
         };
 
-        ['pan', 'lan', 'wan', 'vpn'].forEach(type => {
-            document.getElementById(`btn-type-${type}`).addEventListener('click', (e) => {
-                document.querySelectorAll('#types-view .control-btn').forEach(b => b.classList.remove('active'));
-                e.currentTarget.classList.add('active');
-                TypesSim.init(type);
-            });
+        ['pan', 'lan', 'wan', 'vpn', 'cloud'].forEach(type => {
+            const el = document.getElementById(`btn-type-${type}`);
+            if (el) {
+                el.addEventListener('click', (e) => {
+                    document.querySelectorAll('#types-view .control-btn').forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                    TypesSim.init(type);
+                });
+            }
         });
 
         const DevicesSim = {
             ctx: document.getElementById('devices-canvas').getContext('2d'),
             devices: [],
             packet: null,
+            listenersAdded: false,
 
             init() {
                 const w = this.ctx.canvas.width;
                 const h = this.ctx.canvas.height;
                 const cy = h / 2;
-                const step = w / 6;
+                const step = w / 7;
 
                 this.devices = [
-                    { id: 'pc', x: step*0.5, y: cy, icon: '\uf108', label: 'PC (NIC)', layer: 'Layer 1 & 2 (Network Interface)', desc: 'The Network Interface Card formats data into frames and physically transmits/receives them via MAC addresses.' },
-                    { id: 'switch', x: step*1.5, y: cy, icon: '\uf6ff', label: 'Switch', layer: 'Layer 2 (Network Interface)', desc: 'Connects devices on the same LAN. Uses MAC addresses to forward frames only to the correct destination port.' },
-                    { id: 'router', x: step*3, y: cy, icon: '\uf0e8', label: 'Router', layer: 'Layer 3 (Internet)', desc: 'Connects different networks together. Reads IP addresses and uses routing tables to find the best path.' },
-                    { id: 'firewall', x: step*4.2, y: cy, icon: '\uf132', label: 'HW Firewall', layer: 'Layer 3 & 4 (Internet/Transport)', desc: 'Inspects traffic against security rules to block or allow packets.' },
-                    { id: 'modem', x: step*5.5, y: cy, icon: '\uf7c0', label: 'Modem', layer: 'Layer 1 (Physical)', desc: 'Modulates digital signals from the router into analog signals for the ISP (e.g., cable, DSL, Fiber).' }
+                    { id: 'pc', x: step*0.6, y: cy, icon: '\uf108', label: 'PC', layer: 'Layer 1 & 2', desc: 'The Network Interface Card (NIC) translates logical data into physical electrical signals. It formats data into frames and uniquely identifies the device on the local network using a hard-coded, 48-bit MAC address.' },
+                    { id: 'wap', x: step*1.7, y: cy, icon: '\uf1eb', label: 'WAP', layer: 'Layer 1 & 2', desc: 'Wireless Access Points act as a bridge connecting Wi-Fi devices to a wired Ethernet LAN. They manage wireless associations, authentication, and coordinate radio frequencies (802.11 standards) to avoid packet collisions.' },
+                    { id: 'switch', x: step*2.8, y: cy, icon: '\uf6ff', label: 'Switch', layer: 'Layer 2', desc: 'Unlike a basic hub, a Switch maintains a MAC address table mapping physical ports to device MAC addresses. It inspects incoming frames and forwards them only to the specific destination port, greatly improving LAN efficiency.' },
+                    { id: 'router', x: step*3.9, y: cy, icon: '\uf0e8', label: 'Router', layer: 'Layer 3', desc: 'Connects distinct networks together. It inspects the destination IP address of incoming packets, strips old MAC frames, and consults its routing table to determine the most efficient next path (hop) to forward the encapsulated packet.' },
+                    { id: 'firewall', x: step*5.0, y: cy, icon: '\uf132', label: 'Firewall', layer: 'Layer 3 & 4', desc: 'Acts as a security barrier. It inspects network traffic and applies predefined rulesets (whitelists/blacklists) to block or allow packets based on IP addresses, port numbers, or stateful packet inspection.' },
+                    { id: 'gateway', x: step*6.1, y: cy, icon: '\uf233', label: 'Gateway', layer: 'Layers 1-7', desc: 'An entrance/exit point between entirely different networks that use different protocols, formats, or architectures. A gateway actively translates these differing protocols so the disparate networks can communicate.' }
                 ];
                 this.packet = null;
                 
-                // Add click listener
-                this.ctx.canvas.addEventListener('mousedown', this.handleClick.bind(this));
+                // Add robust click and touch listeners (prevent duplicates)
+                if (!this.listenersAdded) {
+                    const handleInteraction = (e) => {
+                        e.preventDefault(); // Prevent scrolling on canvas touch
+                        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+                        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+                        this.handleClick(clientX, clientY);
+                    };
+                    
+                    this.ctx.canvas.addEventListener('mousedown', handleInteraction);
+                    this.ctx.canvas.addEventListener('touchstart', handleInteraction, { passive: false });
+                    this.listenersAdded = true;
+                }
             },
 
-            handleClick(e) {
+            handleClick(clientX, clientY) {
                 const rect = this.ctx.canvas.getBoundingClientRect();
-                const mx = e.clientX - rect.left;
-                const my = e.clientY - rect.top;
+                const mx = clientX - rect.left;
+                const my = clientY - rect.top;
 
                 let clicked = false;
                 this.devices.forEach(d => {
@@ -670,7 +955,7 @@
             },
             
             getIconClass(unicode) {
-                const map = {'\uf108': 'fa-computer', '\uf6ff': 'fa-network-wired', '\uf0e8': 'fa-sitemap', '\uf132': 'fa-shield-halved', '\uf7c0': 'fa-router'};
+                const map = {'\uf108': 'fa-computer', '\uf1eb': 'fa-wifi', '\uf6ff': 'fa-network-wired', '\uf0e8': 'fa-sitemap', '\uf132': 'fa-shield-halved', '\uf233': 'fa-server', '\uf7c0': 'fa-router'};
                 return map[unicode] || 'fa-server';
             },
 
@@ -701,16 +986,18 @@
                 // Draw links
                 ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 4;
                 ctx.beginPath();
-                ctx.moveTo(this.devices[0].x, this.devices[0].y);
-                for(let i=1; i<this.devices.length; i++) {
-                    ctx.lineTo(this.devices[i].x, this.devices[i].y);
+                if(this.devices.length > 0) {
+                    ctx.moveTo(this.devices[0].x, this.devices[0].y);
+                    for(let i=1; i<this.devices.length; i++) {
+                        ctx.lineTo(this.devices[i].x, this.devices[i].y);
+                    }
+                    // Internet connection line
+                    ctx.lineTo(w, this.devices[0].y);
+                    ctx.stroke();
+                    
+                    // Draw Internet Cloud at end
+                    TypesSim.drawIcon(ctx, '\uf0c2', w-20, this.devices[0].y, 60, '#94a3b8');
                 }
-                // Internet connection
-                ctx.lineTo(w, this.devices[0].y);
-                ctx.stroke();
-                
-                // Draw Internet Cloud at end
-                TypesSim.drawIcon(ctx, '\uf0c2', w-20, this.devices[0].y, 60, '#94a3b8');
 
                 // Draw Devices
                 this.devices.forEach(d => {
@@ -718,7 +1005,7 @@
                     ctx.beginPath(); ctx.arc(d.x, d.y, 25, 0, Math.PI*2); ctx.fill();
                     ctx.strokeStyle = '#94a3b8'; ctx.lineWidth=2; ctx.stroke();
                     TypesSim.drawIcon(ctx, d.icon, d.x, d.y, 24, '#0ea5e9');
-                    ctx.fillStyle = '#334155'; ctx.font='10px font-bold sans-serif'; ctx.fillText(d.label, d.x, d.y+40);
+                    ctx.fillStyle = '#334155'; ctx.font='bold 10px sans-serif'; ctx.fillText(d.label, d.x, d.y+40);
                 });
 
                 // Draw Packet
@@ -736,7 +1023,6 @@
         };
 
         document.getElementById('btn-dev-send').addEventListener('click', () => DevicesSim.sendPacket());
-
 
         const ProtoSim = {
             ctx: document.getElementById('protocols-canvas').getContext('2d'),
@@ -767,9 +1053,27 @@
             updateInfo() {
                 const infoBox = document.getElementById('proto-info');
                 if (this.currentMode === 'tcp') {
-                    infoBox.innerHTML = `<strong>TCP (Transmission Control Protocol):</strong> <br>Connection-oriented. Requires a 3-way handshake (SYN, SYN-ACK, ACK) before sending. Guarantees delivery by requiring acknowledgments and retransmitting lost packets. Slower but reliable. (e.g., Web browsing, Email).`;
+                    infoBox.innerHTML = `
+                        <strong>TCP (Transmission Control Protocol)</strong> &mdash; <em>The "registered mail" of the internet.</em><br><br>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li><strong>Connection-Oriented:</strong> Requires a formal 3-way handshake (SYN, SYN-ACK, ACK) to establish a connection before data transfer begins.</li>
+                            <li><strong>Reliability & Retransmission:</strong> Requires the receiver to send Acknowledgments (ACKs). If an ACK isn't received, TCP automatically retransmits the lost packet.</li>
+                            <li><strong>Sequencing:</strong> Assigns sequence numbers to segments and reassembles them in the exact correct order at the destination.</li>
+                            <li><strong>Flow Control:</strong> Monitors the network and slows transmission to prevent congestion.</li>
+                            <li><strong>Trade-off:</strong> High overhead (minimum 20-byte header) makes it slower, but essential for accuracy (e.g., HTTP/HTTPS, Email, File Transfer).</li>
+                        </ul>
+                    `;
                 } else {
-                    infoBox.innerHTML = `<strong>UDP (User Datagram Protocol):</strong> <br>Connectionless. Just sends packets ("datagrams") without establishing a connection or checking if they arrived. Fast, less overhead, but unreliable. (e.g., Live Video, VoIP, Gaming).`;
+                    infoBox.innerHTML = `
+                        <strong>UDP (User Datagram Protocol)</strong> &mdash; <em>The "postcard" of the internet.</em><br><br>
+                        <ul class="list-disc pl-4 space-y-1">
+                            <li><strong>Connectionless:</strong> No handshake. Sender blasts packets (datagrams) immediately ("fire-and-forget").</li>
+                            <li><strong>Unreliable:</strong> No acknowledgments, no tracking, and no retransmissions. Dropped packets are gone forever.</li>
+                            <li><strong>No Sequencing:</strong> Packets arrive as-is. Reassembly and ordering are left completely to the application software.</li>
+                            <li><strong>Trade-off:</strong> Extremely low overhead (tiny 8-byte header) means almost zero latency and maximum speed.</li>
+                            <li><strong>Use Cases:</strong> Ideal for real-time applications where speed > perfect accuracy (e.g., Live Video Streaming, VoIP, Online Gaming, DNS, DHCP).</li>
+                        </ul>
+                    `;
                 }
             },
 
@@ -886,9 +1190,9 @@
 
                 // Draw Hosts
                 TypesSim.drawIcon(ctx, '\uf108', cx, topY, 40, '#334155'); // Client
-                ctx.fillText('Client', cx, topY-30);
+                ctx.fillStyle = '#334155'; ctx.font='12px sans-serif'; ctx.fillText('Client', cx, topY-30);
                 TypesSim.drawIcon(ctx, '\uf233', cx, botY, 40, '#0ea5e9'); // Server
-                ctx.fillText('Server', cx, botY+30);
+                ctx.fillStyle = '#0ea5e9'; ctx.fillText('Server', cx, botY+30);
 
                 // Draw packets
                 this.packets.forEach(p => {
@@ -929,7 +1233,6 @@
         });
         document.getElementById('btn-proto-send').addEventListener('click', () => ProtoSim.start());
 
-
         const TcpIpSim = {
             ctx: document.getElementById('tcpip-canvas').getContext('2d'),
             step: 0, 
@@ -958,16 +1261,16 @@
                 progBar.style.width = `${(this.step / 9) * 100}%`;
 
                 const descriptions = [
-                    "Ready to send. Application Layer (HTTP/SMTP) creates the payload Data.",
-                    "Application Layer: Raw Data generated.",
-                    "Transport Layer (TCP): Breaks data into segments, adds Source/Dest Ports (e.g., 80) for app routing.",
-                    "Internet Layer (IP): Adds Source/Dest IP Addresses for network routing.",
-                    "Network Interface Layer: Adds MAC Addresses and Frame Check Sequence for physical hardware delivery.",
-                    "Transmission: Encapsulated frame travels across physical medium (cable/wifi).",
-                    "Network Interface Layer (Receiver): Strips MAC header, checks integrity.",
-                    "Internet Layer (Receiver): Strips IP header, verifies correct IP destination.",
-                    "Transport Layer (Receiver): Strips TCP header, routes payload to correct port.",
-                    "Application Layer: Data received successfully by the application!"
+                    "Ready to send. User interacts with software. Application Layer (e.g., HTTP/HTTPS) prepares the raw payload Data.",
+                    "Application Layer: Role is to provide network services directly to user applications. Generates raw data using protocols like HTTP (web) or DHCP (IP addressing).",
+                    "Transport Layer: Role is end-to-end communication and reliability. Uses TCP (reliable) or UDP (fast). Breaks data into segments and adds Source/Dest Ports.",
+                    "Internet Layer: Role is routing packets across disparate global networks. Uses the IP protocol to encapsulate segments into Packets, adding logical Source/Dest IP Addresses.",
+                    "Network Interface (Access) Layer: Role is physical transmission over local media. Adds physical MAC addresses for the next hop and a Frame Check Sequence (FCS) trailer to detect errors.",
+                    "Transmission: Frame is translated into physical signals (electrical impulses, light pulses, or radio waves) and transmitted across the physical medium (cables or Wi-Fi).",
+                    "Network Interface Layer (Receiver): Reverses physical translation. Reads MAC address. Recalculates FCS to verify data integrity. If error-free, strips Frame header/trailer.",
+                    "Internet Layer (Receiver): Inspects the destination IP address to verify it has reached the correct host network. If correct, strips the IP header and passes the segment up.",
+                    "Transport Layer (Receiver): Inspects the destination port number. If using TCP, it guarantees delivery by sending an Acknowledgment back. Strips TCP/UDP header.",
+                    "Application Layer (Receiver): Role is to process the received data for the user. The target application (e.g., a web browser using HTTP) successfully displays the final result!"
                 ];
 
                 desc.innerText = descriptions[this.step];
@@ -1012,7 +1315,7 @@
                 const drawStack = (x, title) => {
                     ctx.fillStyle = '#f1f5f9'; ctx.fillRect(x - 60, 40, 120, h - 80);
                     ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1; ctx.strokeRect(x - 60, 40, 120, h - 80);
-                    ctx.fillStyle = '#334155'; ctx.font = 'bold 12px sans-serif'; ctx.fillText(title, x, 25);
+                    ctx.fillStyle = '#334155'; ctx.font = 'bold 12px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(title, x, 25);
                     
                     const layers = ['Application', 'Transport', 'Internet', 'Network Access'];
                     const layerH = (h-80)/4;
@@ -1049,7 +1352,7 @@
                         py = l4y; px = this.isAnimating ? lerp(senderX, receiverX, this.animProgress) : receiverX; 
                         showData=true; showTCP=true; showIP=true; showMAC=true;
                     }
-                    else if (this.step === 6) { px = receiverX; py = l4y; showData=true; showTCP=true; showIP=true; showMAC = !this.isAnimating || (1-this.animProgress > 0.5); } // MAC disappears
+                    else if (this.step === 6) { px = receiverX; py = l4y; showData=true; showTCP=true; showIP=true; showMAC = !this.isAnimating || (1-this.animProgress > 0.5); } 
                     else if (this.step === 7) { px = receiverX; py = this.isAnimating ? lerp(l4y, l3y, this.animProgress) : l3y; showData=true; showTCP=true; showIP = !this.isAnimating || (1-this.animProgress > 0.5); }
                     else if (this.step === 8) { px = receiverX; py = this.isAnimating ? lerp(l3y, l2y, this.animProgress) : l2y; showData=true; showTCP = !this.isAnimating || (1-this.animProgress > 0.5); }
                     else if (this.step === 9) { px = receiverX; py = this.isAnimating ? lerp(l2y, l1y, this.animProgress) : l1y; showData=true; }
@@ -1060,6 +1363,7 @@
                     ctx.translate(px, py);
                     
                     let currentOffset = -pWidth/2;
+                    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
                     
                     if (showMAC) {
                         ctx.fillStyle = '#8b5cf6'; ctx.fillRect(currentOffset, -10, 15, 20); // Frame Header
@@ -1094,7 +1398,6 @@
         document.getElementById('btn-tcpip-next').addEventListener('click', () => TcpIpSim.nextStep());
         document.getElementById('btn-tcpip-reset').addEventListener('click', () => TcpIpSim.init());
 
-
         function globalLoop() {
             if(currentTab === 'types') { TypesSim.update(); TypesSim.draw(); }
             if(currentTab === 'devices') { DevicesSim.update(); DevicesSim.draw(); }
@@ -1110,16 +1413,38 @@
             buildQuiz('protocols', 'protocols');
             buildQuiz('tcpip', 'tcpip');
 
-            resizeCanvases();
-            
-            TypesSim.init('pan');
-            DevicesSim.init();
-            ProtoSim.init('tcp');
-            TcpIpSim.init();
+            const qBtns = document.querySelectorAll('.q-btn');
+            qBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Toggle visibility
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+                        this.classList.add('bg-sky-50', 'text-sky-700');
+                        this.classList.remove('bg-slate-50', 'text-slate-800');
+                    } else {
+                        content.classList.add('hidden');
+                        icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+                        this.classList.remove('bg-sky-50', 'text-sky-700');
+                        this.classList.add('bg-slate-50', 'text-slate-800');
+                    }
+                });
+            });
 
-            globalLoop();
+            setTimeout(() => {
+                resizeCanvases();
+                
+                TypesSim.init('pan');
+                DevicesSim.init();
+                ProtoSim.init('tcp');
+                TcpIpSim.init();
+
+                globalLoop();
+            }, 100);
         };
-
     </script>
 </body>
 </html>
