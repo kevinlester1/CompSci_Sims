@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus Mastery Tracker - Units 1 to 6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Custom scrollbar for a polished look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8; 
+        }
+
+        .square-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 1 / 1;
+        }
+
+        .square-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-overlay {
+            backdrop-filter: blur(4px);
+            transition: opacity 0.3s ease;
+        }
+
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col items-center pb-12">
+
+    <header class="w-full bg-white shadow-sm sticky top-0 z-10 p-4 md:p-6 mb-8">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold text-slate-900">Syllabus Mastery Tracker</h1>
+                <p class="text-slate-500 text-sm md:text-base">Units 1 to 6 • Click a topic to test your knowledge</p>
+            </div>
+            
+            <div class="w-full md:w-1/3 bg-slate-100 p-3 rounded-xl border border-slate-200 shadow-inner">
+                <div class="flex justify-between text-sm font-semibold mb-1 text-slate-600">
+                    <span>Overall Progress</span>
+                    <span id="progress-text">0 / 35</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-emerald-400 to-emerald-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Unit Progress Trackers -->
+        <div id="unit-progress-container" class="max-w-6xl mx-auto mt-5 flex flex-wrap gap-2 md:gap-3 justify-start">
+            <!-- Unit badges will be injected here by JS -->
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl mx-auto px-4">
+        <!-- Grid Container dynamically populated by JS -->
+        <div id="syllabus-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
+            <!-- Squares will be injected here -->
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="quiz-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-overlay bg-slate-900/40 opacity-0">
+        <div id="modal-content" class="bg-white rounded-2xl shadow-2xl w-full max-w-lg transform scale-95 transition-transform duration-300 overflow-hidden flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header -->
+            <div class="bg-indigo-600 p-5 text-white flex justify-between items-start shrink-0">
+                <div>
+                    <span id="modal-unit-badge" class="inline-block px-2 py-1 bg-indigo-500 rounded-md text-xs font-bold tracking-wider uppercase mb-2">Unit</span>
+                    <h2 id="modal-title" class="text-xl font-bold leading-tight">Topic Title</h2>
+                </div>
+                <button onclick="closeModal()" class="text-indigo-200 hover:text-white transition-colors p-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Modal Body (Scrollable) -->
+            <div class="p-5 md:p-6 overflow-y-auto flex-grow">
+                <p id="modal-question" class="text-lg font-medium text-slate-800 mb-6">Question goes here?</p>
+                
+                <div id="options-container" class="flex flex-col gap-3">
+                    <!-- Options injected here -->
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div id="modal-feedback" class="p-4 text-center font-semibold text-sm hidden shrink-0">
+                <!-- Feedback message injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Comprehensive data for Cambridge IGCSE Computer Science 0478 (Units 1-6, 2026-2028 Syllabus)
+        // Includes supplemented questions directly from "questions.pdf"
+        const syllabusData = [
+            // UNIT 1: Data representation
+            {
+                id: "1.1.1", unit: "Unit 1", unitName: "Data representation", statement: "Computers use binary",
+                questions: [
+                    { q: "Tick one box to show which statement about the binary number system is correct. (Source: questions.pdf)", options: ["It is a base 1 system.", "It is a base 2 system.", "It is a base 10 system.", "It is a base 16 system."], answer: 1 },
+                    { q: "Explain why a computer system can only process data in binary form. (Source: questions.pdf)", options: ["It uses less electricity than denary.", "Processors consist of billions of transistors that act as switches with two states (1 and 0).", "It is the only language humans can't read.", "Binary takes up less storage space than hexadecimal."], answer: 1 },
+                    { q: "What represents a logical '1' inside a computer's circuitry?", options: ["A switch in the OFF state.", "A negative voltage.", "A high voltage or a switch in the ON state.", "A burned out transistor."], answer: 2 },
+                    { q: "What is the base of the binary number system?", options: ["Base-2", "Base-8", "Base-10", "Base-16"], answer: 0 },
+                    { q: "A single transistor in a computer chip can exist in how many discrete states?", options: ["One", "Two", "Eight", "Ten"], answer: 1 }
+                ]
+            },
+            {
+                id: "1.1.2", unit: "Unit 1", unitName: "Data representation", statement: "Number system conversions",
+                questions: [
+                    { q: "Tick one box to show which 8-bit binary value is the correct conversion for the denary value 50. (Source: questions.pdf)", options: ["00101010", "00110010", "01001100", "01010000"], answer: 1 },
+                    { q: "Tick one box to show which 8-bit binary value is the correct conversion for the hexadecimal value 90. (Source: questions.pdf)", options: ["00001001", "01011010", "10010000", "01100100"], answer: 2 },
+                    { q: "The negative denary number -54 needs to be stored. Complete the binary register using two's complement. (Source: questions.pdf)", options: ["11001010", "10110010", "11001001", "00110110"], answer: 0 },
+                    { q: "Convert hexadecimal 1A to denary.", options: ["10", "16", "26", "31"], answer: 2 },
+                    { q: "Convert denary 255 to hexadecimal.", options: ["EE", "F0", "FF", "25"], answer: 2 }
+                ]
+            },
+            {
+                id: "1.1.3", unit: "Unit 1", unitName: "Data representation", statement: "Use of hexadecimal",
+                questions: [
+                    { q: "Give a reason why a programmer may use hexadecimal to represent binary numbers. (Source: questions.pdf)", options: ["It converts directly and automatically to text.", "It uses less RAM in the computer.", "It is shorter and easier for humans to understand, reducing errors.", "It is natively understood by logic gates."], answer: 2 },
+                    { q: "Which of the following is a common use for hexadecimal in computer science? (Source: questions.pdf)", options: ["Defining HTML colour codes.", "Transmitting audio data to a speaker.", "Processing math in the ALU.", "Running a web browser."], answer: 0 },
+                    { q: "How many bits are represented by a single hexadecimal digit?", options: ["2 bits", "4 bits (a nibble)", "8 bits (a byte)", "16 bits"], answer: 1 },
+                    { q: "Why do programmers prefer hexadecimal to denary when inspecting raw data?", options: ["It converts directly and easily to/from binary without complex math.", "It encrypts the data automatically.", "Hexadecimal numbers are always smaller.", "It prevents syntax errors in code."], answer: 0 },
+                    { q: "Which of the following displays a MAC address in the correct hexadecimal format?", options: ["192.168.1.1", "00:1A:2B:3C:4D:5E", "https://google.com", "FF-FF-FF-FF"], answer: 1 }
+                ]
+            },
+            {
+                id: "1.1.4", unit: "Unit 1", unitName: "Data representation", statement: "Binary addition and overflow",
+                questions: [
+                    { q: "Two binary numbers are added by a computer and an overflow error occurs. Explain why the overflow error occurred. (Source: questions.pdf)", options: ["When a logic error crashes the system.", "When the result is exactly 255.", "The result is greater than 255, requiring a 9th bit which falls outside the 8-bit register limit.", "When you add two negative numbers."], answer: 2 },
+                    { q: "Add the two 8-bit binary numbers 11101110 and 00110001 using binary addition. (Source: questions.pdf)", options: ["00011111", "10011111 (plus overflow)", "00100001 (plus overflow)", "10001111 (plus overflow)"], answer: 2 },
+                    { q: "Add 10010011 and 00100110.", options: ["10111001", "11001101", "10111000", "01111001"], answer: 0 },
+                    { q: "What happens to the extra bit if an 8-bit addition results in a 9-bit answer?", options: ["It automatically creates a 9th bit in RAM.", "It is stored in the next sequential byte.", "It is discarded and an overflow error is flagged.", "The computer crashes immediately."], answer: 2 },
+                    { q: "In an 8-bit register, adding 11111111 and 00000001 results in what stored value?", options: ["100000000", "11111111", "00000001", "00000000"], answer: 3 }
+                ]
+            },
+            {
+                id: "1.1.5", unit: "Unit 1", unitName: "Data representation", statement: "Logical binary shifts",
+                questions: [
+                    { q: "A logical left shift of three places is performed on a binary number. Tick one box to show the impact on the number. (Source: questions.pdf)", options: ["The least significant bits are lost.", "The most significant bits are lost.", "The number has been divided by six.", "The number stays the same."], answer: 1 },
+                    { q: "A logical right shift of three places is performed. State one effect this has on the binary number. (Source: questions.pdf)", options: ["It multiplies the number by 8.", "It divides the number by 8 (and least significant bits are lost).", "It divides the number by 3.", "It adds 3 to the number."], answer: 1 },
+                    { q: "Perform a logical left shift by 1 place on the 8-bit binary 00011010.", options: ["00001101", "00110100", "00110010", "10011010"], answer: 1 },
+                    { q: "What happens to the leftmost bit during an 8-bit logical left shift?", options: ["It wraps around to the right side.", "It is inverted.", "It is pushed out and usually lost to the carry flag.", "It remains exactly where it is."], answer: 2 },
+                    { q: "Perform a logical right shift by 1 place on 00110100. What is the newly added leftmost bit?", options: ["0", "1", "It depends on the previous bit.", "The rightmost bit wraps around."], answer: 0 }
+                ]
+            },
+            {
+                id: "1.1.6", unit: "Unit 1", unitName: "Data representation", statement: "Two's complement",
+                questions: [
+                    { q: "Which number system is used to represent positive and negative 8-bit binary integers?", options: ["Sign and magnitude", "Two's complement", "Hexadecimal", "ASCII"], answer: 1 },
+                    { q: "What is the two's complement 8-bit representation of -1?", options: ["10000001", "11111111", "11111110", "00000001"], answer: 1 },
+                    { q: "How do you convert a positive binary number to its two's complement negative equivalent?", options: ["Add a 1 to the front.", "Subtract 1 from all bits.", "Invert all bits and add 1.", "Invert all bits and subtract 1."], answer: 2 },
+                    { q: "What is the denary value of the two's complement binary number 10000000?", options: ["128", "-127", "-128", "0"], answer: 2 },
+                    { q: "In 8-bit two's complement, what does a leading '1' (most significant bit) indicate?", options: ["The number is very large.", "The number is odd.", "An overflow has occurred.", "The number is negative."], answer: 3 }
+                ]
+            },
+            {
+                id: "1.2.1", unit: "Unit 1", unitName: "Data representation", statement: "Text representation",
+                questions: [
+                    { q: "Explain the differences between the ASCII character set and the Unicode character set. (Source: questions.pdf)", options: ["ASCII uses less storage space (7/8 bits) but represents fewer characters; Unicode uses more (16-32 bits) and supports global languages/emojis.", "ASCII is for images; Unicode is for text.", "ASCII cannot be intercepted; Unicode is plain text.", "ASCII operates faster in the CPU but uses more RAM."], answer: 0 },
+                    { q: "One disadvantage of using Unicode instead of ASCII is that text takes up more storage space. Give one reason why. (Source: questions.pdf)", options: ["Unicode requires a built-in dictionary.", "Unicode adds formatting like bold and italics.", "Unicode uses more bits per character.", "Unicode files are automatically encrypted."], answer: 2 },
+                    { q: "Extended ASCII uses 8 bits. How many different characters can it represent?", options: ["128", "255", "256", "65536"], answer: 2 },
+                    { q: "What does the acronym ASCII stand for?", options: ["American Standard Code for Information Interchange", "Asian Standard Character Information Interface", "Advanced System Code for Internet Interchange", "Application Standard Character Integer Index"], answer: 0 },
+                    { q: "What is the main advantage of Unicode over ASCII?", options: ["It uses less storage space.", "It allows for a greater range of characters, emojis, and languages.", "It cannot be intercepted during data transmission.", "It operates faster in the CPU."], answer: 1 }
+                ]
+            },
+            {
+                id: "1.2.2", unit: "Unit 1", unitName: "Data representation", statement: "Sound representation",
+                questions: [
+                    { q: "A band is recording a song. Give one benefit of using a higher sample rate. (Source: questions.pdf)", options: ["It reduces the file size.", "It increases the accuracy/quality of the recording.", "It makes the file highly compressed.", "It removes background noise automatically."], answer: 1 },
+                    { q: "Give one drawback of using a higher sample rate to record a song. (Source: questions.pdf)", options: ["It makes the recording sound distorted.", "It requires a larger file size and more storage space.", "The sound becomes a MIDI file.", "It requires a faster microphone."], answer: 1 },
+                    { q: "Describe what is meant by sample resolution. (Source: questions.pdf)", options: ["The number of bits used to store each sound sample.", "The amount of time the recording lasts.", "The frequency of the sound wave.", "The number of channels (e.g., stereo vs mono)."], answer: 0 },
+                    { q: "An analogue sound wave must be converted to digital to be processed by a computer. What hardware does this?", options: ["Digital to Analogue Converter (DAC)", "Amplifier", "Analogue to Digital Converter (ADC)", "Sound Synthesizer"], answer: 2 },
+                    { q: "What is the definition of 'sample rate' in sound recording?", options: ["The number of bits used to store a sound.", "The number of samples of the sound wave taken per second.", "The loudness of the recorded audio.", "The speed at which the audio plays back."], answer: 1 }
+                ]
+            },
+            {
+                id: "1.2.3", unit: "Unit 1", unitName: "Data representation", statement: "Image representation",
+                questions: [
+                    { q: "What term describes the number of bits used to represent each colour in an image?", options: ["Image resolution", "Sample rate", "Colour depth", "Pixel density"], answer: 2 },
+                    { q: "What is a 'pixel'?", options: ["A type of image compression.", "The smallest identifiable picture element in a digital image.", "The physical screen of a monitor.", "A measure of image file size."], answer: 1 },
+                    { q: "If a bitmap image has a colour depth of 8 bits, how many unique colours can it display?", options: ["8", "16", "256", "16.7 million"], answer: 2 },
+                    { q: "What is image resolution?", options: ["The number of colours available.", "The number of pixels in the image, usually expressed as width x height.", "The size of the image file in bytes.", "The clarity of the computer screen."], answer: 1 },
+                    { q: "If you increase the resolution of an image without changing its physical display size, what happens?", options: ["The pixels become smaller and denser, increasing image detail.", "The image becomes blurry and pixelated.", "The colour depth automatically decreases.", "The file size decreases drastically."], answer: 0 }
+                ]
+            },
+            {
+                id: "1.3.1", unit: "Unit 1", unitName: "Data representation", statement: "Data storage measurements",
+                questions: [
+                    { q: "512 kibibytes (KiB) is equal to how many mebibytes (MiB)? (Source: questions.pdf)", options: ["0.5 MiB", "1024 MiB", "8 MiB", "1048576 MiB"], answer: 0 },
+                    { q: "Arrange these units from smallest to largest: Byte, Nibble, Bit, Kilobyte.", options: ["Byte, Bit, Nibble, Kilobyte", "Bit, Nibble, Byte, Kilobyte", "Nibble, Bit, Byte, Kilobyte", "Bit, Byte, Nibble, Kilobyte"], answer: 1 },
+                    { q: "How many bits are in a byte?", options: ["4", "8", "16", "1024"], answer: 1 },
+                    { q: "What is the difference between a Kilobyte (KB) and a Kibibyte (KiB)?", options: ["A KB is for text, a KiB is for images.", "A KB is 1024 bytes, a KiB is 1000 bytes.", "A KB is 1000 bytes, while a KiB is 1024 bytes.", "They are exactly the same thing."], answer: 2 },
+                    { q: "How many bytes are in a nibble?", options: ["Half a byte (4 bits)", "2 bytes", "4 bytes", "8 bytes"], answer: 0 }
+                ]
+            },
+            {
+                id: "1.3.2", unit: "Unit 1", unitName: "Data representation", statement: "Calculate file size",
+                questions: [
+                    { q: "How do you calculate the file size of an uncompressed image?", options: ["Resolution × Colour Depth", "Sample Rate × Resolution", "Width + Height", "Megapixels × 1024"], answer: 0 },
+                    { q: "How do you calculate the file size of a mono sound file?", options: ["Sample Rate × Sample Resolution × Duration (seconds)", "Duration (seconds) ÷ Sample Rate", "Sample Rate + Sample Resolution", "Bit Rate × Megabytes"], answer: 0 },
+                    { q: "An image is 100 pixels by 100 pixels with a colour depth of 8 bits. What is its uncompressed size in bytes?", options: ["1,000 bytes", "10,000 bytes", "80,000 bytes", "100,000 bytes"], answer: 1 },
+                    { q: "A 10-second mono audio clip has a sample rate of 44,100 Hz and a resolution of 16 bits. What is its size in bits?", options: ["441,000 bits", "705,600 bits", "7,056,000 bits", "14,112,000 bits"], answer: 2 },
+                    { q: "What must be added to a file's raw data size to get the actual total file size on disk?", options: ["The bootloader", "The file header/metadata", "The compiler", "The CPU overhead"], answer: 1 }
+                ]
+            },
+            {
+                id: "1.3.3", unit: "Unit 1", unitName: "Data representation", statement: "Purpose of compression",
+                questions: [
+                    { q: "The website hosts videos that users can stream. Tick one box to show which statement is a benefit of compressing the videos. (Source: questions.pdf)", options: ["Data is encrypted.", "Duration of each video will be reduced.", "Less storage space on the web server is required.", "More bandwidth is required when viewing the videos."], answer: 2 },
+                    { q: "Why is file compression crucial for web servers?", options: ["It encrypts data from hackers.", "It reduces bandwidth required and speeds up page loading times.", "It converts HTML into machine code.", "It prevents DDoS attacks."], answer: 1 },
+                    { q: "Which of the following is NOT a typical reason to compress a file?", options: ["To save space on a hard drive.", "To send it faster via email.", "To increase the visual clarity of an image.", "To reduce mobile data usage."], answer: 2 },
+                    { q: "How does compression affect secondary storage?", options: ["It allows more files to be stored within the same physical capacity.", "It physically shrinks the hard drive.", "It formats the drive to run faster.", "It turns an HDD into an SSD."], answer: 0 },
+                    { q: "What is a potential drawback of compressing a file?", options: ["It might accidentally delete the entire hard drive.", "The CPU must spend processing time decompressing it before use.", "It costs money to compress every file.", "It forces the computer to use virtual memory."], answer: 1 }
+                ]
+            },
+            {
+                id: "1.3.4", unit: "Unit 1", unitName: "Data representation", statement: "Lossy & lossless compression",
+                questions: [
+                    { q: "Explain how lossless compression would compress a text file containing repeating words. (Source: questions.pdf)", options: ["By permanently removing data outside human hearing.", "By replacing repeating sequences of data with a token/index and a dictionary count.", "By converting colour images to black and white.", "By encrypting the file contents."], answer: 1 },
+                    { q: "Which of the following file types typically uses lossy compression?", options: ["ZIP", "TXT", "JPEG", "PDF"], answer: 2 },
+                    { q: "Which compression method reduces file size without permanent loss of data?", options: ["Lossy compression", "Lossless compression", "JPEG compression", "MP3 compression"], answer: 1 },
+                    { q: "Why can't lossy compression be used on text files or computer programs?", options: ["It takes too long to compress.", "Because deleting any original data would render the text unreadable or program unusable.", "Text files are already perfectly compressed.", "Lossy compression only works on Apple devices."], answer: 1 },
+                    { q: "What happens to the discarded data in lossy audio compression (like MP3)?", options: ["It is permanently removed, typically targeting sounds outside human hearing.", "It is hidden in a separate text file.", "It is temporarily stored in RAM.", "It can be restored easily by the user."], answer: 0 }
+                ]
+            },
+
+            // UNIT 2: Data transmission
+            {
+                id: "2.1.1", unit: "Unit 2", unitName: "Data transmission", statement: "Packets & packet switching",
+                questions: [
+                    { q: "Identify two items of data contained in a packet header. (Source: questions.pdf)", options: ["Payload and trailer check", "Destination IP address and packet number", "Checksum and routing table", "HTML tags and URLs"], answer: 1 },
+                    { q: "Data is broken down into packets. A data packet has a packet [_______] that contains the packet number and the destination address. (Source: questions.pdf)", options: ["Trailer", "Payload", "Header", "Footer"], answer: 2 },
+                    { q: "What is the role of a router in packet switching?", options: ["To translate HTML.", "To determine the most efficient path for each individual packet to its destination.", "To compress the packets before sending.", "To encrypt the payload."], answer: 1 },
+                    { q: "Why do packets from the same file sometimes arrive out of order?", options: ["Because the sender mixes them up.", "Because they may take different routes across the network depending on traffic.", "Because the internet protocol is flawed.", "Because the payload is too heavy."], answer: 1 },
+                    { q: "What is usually found in a packet's trailer?", options: ["The sender's IP address.", "Error checking data, such as a checksum.", "The packet sequence number.", "The actual file data."], answer: 1 }
+                ]
+            },
+            {
+                id: "2.1.2", unit: "Unit 2", unitName: "Data transmission", statement: "Transmission methods",
+                questions: [
+                    { q: "Data is transmitted down multiple wires, multiple bits at a time, in one direction only. Which data transmission method is this? (Source: questions.pdf)", options: ["Serial simplex", "Parallel half-duplex", "Serial full-duplex", "Parallel simplex"], answer: 3 },
+                    { q: "Data is transmitted down a single wire, one bit at a time, in both directions at the same time. Which method is this? (Source: questions.pdf)", options: ["Serial transmission", "Parallel transmission", "Simplex transmission", "Serial full-duplex"], answer: 3 },
+                    { q: "What is half-duplex transmission?", options: ["Data travels in one direction only.", "Data can travel in both directions, but not at the same time.", "Data travels in both directions simultaneously.", "Data travels across multiple wires at once."], answer: 1 },
+                    { q: "Why is parallel transmission generally unsuitable for long distances?", options: ["It is too slow.", "Due to a high risk of data skew and crosstalk between wires.", "It requires a satellite connection.", "It can only send data in one direction."], answer: 1 },
+                    { q: "Which data transmission method allows data to be sent in both directions simultaneously?", options: ["Simplex", "Half-duplex", "Full-duplex", "Serial"], answer: 2 }
+                ]
+            },
+            {
+                id: "2.1.3", unit: "Unit 2", unitName: "Data transmission", statement: "USB interface",
+                questions: [
+                    { q: "Which of the following is a benefit of the Universal Serial Bus (USB) interface?", options: ["It uses parallel transmission for extreme speed.", "It can only connect to one specific type of device.", "It is an industry standard that supplies power and data.", "It cannot be inserted incorrectly."], answer: 2 },
+                    { q: "USB uses which type of data transmission?", options: ["Parallel transmission", "Serial transmission", "Simplex transmission", "Analogue transmission"], answer: 1 },
+                    { q: "What does USB stand for?", options: ["Universal System Board", "United Serial Broadband", "Universal Serial Bus", "Uniform System Bus"], answer: 2 },
+                    { q: "Which is a disadvantage of early USB standards compared to network cables?", options: ["The maximum cable length is relatively short, usually around 5 meters.", "They do not provide power to devices.", "They require manual driver installation for every device.", "They are easily broken by data skew."], answer: 0 },
+                    { q: "What happens when a new USB device is plugged into a computer?", options: ["The computer must be restarted.", "The OS automatically detects it and loads the appropriate device driver.", "The motherboard BIOS must be flashed.", "The device must be formatted."], answer: 1 }
+                ]
+            },
+            {
+                id: "2.2.1", unit: "Unit 2", unitName: "Data transmission", statement: "Need for error checking",
+                questions: [
+                    { q: "How can errors occur during data transmission?", options: ["Due to logic errors in the code.", "Due to interference, resulting in data loss, gain, or change.", "Due to compiling the program incorrectly.", "Due to the use of SSDs instead of HDDs."], answer: 1 },
+                    { q: "What is 'data skew' in parallel transmission?", options: ["When the cable is physically bent.", "Bits sent together arrive at different times, causing data corruption.", "When the sender transmits too fast.", "When a hacker intercepts the data."], answer: 1 },
+                    { q: "Which of these is a common cause of transmission errors?", options: ["Electromagnetic interference or voltage spikes.", "Using a high-level programming language.", "Saving files to the cloud.", "Having too much RAM."], answer: 0 },
+                    { q: "What is the consequence of not using error checking during a file transfer?", options: ["The transfer will be twice as fast.", "The received file may be corrupted and unusable.", "The router will crash.", "The IP address will be blocked."], answer: 1 },
+                    { q: "Can basic error checking guarantee that the received data is 100% correct?", options: ["Yes, it always detects every error.", "No, methods like parity checks can fail if an even number of bits are flipped.", "Yes, but only on fiber optic cables.", "No, because software always has bugs."], answer: 1 }
+                ]
+            },
+            {
+                id: "2.2.2", unit: "Unit 2", unitName: "Data transmission", statement: "Parity, checksum, echo",
+                questions: [
+                    { q: "A copy of the data received is sent back from the printer to the computer. The two sets of data are compared to see if they match. State the name of this method. (Source: questions.pdf)", options: ["Parity check", "Checksum", "Echo check", "Check digit"], answer: 2 },
+                    { q: "The byte 1100011_ needs to be sent using an even parity byte check. What is the parity bit? (Source: questions.pdf)", options: ["0", "1", "2", "It doesn't matter."], answer: 0 },
+                    { q: "How does a Checksum work?", options: ["It counts the number of 1s in a byte.", "A value is calculated from the data block using an algorithm, sent, and recalculated by the receiver.", "It sends the data twice and compares the results.", "It encrypts the payload."], answer: 1 },
+                    { q: "What is a major flaw with the Echo Check method?", options: ["It requires too much CPU power.", "If the sent-back data doesn't match, it's unknown whether the error occurred during sending or returning.", "It cannot be used over long distances.", "It only works with parallel cables."], answer: 1 },
+                    { q: "If an even parity byte is received as 11100011, what does the receiver know?", options: ["The data is perfectly fine.", "An error has occurred, as there are five 1s, which is odd.", "The data is an image file.", "The parity bit is missing."], answer: 1 }
+                ]
+            },
+            {
+                id: "2.2.3", unit: "Unit 2", unitName: "Data transmission", statement: "Check digits",
+                questions: [
+                    { q: "What is typically used to detect human errors in data entry for ISBNs or barcodes?", options: ["Parity byte", "Checksum", "ARQ", "Check digit"], answer: 3 },
+                    { q: "Which common error does a check digit easily catch?", options: ["Electromagnetic interference.", "Transposition errors, like typing 45 instead of 54.", "Packet loss over the internet.", "Hardware failure on the hard drive."], answer: 1 },
+                    { q: "Where is the check digit typically located in a barcode number?", options: ["It is the very first digit.", "It is embedded in the middle.", "It is the final digit at the end of the number sequence.", "It is not visible to humans."], answer: 2 },
+                    { q: "Is a check digit primarily used to detect errors in network data transmission?", options: ["Yes, it replaces checksums.", "Yes, it is part of the IP protocol.", "No, it is primarily for detecting human data entry errors.", "No, it is used for encrypting passwords."], answer: 2 },
+                    { q: "If a system recalculates a check digit from entered data and it doesn't match the entered check digit, what happens?", options: ["The computer crashes.", "The system rejects the input and asks the user to re-enter it.", "The system automatically fixes the error and continues.", "The system ignores the error."], answer: 1 }
+                ]
+            },
+            {
+                id: "2.2.4", unit: "Unit 2", unitName: "Data transmission", statement: "ARQ",
+                questions: [
+                    { q: "What does an Automatic Repeat Query (ARQ) use to establish error-free data reception?", options: ["Positive/negative acknowledgements and a timeout.", "A calculated parity bit.", "A mathematical algorithm based on the payload.", "A public and private key."], answer: 0 },
+                    { q: "What does ARQ stand for?", options: ["Automated Routing Queue", "Automatic Repeat reQuest", "Asynchronous Relay Query", "Advanced Request Quotient"], answer: 1 },
+                    { q: "In an ARQ system, what happens if the timeout expires before an acknowledgement is received?", options: ["The connection is permanently dropped.", "The sender automatically retransmits the original data packet.", "The receiver generates a fake packet.", "The router deletes the file."], answer: 1 },
+                    { q: "What triggers a negative acknowledgement (NACK) in an ARQ system?", options: ["The receiver detects an error in the packet (e.g., via checksum).", "The packet arrives perfectly intact.", "The internet connection drops.", "The sender forgets to attach a parity bit."], answer: 0 },
+                    { q: "Does ARQ correct errors within the packet itself?", options: ["Yes, using complex algorithms.", "No, it just requests the sender to send a fresh copy of the packet.", "Yes, by asking the user to manually fix it.", "No, it ignores corrupted packets."], answer: 1 }
+                ]
+            },
+            {
+                id: "2.3.1", unit: "Unit 2", unitName: "Data transmission", statement: "Purpose of encryption",
+                questions: [
+                    { q: "What is the primary purpose of encryption when transmitting data?", options: ["To compress the data.", "To keep data safe from unauthorized access.", "To prevent data from being intercepted.", "To check the data for transmission errors."], answer: 1 },
+                    { q: "What is data called before it is encrypted?", options: ["Ciphertext", "Binarycode", "Plaintext", "Sourcecode"], answer: 2 },
+                    { q: "What is the term for data that has been scrambled by encryption?", options: ["Plaintext", "Ciphertext", "Hashcode", "Bytecode"], answer: 1 },
+                    { q: "Does encryption prevent a hacker from intercepting data?", options: ["Yes, it hides the data entirely.", "Yes, it creates a physical barrier.", "No, it only prevents them from understanding the intercepted data.", "No, it actually invites hackers to steal it."], answer: 2 },
+                    { q: "What is required to decrypt ciphertext back into plaintext?", options: ["An encryption key and the correct algorithm.", "A parity bit.", "A compiler.", "A fast internet connection."], answer: 0 }
+                ]
+            },
+            {
+                id: "2.3.2", unit: "Unit 2", unitName: "Data transmission", statement: "Symmetric & asymmetric encryption",
+                questions: [
+                    { q: "The data before encryption is known as [____] text. To scramble the data, an encryption [____] is used. (Source: questions.pdf)", options: ["cipher / router", "plain / algorithm", "stolen / public", "public / unreadable"], answer: 1 },
+                    { q: "What is the main vulnerability of symmetric encryption?", options: ["It is too slow.", "The single secret key must be shared between sender and receiver, which could be intercepted.", "It cannot encrypt images.", "It requires a quantum computer."], answer: 1 },
+                    { q: "In asymmetric encryption, if Alice wants to send a secure message to Bob, which key does she use to encrypt it?", options: ["Alice's private key", "Bob's private key", "Bob's public key", "A shared symmetric key"], answer: 2 },
+                    { q: "In asymmetric encryption, who has access to the private key?", options: ["Only the owner of the key pair; it is never shared.", "Anyone on the internet.", "The internet service provider.", "The certificate authority."], answer: 0 },
+                    { q: "Which encryption type is faster and therefore typically used for encrypting large amounts of data?", options: ["Asymmetric encryption", "Quantum encryption", "Symmetric encryption", "Public key encryption"], answer: 2 }
+                ]
+            },
+
+            // UNIT 3: Hardware
+            {
+                id: "3.1.1", unit: "Unit 3", unitName: "Hardware", statement: "Role of the CPU",
+                questions: [
+                    { q: "A component in the CPU sends signals to manage the fetch-decode-execute cycle. State the name of this component. (Source: questions.pdf)", options: ["Arithmetic Logic Unit (ALU)", "Control Unit (CU)", "Memory Data Register (MDR)", "Solid State Drive"], answer: 1 },
+                    { q: "What is the primary purpose of the Central Processing Unit (CPU)?", options: ["To store files permanently.", "To fetch, decode, and execute instructions.", "To display graphics on the monitor.", "To connect to the internet."], answer: 1 },
+                    { q: "Which component of the CPU performs mathematical calculations and logical comparisons?", options: ["Control Unit (CU)", "Arithmetic Logic Unit (ALU)", "Memory Data Register (MDR)", "System Clock"], answer: 1 },
+                    { q: "What is a microprocessor?", options: ["A type of integrated circuit on a single chip.", "The main power supply of the computer.", "A type of secondary storage.", "A program that translates high-level code."], answer: 0 },
+                    { q: "Where are instructions and data temporarily held inside the CPU for extremely fast access?", options: ["In the Cache", "In the Hard Drive", "In Registers", "In the ROM"], answer: 2 }
+                ]
+            },
+            {
+                id: "3.1.2", unit: "Unit 3", unitName: "Hardware", statement: "Von Neumann & FDE cycle",
+                questions: [
+                    { q: "Describe the role of the Memory Data Register (MDR) in the fetch-decode-execute cycle. (Source: questions.pdf)", options: ["It holds the address of the next instruction.", "It temporarily holds the data or instruction fetched from memory.", "It performs arithmetic calculations.", "It acts as the system clock."], answer: 1 },
+                    { q: "What defines the Von Neumann architecture?", options: ["It uses multiple CPUs.", "Both the program instructions and the data are stored in the same memory space.", "It has no secondary storage.", "It uses a mechanical hard drive."], answer: 1 },
+                    { q: "What does the Program Counter (PC) store during the Fetch-Decode-Execute cycle?", options: ["The results of the ALU.", "The memory address of the next instruction to be fetched.", "The actual instruction currently being decoded.", "The total number of programs running."], answer: 1 },
+                    { q: "What happens during the 'Decode' stage of the FDE cycle?", options: ["Data is fetched from RAM.", "The Control Unit interprets the instruction to see what needs doing.", "The ALU performs a calculation.", "The result is saved to the hard drive."], answer: 1 },
+                    { q: "Which bus is used to transmit the actual instruction data from RAM to the MDR?", options: ["The Control Bus", "The Address Bus", "The Data Bus", "The Universal Serial Bus"], answer: 2 }
+                ]
+            },
+            {
+                id: "3.1.3", unit: "Unit 3", unitName: "Hardware", statement: "Core, cache, clock",
+                questions: [
+                    { q: "The CPU has a clock speed of 2.4 Ghz. Describe what is meant by a 2.4 Ghz clock speed. (Source: questions.pdf)", options: ["It means the CPU has 2.4 cores.", "It means the CPU executes 2.4 billion fetch-decode-execute cycles per second.", "It stores 2.4 gigabytes of data.", "It runs 2.4 times faster than a normal CPU."], answer: 1 },
+                    { q: "How does a larger cache memory affect CPU performance?", options: ["It slows down the CPU due to more data to search.", "It increases performance by storing frequently used instructions closer to the CPU.", "It permanently stores the operating system.", "It decreases the clock speed."], answer: 1 },
+                    { q: "How does increasing the number of CPU cores affect performance?", options: ["It allows multiple instructions to be processed simultaneously.", "It increases the clock speed exponentially.", "It reduces the need for RAM.", "It makes the computer immune to viruses."], answer: 0 },
+                    { q: "What is overclocking?", options: ["Adding more cores to a CPU.", "Running the CPU clock at a faster speed than the manufacturer recommends.", "Using a stopwatch to time program execution.", "Expanding the cache size artificially."], answer: 1 },
+                    { q: "Why is cache memory faster than RAM?", options: ["It uses newer optical technology.", "It is built physically closer to or inside the CPU chip itself.", "It stores less data.", "It is managed by the internet provider."], answer: 1 }
+                ]
+            },
+            {
+                id: "3.1.4", unit: "Unit 3", unitName: "Hardware", statement: "Instruction set",
+                questions: [
+                    { q: "The CPU has a list of all the machine code commands it can process. State the name of this list of commands. (Source: questions.pdf)", options: ["Flowchart", "Instruction set", "Operating system", "High-level language"], answer: 1 },
+                    { q: "An instruction is typically split into two parts. What are they?", options: ["Input and Output", "High-level and Low-level", "Opcode and Operand", "Fetch and Execute"], answer: 2 },
+                    { q: "What does the 'Opcode' portion of a machine code instruction dictate?", options: ["The data to be used.", "The operation or command to be performed (e.g., ADD, LOAD).", "The memory address.", "The speed of execution."], answer: 1 },
+                    { q: "True or False: Every CPU architecture (like ARM vs Intel x86) shares the exact same instruction set.", options: ["True, they are universal.", "False, instruction sets are specific to processor families.", "True, because of Von Neumann architecture.", "False, they change every time you reboot."], answer: 1 },
+                    { q: "What does the 'Operand' represent in an instruction?", options: ["The command to be executed.", "The data to be manipulated, or the address where the data is located.", "The type of CPU.", "The result of a calculation."], answer: 1 }
+                ]
+            },
+            {
+                id: "3.1.5", unit: "Unit 3", unitName: "Hardware", statement: "Embedded systems",
+                questions: [
+                    { q: "A washing machine is an example of an embedded system. Give a characteristic of an embedded system. (Source: questions.pdf)", options: ["It can run any modern operating system like Windows 11.", "It is built to perform a specific, dedicated function within a larger device.", "It requires massive amounts of RAM and a dedicated GPU.", "It is entirely mechanical."], answer: 1 },
+                    { q: "Circle three other examples of an embedded system. (Source: questions.pdf)", options: ["Laptop, PC, Web Server", "Vending machine, Freezer, Security light system", "Keyboard, Mouse, Monitor", "Hard drive, SSD, Cloud storage"], answer: 1 },
+                    { q: "Which of these is NOT an example of an embedded system?", options: ["A microwave oven", "A digital watch", "A desktop PC", "An anti-lock braking system (ABS)"], answer: 2 },
+                    { q: "Why are embedded systems generally more reliable than general-purpose computers?", options: ["They have a single, dedicated purpose and simpler software, reducing crash risks.", "They use quantum processors.", "They are never connected to the internet.", "They are made of stronger plastics."], answer: 0 },
+                    { q: "Can the user easily upgrade the hardware (like adding more RAM) in a typical embedded system?", options: ["Yes, just like a PC.", "No, the components are usually soldered onto a single printed circuit board.", "Yes, by downloading an update.", "No, because they don't use RAM."], answer: 1 }
+                ]
+            },
+            {
+                id: "3.2.1", unit: "Unit 3", unitName: "Hardware", statement: "Input devices",
+                questions: [
+                    { q: "An automated system uses a flow sensor. Identify what a flow sensor measures. (Source: questions.pdf)", options: ["Temperature of the air", "Flow rate of liquids or gases", "Amount of light in a room", "Physical pressure on a pad"], answer: 1 },
+                    { q: "Tick one box to show which type of device a keyboard is. (Source: questions.pdf)", options: ["Input", "Memory", "Output", "Storage"], answer: 0 },
+                    { q: "Which input device is most commonly used in a Point of Sale (POS) system at a supermarket?", options: ["3D Scanner", "Microphone", "Barcode reader", "Plotter"], answer: 2 },
+                    { q: "How does a capacitive touch screen detect input?", options: ["By sensing physical pressure.", "It senses changes in the screen's electrostatic field when touched by a conductive object.", "By using a grid of infrared beams.", "By detecting sound waves on the glass."], answer: 1 },
+                    { q: "Which input device uses a laser to measure the physical shape and depth of an object?", options: ["A barcode scanner", "A 2D scanner", "A 3D scanner", "A digital camera"], answer: 2 }
+                ]
+            },
+            {
+                id: "3.2.2", unit: "Unit 3", unitName: "Hardware", statement: "Output devices",
+                questions: [
+                    { q: "The student uses a printer to print his schoolwork. Tick one box to show which type of device the printer is. (Source: questions.pdf)", options: ["Input", "Memory", "Output", "Storage"], answer: 2 },
+                    { q: "How does a laser printer differ from an inkjet printer?", options: ["Laser uses wet ink; inkjet uses static electricity.", "Laser printers use a laser, static electricity, and dry toner powder; inkjet uses wet ink droplets.", "Laser printers only print in black and white.", "Inkjet printers are always faster."], answer: 1 },
+                    { q: "What does a digital-to-analogue converter (DAC) do in a computer's audio system?", options: ["It converts digital binary values from a sound file into an analogue electrical wave for the speaker.", "It records voice from a microphone.", "It compresses MP3 files.", "It increases the volume limit."], answer: 0 },
+                    { q: "What is an actuator?", options: ["An input device that senses temperature.", "An output device, often a motor, that creates physical movement based on computer signals.", "A type of high-speed memory.", "A screen display technology."], answer: 1 },
+                    { q: "Which output device produces physical solid objects from a digital blueprint?", options: ["A plotter", "A laser printer", "A 3D printer", "A CNC mill"], answer: 2 }
+                ]
+            },
+            {
+                id: "3.2.3", unit: "Unit 3", unitName: "Hardware", statement: "Sensors",
+                questions: [
+                    { q: "Which type of sensor would be most suitable for automatically turning on streetlights when it gets dark?", options: ["Acoustic", "Temperature", "Light", "Proximity"], answer: 2 },
+                    { q: "What is the main function of a sensor?", options: ["To display information to the user.", "To measure physical properties from the real-world environment and convert them into analogue data.", "To execute software code.", "To store files permanently."], answer: 1 },
+                    { q: "Which sensor would be used in an automatic greenhouse to ensure plants don't freeze?", options: ["Humidity sensor", "Temperature sensor", "Pressure sensor", "Magnetic field sensor"], answer: 1 },
+                    { q: "What type of sensor detects movement or the presence of a person in a security alarm system?", options: ["Infrared or Motion/Proximity sensor", "pH sensor", "Gas sensor", "Light sensor"], answer: 0 },
+                    { q: "Because a sensor gathers real-world analogue data, what hardware is required before the CPU can process it?", options: ["Digital-to-Analogue Converter (DAC)", "Analogue-to-Digital Converter (ADC)", "A router", "A graphics card"], answer: 1 }
+                ]
+            },
+            {
+                id: "3.3.1", unit: "Unit 3", unitName: "Hardware", statement: "Primary storage",
+                questions: [
+                    { q: "Tick one box to show which is an example of primary storage. (Source: questions.pdf)", options: ["Compact disk (CD)", "Hard disk drive (HDD)", "Random access memory (RAM)", "Solid-state drive (SSD)"], answer: 2 },
+                    { q: "What is a key difference between RAM and ROM?", options: ["RAM is non-volatile; ROM is volatile.", "RAM is volatile and can be written to; ROM is non-volatile and is read-only.", "RAM is slower than ROM.", "RAM stores the BIOS; ROM stores user data."], answer: 1 },
+                    { q: "What does 'volatile' mean in the context of computer memory?", options: ["The data is lost when the power is turned off.", "The memory is extremely fast.", "The memory can easily catch fire.", "The data cannot be overwritten."], answer: 0 },
+                    { q: "What is typically stored in ROM?", options: ["The computer's boot-up instructions / BIOS / firmware.", "The user's Word documents.", "A high-end video game.", "The browser cache."], answer: 0 },
+                    { q: "What is currently stored in RAM while a computer is running?", options: ["Nothing, it remains empty until needed.", "The operating system, currently running applications, and data in use.", "The entire contents of the hard drive.", "Only the mouse cursor position."], answer: 1 }
+                ]
+            },
+            {
+                id: "3.3.2", unit: "Unit 3", unitName: "Hardware", statement: "Secondary storage",
+                questions: [
+                    { q: "Tick one box to show which statement about secondary storage is correct. (Source: questions.pdf)", options: ["It is directly accessed by the CPU.", "It is magnetic storage only.", "It is used to permanently store software and data files.", "It is volatile."], answer: 2 },
+                    { q: "Circle three components that are secondary storage devices. (Source: questions.pdf)", options: ["CPU, ROM, RAM", "CD, HDD, SSD", "Sensor, Register, Cache", "Motherboard, GPU, PSU"], answer: 1 },
+                    { q: "Why is secondary storage usually much slower than primary storage?", options: ["Because it uses older electricity.", "Because the data must be moved across a bus to RAM before the CPU can access it, and it often uses mechanical parts.", "Because it is encrypted.", "Because it is located outside the computer case."], answer: 1 },
+                    { q: "Which of the following is NOT a type of secondary storage?", options: ["Hard Disk Drive (HDD)", "Solid State Drive (SSD)", "Cache memory", "USB Flash Drive"], answer: 2 },
+                    { q: "Which secondary storage type is best for distributing commercial movies due to cheap mass reproduction?", options: ["Magnetic tape", "Optical storage (Blu-ray/DVD)", "Solid State Drive", "Cloud storage"], answer: 1 }
+                ]
+            },
+            {
+                id: "3.3.3", unit: "Unit 3", unitName: "Hardware", statement: "Magnetic, optical, solid-state",
+                questions: [
+                    { q: "Solid-state storage is made of [_______] that are laid out in a grid. Gates are used to control the flow of [_______]. (Source: questions.pdf)", options: ["Transistors / Electrons", "Platters / Lasers", "Pits / Light", "Binary / Neutrons"], answer: 0 },
+                    { q: "How does a magnetic hard disk drive (HDD) store data?", options: ["Using microscopic pits and lands.", "By changing the magnetic polarity of tiny areas on spinning metal platters.", "Trapping electrons in floating gates.", "Printing ink onto a disk."], answer: 1 },
+                    { q: "How does optical storage (like a CD or DVD) store binary data?", options: ["Using microscopic 'pits' and 'lands' on a reflective surface, read by a laser.", "Using magnetic domains.", "Using NAND flash memory.", "Using punch holes in paper."], answer: 0 },
+                    { q: "Why are Solid State Drives (SSDs) preferred over HDDs in laptops?", options: ["They have no moving parts, making them robust, silent, and lower power.", "They are much cheaper per gigabyte.", "They have unlimited read/write cycles.", "They use CDs."], answer: 0 },
+                    { q: "What is a disadvantage of an SSD compared to a traditional HDD?", options: ["They are too slow.", "They are very noisy.", "They generally have a shorter lifespan in terms of total read/write cycles, and cost more per gigabyte.", "They require constant internet connection."], answer: 2 }
+                ]
+            },
+            {
+                id: "3.3.4", unit: "Unit 3", unitName: "Hardware", statement: "Virtual memory",
+                questions: [
+                    { q: "Virtual memory is used when the [______] is full. It is created by partitioning the [______]. (Source: questions.pdf)", options: ["RAM / HDD or SSD", "ROM / RAM", "CPU / Cache", "HDD / Cloud"], answer: 0 },
+                    { q: "Where is virtual memory physically located?", options: ["In the CPU cache.", "In the RAM chips.", "On a partitioned area of secondary storage, like the HDD or SSD.", "On the motherboard BIOS."], answer: 2 },
+                    { q: "What is 'paging' or 'swapping' in virtual memory?", options: ["The process of moving inactive pages of data between RAM and the hard drive to free up space.", "Printing a document.", "Deleting old files.", "Downloading data from the internet."], answer: 0 },
+                    { q: "What is a major disadvantage of a computer heavily relying on virtual memory?", options: ["It uses too much electricity.", "The system slows down significantly, known as disk thrashing, due to constant swapping.", "It deletes user files randomly.", "It causes the screen to flicker."], answer: 1 },
+                    { q: "How can a user permanently reduce their computer's reliance on virtual memory?", options: ["By buying a bigger hard drive.", "By installing a faster CPU.", "By installing more physical RAM.", "By using cloud storage."], answer: 2 }
+                ]
+            },
+            {
+                id: "3.3.5", unit: "Unit 3", unitName: "Hardware", statement: "Cloud storage",
+                questions: [
+                    { q: "What is cloud storage?", options: ["Data stored on a USB drive.", "Data stored in RAM.", "Data accessed remotely, requiring physical servers maintained by a third party.", "Data stored in the CPU cache."], answer: 2 },
+                    { q: "Who is responsible for maintaining and backing up the physical servers in a cloud storage system?", options: ["The user.", "The third-party hosting company (e.g., Google, Amazon).", "The user's internet service provider.", "The government."], answer: 1 },
+                    { q: "Which of these is a benefit of cloud storage?", options: ["It works perfectly without internet.", "Data can be accessed and synced easily across multiple devices from anywhere.", "It increases the processing speed of your local CPU.", "It requires zero security."], answer: 1 },
+                    { q: "How is data typically transferred to and from cloud storage?", options: ["Over a local USB cable.", "Over the Internet.", "Using a CD-ROM.", "Via Bluetooth."], answer: 1 },
+                    { q: "What happens to your files on cloud storage if your physical laptop is destroyed?", options: ["They are destroyed too.", "The files are safe, as they are stored on remote servers.", "They are locked forever.", "They are printed out."], answer: 1 }
+                ]
+            },
+            {
+                id: "3.3.6", unit: "Unit 3", unitName: "Hardware", statement: "Cloud vs Local storage",
+                questions: [
+                    { q: "Give one disadvantage of storing photographs in cloud storage instead of storing them locally. (Source: questions.pdf)", options: ["It requires a constant internet connection to access the data.", "It cannot be accessed from multiple devices.", "It uses up space on your local hard drive.", "It is always slower than optical storage."], answer: 0 },
+                    { q: "Which method gives the user complete physical control and security over who can access their data drive?", options: ["Cloud storage", "Local storage", "Network attached storage on the internet", "Email storage"], answer: 1 },
+                    { q: "Which storage method is most vulnerable to data breaches or hacking on a massive scale?", options: ["A local USB stick", "A local SSD", "Cloud storage", "A CD-ROM"], answer: 2 },
+                    { q: "If a company requires ultra-fast access to enormous video files without network latency, which is best?", options: ["High-speed Local Storage", "Cloud Storage", "A web server", "An FTP server in another country"], answer: 0 },
+                    { q: "What is a financial difference between cloud and local storage?", options: ["Local storage requires a monthly fee.", "Cloud storage is always 100% free forever.", "Cloud usually requires an ongoing monthly subscription fee, while local is a one-off purchase.", "There is no difference."], answer: 2 }
+                ]
+            },
+            {
+                id: "3.4.1", unit: "Unit 3", unitName: "Hardware", statement: "Network Interface Card",
+                questions: [
+                    { q: "What hardware component is required for a computer to access a network?", options: ["A GPU", "A Network Interface Card (NIC)", "An Optical Drive", "An Actuator"], answer: 1 },
+                    { q: "What uniquely identifies a NIC on a local network?", options: ["Its IP address", "Its MAC address", "Its serial number", "Its brand name"], answer: 1 },
+                    { q: "Can a mobile device connect to a wireless Wi-Fi network without a NIC?", options: ["Yes, it uses Bluetooth instead.", "Yes, it uses cellular data.", "No, it requires a Wireless Network Interface Card (WNIC).", "No, it requires an Ethernet cable."], answer: 2 },
+                    { q: "What is the physical purpose of the NIC?", options: ["To format data into network frames and manage the physical connection to the network medium.", "To render graphics for web pages.", "To type URLs.", "To cool down the router."], answer: 0 },
+                    { q: "A NIC operates at which basic level of a computer system?", options: ["Software", "Hardware", "Operating System", "Application"], answer: 1 }
+                ]
+            },
+            {
+                id: "3.4.2", unit: "Unit 3", unitName: "Hardware", statement: "MAC address",
+                questions: [
+                    { q: "This address is assigned by the manufacturer and is used to uniquely identify the device. What is it? (Source: questions.pdf)", options: ["IP Address", "MAC Address", "URL", "Email Address"], answer: 1 },
+                    { q: "When is a MAC address assigned to a network interface card?", options: ["Every time it connects to a network.", "At the point of manufacture.", "When the user configures the router.", "When the ISP assigns an IP address."], answer: 1 },
+                    { q: "Which format is typically used to write a MAC address?", options: ["Four numbers separated by dots.", "Six pairs of hexadecimal digits.", "A standard web URL.", "A string of 32 binary bits."], answer: 1 },
+                    { q: "Can a MAC address usually be permanently changed by the average user?", options: ["Yes, easily in the control panel.", "No, it is hard-coded into the NIC's firmware by the manufacturer.", "Yes, by unplugging the router.", "No, because it belongs to the government."], answer: 1 },
+                    { q: "How many bits long is a standard MAC address?", options: ["32 bits", "48 bits", "64 bits", "128 bits"], answer: 1 }
+                ]
+            },
+            {
+                id: "3.4.3", unit: "Unit 3", unitName: "Hardware", statement: "IP address",
+                questions: [
+                    { q: "A computer is connected to a network and assigned an IPv4 address. Which device would assign this? (Source: questions.pdf)", options: ["Domain name server (DNS)", "Network interface card (NIC)", "Router", "Web server"], answer: 2 },
+                    { q: "What does IP stand for?", options: ["Internet Protocol", "Internal Provider", "Intranet Packet", "Information Processor"], answer: 0 },
+                    { q: "What is the main difference between IPv4 and IPv6?", options: ["IPv4 is for local networks, IPv6 is for the internet.", "IPv4 uses 32 bits, while IPv6 uses 128 bits to allow for vastly more addresses.", "IPv6 is slower.", "IPv4 uses letters, IPv6 uses numbers."], answer: 1 },
+                    { q: "Who or what typically assigns a local IP address to a computer on a home network?", options: ["The computer's motherboard.", "The router's DHCP server.", "The website being visited.", "The manufacturer of the NIC."], answer: 1 },
+                    { q: "Why do IP addresses need to exist alongside MAC addresses?", options: ["Because MAC addresses are running out.", "IP addresses are hierarchical and show location on the internet; MAC addresses only identify local hardware.", "Because MAC addresses can't be used on Wi-Fi.", "They don't, IP addresses have replaced MAC addresses."], answer: 1 }
+                ]
+            },
+            {
+                id: "3.4.4", unit: "Unit 3", unitName: "Hardware", statement: "Role of a router",
+                questions: [
+                    { q: "What is a primary role of a router in a network?", options: ["To assign MAC addresses.", "To provide power to connected devices.", "To send data to a specific destination on a network and connect local networks to the internet.", "To compile high-level code."], answer: 2 },
+                    { q: "How does a router decide where to send a data packet?", options: ["It guesses.", "It examines the packet's destination IP address and looks it up in its routing table.", "It broadcasts it to every device.", "It asks the user."], answer: 1 },
+                    { q: "A router typically connects a Local Area Network (LAN) to what?", options: ["A printer.", "A Wide Area Network (WAN), usually the Internet.", "A single computer.", "A Bluetooth speaker."], answer: 1 },
+                    { q: "What commonly assigns local private IP addresses to devices within a home network?", options: ["The Modem", "The Router (via DHCP)", "The ISP", "The Switch"], answer: 1 },
+                    { q: "Can a router perform Network Address Translation (NAT)?", options: ["No, only modems do that.", "Yes, it translates between the single public IP and the multiple private IPs on the local network.", "No, NAT is an obsolete technology.", "Yes, it translates English to French."], answer: 1 }
+                ]
+            },
+
+            // UNIT 4: Software
+            {
+                id: "4.1.1", unit: "Unit 4", unitName: "Software", statement: "System vs application software",
+                questions: [
+                    { q: "A type of software that provides services that the user requires and allows the user to perform tasks. What is this? (Source: questions.pdf)", options: ["System software", "Application software", "Firmware", "Hardware"], answer: 1 },
+                    { q: "A type of software that manages the main functions of the computer, including managing files and memory. What is this? (Source: questions.pdf)", options: ["Operating system", "Word processor", "Assembler", "Interpreter"], answer: 0 },
+                    { q: "Which software type provides an interface between the user and the computer hardware?", options: ["Application Software", "System Software (Operating System)", "Malware", "HTML"], answer: 1 },
+                    { q: "Utility programs, such as disk defragmenters and antivirus, fall under which category?", options: ["Application Software", "System Software", "Firmware", "Hardware"], answer: 1 },
+                    { q: "What distinguishes application software from system software?", options: ["Application software allows the user to perform specific everyday tasks, rather than running the computer itself.", "System software is always free.", "Application software runs the hardware directly.", "System software is used for playing games."], answer: 0 }
+                ]
+            },
+            {
+                id: "4.1.2", unit: "Unit 4", unitName: "Software", statement: "Operating system roles",
+                questions: [
+                    { q: "Which of the following is a basic function of an operating system?", options: ["Creating 3D graphics.", "Managing user accounts and handling interrupts.", "Translating assembly language to machine code.", "Browsing the world wide web."], answer: 1 },
+                    { q: "How does an OS handle multitasking?", options: ["By using multiple monitors.", "By rapidly switching CPU time between different open programs, making it appear they run simultaneously.", "By closing background apps.", "By downloading more RAM."], answer: 1 },
+                    { q: "Which of the following is NOT a core role of an Operating System?", options: ["Memory management.", "File and disk management.", "Translating Python code into machine code.", "Providing a user interface."], answer: 2 },
+                    { q: "What is the role of an OS in memory management?", options: ["Allocating RAM space to programs when they open and freeing it when they close to prevent clashes.", "Deleting old photos.", "Emptying the recycling bin.", "Cleaning the CPU cache physically."], answer: 0 },
+                    { q: "How does the OS communicate with peripheral hardware devices like printers?", options: ["By sending an email.", "Using small programs called device drivers.", "Through the application software.", "By guessing the correct protocol."], answer: 1 }
+                ]
+            },
+            {
+                id: "4.1.3", unit: "Unit 4", unitName: "Software", statement: "Hardware, firmware, OS",
+                questions: [
+                    { q: "The computer uses a bootstrap. Tick one box to show the part of a computer of which the bootstrap is an example. (Source: questions.pdf)", options: ["Application software", "Firmware", "Hard disk drive", "MAC address"], answer: 1 },
+                    { q: "What is the correct hierarchy of execution when running software?", options: ["Applications run on firmware -> OS runs on hardware", "Applications run on the OS -> OS runs on firmware -> Bootloader runs on hardware", "Hardware runs on OS -> OS runs on applications", "OS runs directly on applications"], answer: 1 },
+                    { q: "When a computer is powered on, what runs first to check hardware and boot the OS?", options: ["The web browser", "The Operating System", "The firmware / bootstrap loader", "The antivirus"], answer: 2 },
+                    { q: "Why does application software not interact directly with the hardware?", options: ["It uses the Operating System's API to ensure compatibility across different hardware setups.", "Because it is illegal.", "Because hardware is too slow.", "Because applications don't need hardware."], answer: 0 },
+                    { q: "Which layer sits directly beneath the Operating System in the system hierarchy?", options: ["Application software", "Firmware / Hardware", "The Internet", "The User"], answer: 1 }
+                ]
+            },
+            {
+                id: "4.1.4", unit: "Unit 4", unitName: "Software", statement: "Interrupts",
+                questions: [
+                    { q: "Interrupts can be hardware based or software based. Which is an example of a hardware interrupt? (Source: questions.pdf)", options: ["Division by zero", "A key press on a keyboard", "An infinite loop in code", "A missing file error"], answer: 1 },
+                    { q: "What is a hardware interrupt?", options: ["A signal generated by a peripheral, like a mouse click, demanding CPU attention.", "When the power goes out.", "When a program crashes.", "A broken screen."], answer: 0 },
+                    { q: "When the CPU receives an interrupt signal, what does it consult to decide what to do?", options: ["The user.", "The Interrupt Service Routine (ISR).", "The internet.", "The hard drive."], answer: 1 },
+                    { q: "How does the CPU know which interrupt to process first if two happen at once?", options: ["It guesses.", "Interrupts are assigned different priority levels.", "It processes the software one first.", "It crashes."], answer: 1 },
+                    { q: "What must the CPU do before jumping to an Interrupt Service Routine?", options: ["Save the current contents of its registers to memory so it can resume the original task later.", "Delete the current program.", "Turn off the monitor.", "Empty the RAM."], answer: 0 }
+                ]
+            },
+            {
+                id: "4.2.1", unit: "Unit 4", unitName: "Software", statement: "High vs Low-level languages",
+                questions: [
+                    { q: "Tick one box to show a benefit of writing a program in a high-level language, instead of a low-level language. (Source: questions.pdf)", options: ["The program can directly manipulate the hardware.", "The program is machine independent.", "The program is more memory efficient.", "The program is quicker to execute."], answer: 1 },
+                    { q: "Which statement describes a low-level language?", options: ["It is specific to a particular CPU architecture and requires deep knowledge of the hardware.", "It uses English-like keywords.", "It is platform-independent (works on any CPU).", "It does not need to be translated."], answer: 0 },
+                    { q: "Why might a programmer choose a low-level language over a high-level language?", options: ["To write highly optimized code that runs faster and uses less memory for embedded systems.", "Because it is easier to learn.", "To write a web application.", "To avoid using an assembler."], answer: 0 },
+                    { q: "Which of the following is an example of a high-level language?", options: ["Machine code", "Assembly language", "Python", "Binary"], answer: 2 },
+                    { q: "Which type of language uses English-like statements and mathematical notation?", options: ["High-level language", "Assembly language", "Machine code", "Low-level language"], answer: 0 }
+                ]
+            },
+            {
+                id: "4.2.2", unit: "Unit 4", unitName: "Software", statement: "Assembly language",
+                questions: [
+                    { q: "Assembly language uses mnemonics. What is required to translate it into machine code?", options: ["An interpreter", "A compiler", "An assembler", "An IDE"], answer: 2 },
+                    { q: "What does assembly language use to represent machine code instructions?", options: ["English paragraphs.", "Short mnemonic codes like ADD, SUB, LDA.", "Flowcharts.", "Binary strings only."], answer: 1 },
+                    { q: "Assembly language is considered a ________-level language.", options: ["High", "Medium", "Low", "System"], answer: 2 },
+                    { q: "Is an assembly language program written for an Intel processor guaranteed to work on an ARM processor?", options: ["Yes, it is universal.", "No, assembly language is machine-dependent/specific to an architecture.", "Yes, if compiled correctly.", "Only if it uses an interpreter."], answer: 1 },
+                    { q: "What is the relationship between an assembly instruction and a machine code instruction?", options: ["One assembly line equals many machine code lines.", "Generally, it is a one-to-one mapping.", "Many assembly lines equal one machine code line.", "There is no relationship."], answer: 1 }
+                ]
+            },
+            {
+                id: "4.2.3", unit: "Unit 4", unitName: "Software", statement: "Compiler and Interpreter operation",
+                questions: [
+                    { q: "Which translator creates an error report displaying all the errors in the code before it can be executed? (Source: questions.pdf)", options: ["Assembler", "Interpreter", "Compiler", "Debugger"], answer: 2 },
+                    { q: "Which translator converts and executes the code line by line? (Source: questions.pdf)", options: ["Compiler", "Interpreter", "Assembler", "Operating System"], answer: 1 },
+                    { q: "What does a compiler produce after successfully translating the source code?", options: ["An error log.", "An executable machine code file (e.g., a .exe file).", "A flowchart.", "An assembly language file."], answer: 1 },
+                    { q: "If a compiler encounters a syntax error, what happens?", options: ["It fixes it automatically.", "It stops compiling and outputs a list of all errors found in the source code.", "It crashes the computer.", "It runs the program anyway."], answer: 1 },
+                    { q: "Which translator executes the program immediately as it translates?", options: ["A Compiler", "An Assembler", "An Interpreter", "A Linker"], answer: 2 }
+                ]
+            },
+            {
+                id: "4.2.4", unit: "Unit 4", unitName: "Software", statement: "Compiler vs Interpreter adv/disadv",
+                questions: [
+                    { q: "When is an interpreter mostly used instead of a compiler?", options: ["When distributing the final commercial software.", "When developing and debugging a program line-by-line.", "When translating assembly code.", "When executing machine code directly."], answer: 1 },
+                    { q: "Why is a compiled program better for commercial distribution?", options: ["The user doesn't need the translator installed, and the source code is hidden/protected.", "It is easier to hack.", "It uses more RAM.", "It works on every single CPU architecture automatically."], answer: 0 },
+                    { q: "Which translator makes a program run faster once it has been fully translated?", options: ["An interpreter.", "An assembler.", "A compiler, because the executable file is already in machine code.", "They are exactly the same speed."], answer: 2 },
+                    { q: "Why can interpreting a program be slower than running a compiled version?", options: ["Because interpreters are old technology.", "Because the interpreter must translate each line every single time the program is run.", "Because interpreters use the internet.", "Because interpreters only work on Macs."], answer: 1 },
+                    { q: "If you want to find a bug immediately when running a specific line of code, which is better?", options: ["An interpreter, as it stops execution on the exact line the error occurs.", "A compiler, as it gives you a list at the end.", "An assembler.", "A hex editor."], answer: 0 }
+                ]
+            },
+            {
+                id: "4.2.5", unit: "Unit 4", unitName: "Software", statement: "IDEs",
+                questions: [
+                    { q: "Which of the following is a common function provided by an Integrated Development Environment (IDE)?", options: ["Hardware interrupt generation", "Auto-completion and error diagnostics", "Packet switching", "Disk defragmentation"], answer: 1 },
+                    { q: "What does IDE stand for?", options: ["Internet Data Execution", "Integrated Development Environment", "Internal Device Emulator", "Integrated Debugging Engine"], answer: 1 },
+                    { q: "What is the purpose of the 'syntax highlighting' feature in an IDE?", options: ["It makes the code run faster.", "It color-codes different parts of the code to make it easier to read and spot typos.", "It encrypts the source code.", "It translates the code into binary."], answer: 1 },
+                    { q: "Which IDE tool allows a programmer to pause code execution and inspect the values of variables?", options: ["A compiler", "An assembler", "A debugger / stepping tool", "An auto-formatter"], answer: 2 },
+                    { q: "Does an IDE typically include a built-in translator?", options: ["No, you have to buy it separately.", "Yes, IDEs usually contain a built-in compiler or interpreter to run the code easily.", "Only for assembly language.", "No, IDEs are just text editors."], answer: 1 }
+                ]
+            },
+
+            // UNIT 5: The internet and its uses
+            {
+                id: "5.1.1", unit: "Unit 5", unitName: "The internet and its uses", statement: "Internet vs WWW",
+                questions: [
+                    { q: "What is the difference between the internet and the world wide web?", options: ["The internet is software; the WWW is hardware.", "The internet is the infrastructure; the WWW is the collection of websites accessed using the internet.", "They are exactly the same thing.", "The internet is used for emails; the WWW is used for FTP."], answer: 1 },
+                    { q: "Which protocol is fundamentally used to transfer web pages on the World Wide Web?", options: ["FTP", "SMTP", "HTTP / HTTPS", "VoIP"], answer: 2 },
+                    { q: "The internet is a massive network of networks. What technology connects it physically?", options: ["Wi-Fi only.", "Fiber optic cables, copper wires, and satellite links.", "Bluetooth connections.", "The World Wide Web."], answer: 1 },
+                    { q: "Is email a service provided by the Internet or the World Wide Web?", options: ["The Internet", "The World Wide Web", "Neither", "Both equally"], answer: 0 },
+                    { q: "Which British computer scientist is credited with inventing the World Wide Web?", options: ["Alan Turing", "Bill Gates", "Tim Berners-Lee", "Steve Jobs"], answer: 2 }
+                ]
+            },
+            {
+                id: "5.1.2", unit: "Unit 5", unitName: "The internet and its uses", statement: "URL",
+                questions: [
+                    { q: "What does URL stand for?", options: ["Uniform Resource Locator", "Universal Routing Logic", "Uniform Routing Link", "United Resource Locator"], answer: 0 },
+                    { q: "In the URL 'https://www.cambridge.org/index.html', what is 'cambridge.org'?", options: ["The protocol", "The domain name", "The file path", "The web browser"], answer: 1 },
+                    { q: "In the URL 'https://www.cambridge.org/index.html', what does '/index.html' represent?", options: ["The protocol", "The domain name", "The specific file name or path being requested", "The security certificate"], answer: 2 },
+                    { q: "Why do we use URLs instead of IP addresses to visit websites?", options: ["URLs are faster.", "URLs use human-readable words which are much easier to remember.", "URLs are more secure.", "IP addresses don't work on the internet."], answer: 1 },
+                    { q: "What is the first part of a URL (e.g., 'http://') called?", options: ["The domain", "The file path", "The protocol", "The sub-domain"], answer: 2 }
+                ]
+            },
+            {
+                id: "5.1.3", unit: "Unit 5", unitName: "The internet and its uses", statement: "HTTP and HTTPS",
+                questions: [
+                    { q: "What does the 'S' in HTTPS stand for, indicating encrypted data transfer?", options: ["System", "Standard", "Secure", "Serial"], answer: 2 },
+                    { q: "What mechanism does HTTPS use to secure data transmission?", options: ["Parity checks", "TLS/SSL encryption", "Check digits", "Firewalls"], answer: 1 },
+                    { q: "Why is it dangerous to enter a password on a website using HTTP?", options: ["The data is sent as plain text and can be easily intercepted.", "The website might crash.", "The password will be deleted.", "It uses too much bandwidth."], answer: 0 },
+                    { q: "What port does HTTPS typically use by default?", options: ["Port 80", "Port 21", "Port 443", "Port 25"], answer: 2 },
+                    { q: "How does a web browser visually indicate an HTTPS connection?", options: ["With a red warning screen.", "Usually with a padlock icon in the address bar.", "By flashing the screen.", "By asking for a password immediately."], answer: 1 }
+                ]
+            },
+            {
+                id: "5.1.4", unit: "Unit 5", unitName: "The internet and its uses", statement: "Web browser",
+                questions: [
+                    { q: "Two functions of the web browser are to render HTML and to store cookies. Identify another function. (Source: questions.pdf)", options: ["Assigning an IP address to the computer.", "Storing bookmarks and recording user history.", "Hosting websites on a server.", "Translating domain names into IPs."], answer: 1 },
+                    { q: "How does a web browser request a web page?", options: ["It sends an HTTP request to the web server hosting the site.", "It calls the ISP on the phone.", "It searches the local hard drive.", "It asks the DNS for the HTML file."], answer: 0 },
+                    { q: "Which of the following is NOT a function of a web browser?", options: ["Rendering HTML.", "Storing bookmarks.", "Assigning an IP address to the user's computer.", "Managing cookies."], answer: 2 },
+                    { q: "What is stored in a web browser's 'cache'?", options: ["Passwords only.", "Copies of recently visited web page assets (like images) to speed up future loading.", "The computer's operating system.", "Viruses."], answer: 1 },
+                    { q: "A browser interprets HTML. What does HTML stand for?", options: ["HyperText Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language", "Hyper Text Machine Language"], answer: 0 }
+                ]
+            },
+            {
+                id: "5.1.5", unit: "Unit 5", unitName: "The internet and its uses", statement: "Locating web pages",
+                questions: [
+                    { q: "What is the role of the Domain Name Server (DNS) when locating a web page?", options: ["It renders the HTML.", "It translates the domain name into an IP address.", "It encrypts the URL.", "It prevents DDoS attacks."], answer: 1 },
+                    { q: "What happens if your local DNS server does not have the IP address for a requested URL?", options: ["The internet crashes.", "It forwards the request to a higher-level DNS server to find it.", "It sends a random website instead.", "It blocks the user's IP."], answer: 1 },
+                    { q: "Why is a DNS system necessary?", options: ["To stop hackers.", "Because web servers are located using IP addresses, but humans use text-based URLs.", "To compress web pages.", "To host the actual website files."], answer: 1 },
+                    { q: "What does DNS stand for?", options: ["Domain Name System / Server", "Data Network Service", "Dynamic Node System", "Digital Name Server"], answer: 0 },
+                    { q: "Without a DNS server, how could you still access a website?", options: ["By shouting at the screen.", "By typing the exact IP address of the web server directly into the browser.", "By using a search engine.", "It is completely impossible."], answer: 1 }
+                ]
+            },
+            {
+                id: "5.1.6", unit: "Unit 5", unitName: "The internet and its uses", statement: "Cookies",
+                questions: [
+                    { q: "Cookies are small _____ files that are sent between a _____ and a web server. (Source: questions.pdf)", options: ["Executable / Router", "Text / Web browser", "Image / CPU", "Sound / Database"], answer: 1 },
+                    { q: "What is a session cookie?", options: ["A cookie that lasts forever.", "A cookie that is temporarily stored and deleted when the browser is closed.", "A cookie used for advertising.", "A cookie that stores your password."], answer: 1 },
+                    { q: "Where are cookies physically stored?", options: ["On the web server.", "In the cloud.", "As small text files on the user's local hard drive.", "In the RAM permanently."], answer: 2 },
+                    { q: "Can a cookie contain an executable virus?", options: ["Yes, they are highly dangerous programs.", "No, cookies are plain text files, not programs.", "Yes, if they are third-party cookies.", "Only session cookies can."], answer: 1 },
+                    { q: "Why do some websites use third-party cookies?", options: ["To make the website load faster.", "To track a user's browsing habits across multiple websites, usually for targeted advertising.", "To secure the connection with HTTPS.", "To store the HTML of the page."], answer: 1 }
+                ]
+            },
+            {
+                id: "5.2.1", unit: "Unit 5", unitName: "The internet and its uses", statement: "Digital currency",
+                questions: [
+                    { q: "What characterizes a digital currency?", options: ["It is backed by a physical gold reserve.", "It only exists electronically.", "It is printed by a central bank.", "It can only be used offline."], answer: 1 },
+                    { q: "What is a cryptocurrency?", options: ["A currency used by banks only.", "A digital currency that relies on cryptography and operates independently of a central bank.", "A physical coin with a microchip.", "Money stored in a regular bank account."], answer: 1 },
+                    { q: "Which of the following is a potential risk of using decentralized digital currency?", options: ["It cannot be spent anywhere.", "Its value can be highly volatile, and lost private keys mean permanent loss of funds.", "It is controlled by the government.", "It requires a physical vault."], answer: 1 },
+                    { q: "Central banks are exploring CBDCs. What does CBDC stand for?", options: ["Central Bank Digital Currency", "Computer Based Digital Cash", "Crypto Bank Data Coin", "Centralized Block Digital Currency"], answer: 0 },
+                    { q: "How are traditional cryptocurrency transactions verified?", options: ["By a single central server.", "Through a decentralized peer-to-peer network consensus.", "By the government.", "By printing a receipt."], answer: 1 }
+                ]
+            },
+            {
+                id: "5.2.2", unit: "Unit 5", unitName: "The internet and its uses", statement: "Blockchain",
+                questions: [
+                    { q: "What is a blockchain in the context of digital currency?", options: ["A central bank server that prints money.", "A digital ledger that is a time-stamped series of records that cannot be altered.", "A type of firewall that prevents hacking.", "A physical device used to store keys."], answer: 1 },
+                    { q: "Why is a blockchain considered secure against tampering?", options: ["It is hidden from the internet.", "Each block contains a cryptographic hash of the previous block, linking them permanently.", "It uses a very long password.", "It is stored on a single secure computer."], answer: 1 },
+                    { q: "In a blockchain network, who holds a copy of the ledger?", options: ["Only the creator.", "Multiple interconnected nodes in a distributed peer-to-peer network.", "The central bank.", "Nobody, it exists in the ether."], answer: 1 },
+                    { q: "What is 'mining' in the context of a blockchain (like Bitcoin)?", options: ["Digging for physical gold.", "Nodes competing to solve complex mathematical puzzles to validate transactions and add the next block.", "Deleting old transactions.", "Creating fake coins."], answer: 1 },
+                    { q: "Can data in a blockchain easily be deleted or changed after it's added?", options: ["Yes, anyone can edit it.", "No, it is immutable; altering one block breaks the entire chain.", "Yes, by the network administrator.", "Only if you pay a fee."], answer: 1 }
+                ]
+            },
+            {
+                id: "5.3.1", unit: "Unit 5", unitName: "The internet and its uses", statement: "Cyber security threats",
+                questions: [
+                    { q: "Tick one box to show a correct definition of spyware. (Source: questions.pdf)", options: ["Software that activates a webcam.", "Software that detects a password and emails it.", "Software that records all key presses and transmits these to a third party.", "Software that encrypts your files."], answer: 2 },
+                    { q: "The attacker encourages people to download malware... turning each computer into a bot, creating a network called a... (Source: questions.pdf)", options: ["Subnet", "Botnet", "Intranet", "Phishing net"], answer: 1 },
+                    { q: "Tick one box to show which cyber security threat is NOT a type of malware. (Source: questions.pdf)", options: ["Phishing", "Ransomware", "Virus", "Worm"], answer: 0 },
+                    { q: "What is malware that encrypts a user's files and demands payment to unlock them called?", options: ["Spyware", "Ransomware", "Adware", "Worm"], answer: 1 },
+                    { q: "What is a 'Trojan Horse' in cyber security?", options: ["A physical attack on a server.", "Malware disguised as legitimate software to trick the user into installing it.", "A type of firewall.", "A tool used to stop DDoS attacks."], answer: 1 }
+                ]
+            },
+            {
+                id: "5.3.2", unit: "Unit 5", unitName: "The internet and its uses", statement: "Cyber security solutions",
+                questions: [
+                    { q: "Which security solution monitors/filters incoming and outgoing network traffic based on rules?", options: ["Anti-virus software", "Proxy server", "Firewall", "Biometric authentication"], answer: 2 },
+                    { q: "What is a key function of anti-virus software?", options: ["To prevent DDoS attacks.", "To scan files for known virus signatures and quarantine or delete malicious code.", "To encrypt the hard drive.", "To block all internet access."], answer: 1 },
+                    { q: "What does Two-Factor Authentication (2FA) require?", options: ["A very long password.", "Two different types of proof of identity (e.g., a password AND a code sent to a phone).", "Two different users to log in.", "Two antivirus programs running at once."], answer: 1 },
+                    { q: "How does a Proxy Server enhance network security?", options: ["It encrypts the hard drive.", "It acts as an intermediary, hiding the true IP addresses of computers on the internal network.", "It deletes all emails.", "It stops brute-force attacks on local accounts."], answer: 1 },
+                    { q: "What is the purpose of software patching and updates?", options: ["To make the software look nicer.", "To fix discovered security vulnerabilities before hackers can exploit them.", "To delete old user files.", "To downgrade the software version."], answer: 1 }
+                ]
+            },
+
+            // UNIT 6: Automated and emerging technologies
+            {
+                id: "6.1.1", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "Automated systems",
+                questions: [
+                    { q: "The system uses a sensor and a microprocessor. How do they automate the system? (Source: questions.pdf)", options: ["The sensor processes data and sends it to the cloud.", "The sensor sends analog data to the microprocessor, which compares it to preset values and takes action.", "The microprocessor measures the environment directly.", "The actuator tells the sensor what to do."], answer: 1 },
+                    { q: "In an automated system, what is the role of the microprocessor?", options: ["To measure the physical environment.", "To process sensor data against programmed rules and decide what action to take.", "To physically move an object.", "To store the data permanently in the cloud."], answer: 1 },
+                    { q: "What converts the digital command from the microprocessor back into physical movement?", options: ["A Sensor", "An Actuator", "An ADC", "A Router"], answer: 1 },
+                    { q: "Which of the following is a classic example of an automated system?", options: ["A standard mechanical bicycle.", "A modern car engine management system adjusting fuel mix.", "A wooden door.", "A pair of scissors."], answer: 1 },
+                    { q: "Why is an Analogue-to-Digital Converter (ADC) often needed in automated systems?", options: ["To connect to the internet.", "Because sensors generate analogue data, but microprocessors only understand digital data.", "To power the actuators.", "To encrypt the data."], answer: 1 }
+                ]
+            },
+            {
+                id: "6.1.2", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "Advantages and Disadvantages",
+                questions: [
+                    { q: "Which of the following is a potential disadvantage of an automated system?", options: ["They can operate continuously without breaks.", "They have high initial setup and maintenance costs.", "They provide increased precision.", "They can work in hazardous environments."], answer: 1 },
+                    { q: "What is a major advantage of using automated systems in manufacturing?", options: ["They are cheaper to install initially than hiring a person.", "They can produce goods consistently with higher precision than human workers.", "They require no electricity.", "They can design new products creatively."], answer: 1 },
+                    { q: "Which of these is a social disadvantage of increasing automation?", options: ["Products become cheaper.", "It can lead to a loss of jobs for semi-skilled and unskilled manual workers.", "Factories become safer.", "Working hours are reduced."], answer: 1 },
+                    { q: "How does automation affect the safety of human workers in heavy industry?", options: ["It makes it more dangerous.", "It improves safety by taking over hazardous tasks like handling toxic chemicals.", "It has no effect.", "It causes more accidents."], answer: 1 },
+                    { q: "Why might an automated system fail in a highly unpredictable environment?", options: ["They get tired.", "They only follow pre-programmed logic and cannot easily apply 'common sense' to unexpected situations.", "They are too fast.", "They run out of memory."], answer: 1 }
+                ]
+            },
+            {
+                id: "6.2.1", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "Meaning of robotics",
+                questions: [
+                    { q: "What is robotics?", options: ["A branch of computer science focused solely on software.", "The study of human biology.", "A branch of computer science that incorporates the design, construction, and operation of robots.", "A type of network infrastructure."], answer: 2 },
+                    { q: "Robotics encompasses computer science, electrical engineering, and which other major field?", options: ["Marine biology", "Mechanical engineering", "Psychology", "Astrophysics"], answer: 1 },
+                    { q: "What differentiates a robot from a simple automated system (like a thermostat)?", options: ["Robots don't use electricity.", "Robots typically have a physical, articulated structure and a higher degree of flexibility/autonomy.", "Robots only exist in software.", "There is no difference."], answer: 1 },
+                    { q: "What are the physical limbs or moving parts of a robot collectively known as?", options: ["The electrical components", "The software", "The mechanical structure", "The sensors"], answer: 2 },
+                    { q: "A robot uses software for what purpose?", options: ["To look cool.", "To provide the instructions that determine how and when it should move its physical structure.", "To power the motors.", "To connect to Bluetooth."], answer: 1 }
+                ]
+            },
+            {
+                id: "6.2.2", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "Characteristics of a robot",
+                questions: [
+                    { q: "One characteristic of a robot is that it is programmable. State two other characteristics. (Source: questions.pdf)", options: ["It has a mechanical structure and electrical components.", "It is biological and requires food.", "It only exists in software.", "It must look like a human."], answer: 0 },
+                    { q: "What provides the power and control signals to a robot's mechanical parts?", options: ["The software", "The electrical components", "The mechanical structure", "The user's thoughts"], answer: 1 },
+                    { q: "Can a robot be reprogrammed to perform a completely different task?", options: ["No, they are single-use.", "Yes, programmability is a defining characteristic of a robot.", "Only if you rebuild the hardware.", "Only by the original manufacturer."], answer: 1 },
+                    { q: "Which part of a robot acts as its 'brain'?", options: ["The Actuators", "The Sensors", "The Microprocessor or Microcontroller", "The Power Supply"], answer: 2 },
+                    { q: "What gives a robot the ability to interact with and move objects in the physical world?", options: ["Cameras", "Microphones", "Actuators (such as motors, hydraulics, or pneumatics).", "Wi-Fi antennas"], answer: 2 }
+                ]
+            },
+            {
+                id: "6.2.3", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "Roles of robots",
+                questions: [
+                    { q: "Which is a common role for robots in a domestic setting?", options: ["Performing open-heart surgery.", "Assembling cars.", "Vacuuming floors.", "Managing cloud servers."], answer: 2 },
+                    { q: "Which role is highly suited for industrial robots?", options: ["Walking a dog.", "Repetitive heavy lifting and precise welding on car assembly lines.", "Writing a novel.", "Teaching a class."], answer: 1 },
+                    { q: "How are robots increasingly used in the medical field?", options: ["To prescribe medicine.", "Assisting surgeons with minimally invasive procedures that require extreme precision.", "To build hospitals.", "To answer phones."], answer: 1 },
+                    { q: "Why are robots used for bomb disposal and space exploration?", options: ["Because they are cheap to replace.", "Because those environments are too dangerous or hostile for human beings.", "Because they work faster.", "Because they don't need oxygen."], answer: 1 },
+                    { q: "Which of the following is an example of an agricultural robot?", options: ["A robot vacuum.", "An automated drone that maps crops and sprays pesticides precisely.", "A robotic arm building a computer.", "A chatbot."], answer: 1 }
+                ]
+            },
+            {
+                id: "6.3.1", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "Meaning of AI",
+                questions: [
+                    { q: "What is Artificial Intelligence (AI)?", options: ["A branch of computer science dealing with the simulation of intelligent behaviours by computers.", "A type of physical robot.", "A secure method of transmitting data over HTTPS.", "A hardware component in the CPU."], answer: 0 },
+                    { q: "What is the ultimate goal of Artificial Intelligence research?", options: ["To create faster Wi-Fi.", "To create machines capable of human-like intelligence, reasoning, and problem-solving.", "To build a better mechanical arm.", "To replace all hard drives."], answer: 1 },
+                    { q: "What distinguishes AI from standard programming?", options: ["AI uses electricity.", "Standard programming relies on strict rules; AI can find patterns, learn, and adapt without explicit instructions.", "AI only works on the cloud.", "There is no difference."], answer: 1 },
+                    { q: "Which subset of AI involves training a system on large amounts of data so it can make predictions?", options: ["Robotics", "Machine Learning", "Expert Systems", "Natural Language Processing"], answer: 1 },
+                    { q: "Which test was famously proposed to determine if a machine exhibits human-equivalent intelligence?", options: ["The Von Neumann Test", "The Turing Test", "The Boolean Test", "The Lovelace Test"], answer: 1 }
+                ]
+            },
+            {
+                id: "6.3.2", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "Characteristics of AI",
+                questions: [
+                    { q: "What is a main characteristic of AI?", options: ["It requires a physical actuator to function.", "It relies solely on brute-force algorithms.", "The collection of data and rules, reasoning, and the ability to learn and adapt.", "It cannot process text or sound data."], answer: 2 },
+                    { q: "How does a machine learning algorithm improve over time?", options: ["By being rebooted.", "By processing more training data and adjusting its internal weightings/patterns.", "By increasing the clock speed.", "By downloading more RAM."], answer: 1 },
+                    { q: "What is 'narrow AI' (or weak AI)?", options: ["AI that is not very smart.", "AI designed and trained for one specific task, like playing chess or recognizing faces.", "AI that mimics a human perfectly.", "AI that runs on a smartphone."], answer: 1 },
+                    { q: "Which of the following is an everyday example of AI?", options: ["A mechanical clock.", "A streaming service recommending movies based on your viewing history.", "A basic calculator.", "A wired mouse."], answer: 1 },
+                    { q: "What is Natural Language Processing (NLP) in the context of AI?", options: ["Translating binary to hex.", "The ability of a computer program to understand human language as it is spoken or written.", "Writing HTML code automatically.", "Typing very fast."], answer: 1 }
+                ]
+            },
+            {
+                id: "6.3.3", unit: "Unit 6", unitName: "Automated and emerging technologies", statement: "AI systems operation",
+                questions: [
+                    { q: "An expert system is an example of AI. Identify three components present in an expert system. (Source: questions.pdf)", options: ["Mouse, keyboard, monitor", "Knowledge base, rule base, inference engine", "RAM, ROM, CPU", "Router, switch, hub"], answer: 1 },
+                    { q: "In an expert system, what is the role of the Inference Engine?", options: ["To store data.", "It applies logical rules to the knowledge base to deduce new information or make a decision.", "To interact with the user.", "To translate languages."], answer: 1 },
+                    { q: "How does a user interact with an expert system (e.g., to input symptoms)?", options: ["Through the Inference Engine", "Through the Knowledge Base", "Through the User Interface", "Through the Rule Base"], answer: 2 },
+                    { q: "What is the 'Rule Base' in an expert system?", options: ["A list of passwords.", "A set of IF-THEN rules used by the inference engine to navigate the knowledge base.", "The terms and conditions of use.", "The source code of the system."], answer: 1 },
+                    { q: "Who inputs the initial facts and rules into an expert system?", options: ["The end user.", "Human domain experts and knowledge engineers.", "The inference engine.", "It learns them automatically from the internet."], answer: 1 }
+                ]
+            }
+        ];
+
+        // State management
+        let completedItems = JSON.parse(localStorage.getItem('syllabusTrackerState')) || [];
+        let incorrectItems = JSON.parse(localStorage.getItem('syllabusTrackerIncorrect')) || [];
+        let currentItem = null;
+        let currentQuestion = null;
+
+        const gridContainer = document.getElementById('syllabus-grid');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        
+        // Modal elements
+        const modal = document.getElementById('quiz-modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalTitle = document.getElementById('modal-title');
+        const modalUnitBadge = document.getElementById('modal-unit-badge');
+        const modalQuestion = document.getElementById('modal-question');
+        const optionsContainer = document.getElementById('options-container');
+        const modalFeedback = document.getElementById('modal-feedback');
+
+        function initApp() {
+            renderGrid();
+            updateProgress();
+        }
+
+        function renderGrid() {
+            gridContainer.innerHTML = '';
+            
+            syllabusData.forEach((item, index) => {
+                const isCompleted = completedItems.includes(item.id);
+                const isIncorrect = incorrectItems.includes(item.id) && !isCompleted;
+                
+                // Color coding based on unit for a nice visual gradient if not completed
+                const unitColors = {
+                    "Unit 1": "bg-blue-50 text-blue-900 border-blue-200 hover:border-blue-400 hover:shadow-blue-100",
+                    "Unit 2": "bg-indigo-50 text-indigo-900 border-indigo-200 hover:border-indigo-400 hover:shadow-indigo-100",
+                    "Unit 3": "bg-violet-50 text-violet-900 border-violet-200 hover:border-violet-400 hover:shadow-violet-100",
+                    "Unit 4": "bg-purple-50 text-purple-900 border-purple-200 hover:border-purple-400 hover:shadow-purple-100",
+                    "Unit 5": "bg-fuchsia-50 text-fuchsia-900 border-fuchsia-200 hover:border-fuchsia-400 hover:shadow-fuchsia-100",
+                    "Unit 6": "bg-pink-50 text-pink-900 border-pink-200 hover:border-pink-400 hover:shadow-pink-100",
+                };
+
+                const baseStyles = "square-card cursor-pointer rounded-2xl p-4 md:p-5 flex flex-col justify-between border-2 relative overflow-hidden group";
+                
+                let appliedStyles = "";
+                let iconHtml = "";
+
+                if (isCompleted) {
+                    appliedStyles = "bg-gradient-to-br from-emerald-400 to-green-500 border-green-500 shadow-green-200/50 text-white shadow-lg";
+                    iconHtml = `
+                        <div class="absolute -bottom-2 -right-2 text-white/20 w-16 h-16 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    `;
+                } else if (isIncorrect) {
+                    appliedStyles = "bg-red-50 text-red-900 border-red-300 hover:border-red-500 shadow-sm";
+                    iconHtml = `
+                        <div class="absolute -bottom-2 -right-2 text-red-500/10 w-16 h-16 group-hover:scale-110 transition-transform">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm-1.72 6.97a.75.75 0 10-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 101.06 1.06L12 13.06l1.72 1.72a.75.75 0 101.06-1.06L13.06 12l1.72-1.72a.75.75 0 10-1.06-1.06L12 10.94l-1.72-1.72z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    `;
+                } else {
+                    appliedStyles = unitColors[item.unit] || "bg-white text-slate-800 border-slate-200 hover:border-slate-300";
+                }
+
+                const cardHtml = `
+                    <div id="card-${item.id}" class="${baseStyles} ${appliedStyles}" onclick="handleSquareClick('${item.id}')">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-wider opacity-80">${item.id}</span>
+                            <h3 class="font-bold text-sm md:text-base mt-1 leading-tight">${item.statement}</h3>
+                        </div>
+                        <div class="mt-4 text-xs font-medium opacity-75">
+                            ${item.unit}
+                        </div>
+                        ${iconHtml}
+                    </div>
+                `;
+                
+                gridContainer.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        function updateProgress() {
+            const total = syllabusData.length;
+            const completed = completedItems.length;
+            const percentage = (completed / total) * 100;
+            
+            progressBar.style.width = `${percentage}%`;
+            progressText.innerText = `${completed} / ${total}`;
+            
+            // Calculate and update unit-specific progress
+            const unitStats = {};
+            // Initialize stats for Units 1 to 6
+            for(let i = 1; i <= 6; i++) {
+                unitStats[`Unit ${i}`] = { total: 0, completed: 0 };
+            }
+
+            syllabusData.forEach(item => {
+                if (!unitStats[item.unit]) {
+                    unitStats[item.unit] = { total: 0, completed: 0 };
+                }
+                unitStats[item.unit].total++;
+                if (completedItems.includes(item.id)) {
+                    unitStats[item.unit].completed++;
+                }
+            });
+
+            const unitContainer = document.getElementById('unit-progress-container');
+            if (unitContainer) {
+                unitContainer.innerHTML = '';
+                Object.keys(unitStats).forEach(unitName => {
+                    const stats = unitStats[unitName];
+                    if (stats.total === 0) return; // Skip if no data for this unit
+                    
+                    const isComplete = stats.completed === stats.total;
+                    const bgClass = isComplete ? 'bg-green-100 border-green-300 text-green-800 shadow-sm' : 'bg-white border-slate-200 text-slate-700';
+                    const countClass = isComplete ? 'text-green-600' : 'text-slate-400';
+                    const icon = isComplete ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>` : '';
+                    
+                    const unitHtml = `
+                        <div class="flex items-center gap-2 border px-3 py-1.5 rounded-lg text-sm transition-colors duration-300 ${bgClass}">
+                            <span class="font-semibold">${unitName}</span>
+                            <span class="font-medium ${countClass} flex items-center gap-1">${stats.completed}/${stats.total} ${icon}</span>
+                        </div>
+                    `;
+                    unitContainer.insertAdjacentHTML('beforeend', unitHtml);
+                });
+            }
+            
+            // Save state to local storage to persist reloads
+            localStorage.setItem('syllabusTrackerState', JSON.stringify(completedItems));
+        }
+
+        function handleSquareClick(id) {
+            currentItem = syllabusData.find(item => item.id === id);
+            if (!currentItem) return;
+
+            // Pick a random question for this statement out of the 5 options
+            const randomIdx = Math.floor(Math.random() * currentItem.questions.length);
+            currentQuestion = currentItem.questions[randomIdx];
+
+            populateModal();
+            openModal();
+        }
+
+        function populateModal() {
+            modalUnitBadge.innerText = `${currentItem.unit}: ${currentItem.unitName}`;
+            modalTitle.innerText = `${currentItem.id} - ${currentItem.statement}`;
+            modalQuestion.innerText = currentQuestion.q;
+            
+            optionsContainer.innerHTML = '';
+            modalFeedback.classList.add('hidden');
+            modalFeedback.className = 'p-4 text-center font-bold text-sm hidden shrink-0';
+
+            currentQuestion.options.forEach((option, index) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-xl border-2 border-slate-200 bg-slate-50 hover:bg-indigo-50 hover:border-indigo-300 transition-colors text-slate-700 font-medium";
+                btn.innerHTML = `<span class="inline-block w-6 font-bold text-slate-400 mr-2">${String.fromCharCode(65 + index)}.</span> ${option}`;
+                btn.onclick = () => selectOption(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIndex, btnElement) {
+            // Disable all buttons to prevent multiple clicks
+            const allBtns = optionsContainer.querySelectorAll('button');
+            allBtns.forEach(b => {
+                b.disabled = true;
+                b.classList.remove('hover:bg-indigo-50', 'hover:border-indigo-300', 'cursor-pointer');
+            });
+
+            modalFeedback.classList.remove('hidden');
+
+            if (selectedIndex === currentQuestion.answer) {
+                // Correct Answer
+                btnElement.classList.replace('bg-slate-50', 'bg-green-100');
+                btnElement.classList.replace('border-slate-200', 'border-green-500');
+                btnElement.classList.add('text-green-800');
+                
+                modalFeedback.innerText = "Correct! Great job.";
+                modalFeedback.classList.add('bg-green-100', 'text-green-800');
+
+                // Mark as completed
+                if (incorrectItems.includes(currentItem.id)) {
+                    incorrectItems = incorrectItems.filter(id => id !== currentItem.id);
+                    localStorage.setItem('syllabusTrackerIncorrect', JSON.stringify(incorrectItems));
+                }
+
+                if (!completedItems.includes(currentItem.id)) {
+                    completedItems.push(currentItem.id);
+                    updateProgress();
+                    
+                    // Re-render grid to show green card immediately behind modal
+                    renderGrid();
+                }
+
+                // Auto-close after a short delay
+                setTimeout(() => {
+                    closeModal();
+                }, 1200);
+            } else {
+                // Incorrect Answer
+                btnElement.classList.replace('bg-slate-50', 'bg-red-100');
+                btnElement.classList.replace('border-slate-200', 'border-red-500');
+                btnElement.classList.add('text-red-800');
+                
+                // Shake modal content
+                modalContent.classList.remove('shake');
+                void modalContent.offsetWidth; // trigger reflow
+                modalContent.classList.add('shake');
+
+                // Highlight correct answer slightly
+                const correctBtn = allBtns[currentQuestion.answer];
+                correctBtn.classList.replace('border-slate-200', 'border-green-400');
+                correctBtn.classList.add('bg-green-50', 'opacity-80');
+
+                modalFeedback.innerText = "Incorrect. Review this topic and try again later!";
+                modalFeedback.classList.add('bg-red-100', 'text-red-800');
+
+                // Mark as incorrect for the grid
+                if (!completedItems.includes(currentItem.id) && !incorrectItems.includes(currentItem.id)) {
+                    incorrectItems.push(currentItem.id);
+                    localStorage.setItem('syllabusTrackerIncorrect', JSON.stringify(incorrectItems));
+                    renderGrid(); // Re-render to show red square behind
+                }
+
+                // Give them time to read the right answer, then close or let them close manually
+                setTimeout(() => {
+                    // We'll let them close it manually so they can read the correct answer
+                    allBtns.forEach(b => b.disabled = false); 
+                }, 1000);
+            }
+        }
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            // Small delay to allow display:block to apply before changing opacity for transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalContent.classList.remove('shake');
+            }, 300); // Matches transition duration
+        }
+
+        // Close modal when clicking outside of the content
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Initialize on page load
+        window.onload = initApp;
+
+    </script>
+</body>
+</html>
